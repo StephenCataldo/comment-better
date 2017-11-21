@@ -16,6 +16,8 @@ the guide (currently set to CognitivePolitics.com) has a suggestion,
 it will be available in a drop-down in the bullhorn next to the address bar
 of your browser.
 
+Developers should follow instructions from the boilerplate, below. Note that
+the /build directory will often be behind your own    'npm run dev'
 
 #### Purpose & Plan
 
