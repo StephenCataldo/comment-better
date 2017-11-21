@@ -1,0 +1,53 @@
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  background-color: #550b8e; 
+}
+nav { 
+  width: 100%;
+  background-color: pink;
+  padding: 2px;
+  font-weight: normal;
+} 
+nav div {   /* why isn't .home working here? I need sleep? */
+  float: right;
+  padding-left: 6px;
+  background: #38075f;
+  width: 80px;
+}
+
+
+nav li {
+    float: left;
+}
+
+nav div a,
+nav li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 6px 12px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+nav div a:hover,
+nav li a:hover {
+    background-color: #111;
+}
+nav li.active a {
+  background-color: green;
+  border: 7px solid #543;
+}
+/*** Help!!! Classes look right, but somehow not kicking in. ***/
+.active {
+  background-color: red;
+  border: 15px solid red;
+}
+
+/* not final design, fix this up @ToDo */ 
+nav li:first-child {
+  background-color: green;
+}

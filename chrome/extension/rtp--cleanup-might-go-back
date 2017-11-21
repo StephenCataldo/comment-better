@@ -1,0 +1,427 @@
+/** This is a container, or rather needs to be. If it loads data when
+ * it renders, and changes the component state, it will render again,
+ * and loop. This is modeled on an example that doesn't load data,
+ * and so the components can update the store more logically.
+ *
+ * Note that I find it helpful to think of this script as normal javascipt.
+ * The popup is written all in React. The script here is reading a website
+ * I didn't write and making a few replacements: that's a job for jQuery.
+ * Also, it needs access to the same store that the popup script uses.
+ **/
+
+/* template copied from TodoItem.js */
+// !!!! Should this be React? I think go back to jQuery style for a little while
+import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+// Creates a connected component.
+//  mapStateToProps and mapDispatchToProps ... returns a function.
+//  It returns a class that extends the component: it doesn't inherit,
+//  it's a new component that uses what you pass, not extend it.
+//  It does render your input component.
+//  IT NEEDS ACCESS TO THE STORE, read from props..
+//  this.store = props.store || context.store;
+//    ( context is like a global variable for a subtree of components)
+//
+/* I think this goes, when not doing things by hand
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+*/
+import classnames from 'classnames';
+import jQuery from "./maybe_bad/jquery";
+window.$ = window.jQuery = jQuery;
+//import * as GuideActions from '../../app/actions/guides';
+import * as TodoActions from '../../app/actions/todos';
+import { Config } from '../../CONFIG/config.js';
+// for now, use jQuery for the replacements... I think that might make sense, this really jQuery for the inject:     const reactStringReplace = require('react-string-replace');
+import style from './ResourcesThisPage.css';
+$('.highlight').css({
+  'background': 'yellow',
+  'border': '1px solid blue'
+  });
+
+
+  //readCurrentPage = () => {
+  //new Vivus("foo", {duration: 100, file: 'bar'}, ()=> myCallback())
+  //new Vivus("foo", {duration: 100, file: 'bar'}, (...args)=> myCallback(...args))
+  //loadSMG(topic, url) {     // using the pre-bind in the constructor
+  // ResourcesThisPage.loadSMG = (topic, url) => {
+  // loadSMG = (topic, url) => {
+  // returns the webPage to the store
+  function loadSMG (topic, url, actions) {
+    let source = Config.sourcePreURL + url + '#guide'; 
+    console.log("About to loadSMG");
+     $.get(source+'',function( data, status ) {
+
+      var sG = $('#queryResultContainerr').html($("body", data));
+      console.log(  $('#queryResultContainerr').html($("body", data)) );
+            // looks like the same 80 piece something something that doesn't 
+            // then do what I would like.
+      console.log(sG.html());
+
+
+      // This next crap code deals whether to return the whole webpage
+      // or what is contained inside < id="start-guide" >
+      let stdGuide = $($.parseHTML(data)).find("#start-guide");
+// if it doesn't find, is that null or -1  and need  ~   ???
+      if ( stdGuide ) {
+        //insecure: $( "#innerGuide" ).append('<link rel="stylesheet" href="http://cognitivepolitics.org/hkpgsm/examples/examples-pop2.css" type="text/css" />');
+        //insecure: $( "#innerGuide" ).append('<script src="http://cognitivepolitics.org/hkpgsm/examples/pop.js"></script>');
+        //what was this for: $( "#innerGuide" ).append( stdGuide );  
+        //stdGuide = $("#start-guide", $.parseHTML(data))[0].outerHTML;
+        //stdGuide = $("#start-guide", $.parseHTML(data)).outerHTML;
+        //
+        //
+        //$('.classSelector')[0].outerHTML
+        //$('.classSelector').html()
+        //
+        //
+        //
+        //
+
+/* this works the basics */
+      stdGuide = $.parseHTML(data);  //<----try with $.parseHTML().
+      var $hold = $("<div/>");
+      $(stdGuide).find("#start-guide").each(function(){
+          $hold.append($(this).html());
+      });
+      console.log("XXXXXXXXXXXXx");
+      console.log($hold.html());
+
+
+
+stdGuide = $($.parseHTML(data)) //.find("#start-guide"); // doesn't seem to find any?
+console.log(stdGuide.clone()); // 80 node objects[?] of various types: meta, text, link
+      // do I want to pass along only text?
+  console.log(stdGuide.clone()[64]); // 80 node objects[?] of various types
+  console.log(stdGuide.clone()[75]); // 80 node objects[?] of various types
+  console.log(stdGuide.clone()[76]); // 80 node objects[?] of various types
+  console.log(stdGuide.clone()[77]); // 80 node objects[?] of various types
+console.log(typeof stdGuide[77]); // 
+console.log(typeof $(stdGuide[77]));
+console.log(typeof stdGuide);
+console.log("------");
+console.log(JSON.stringify( stdGuide )); // 80 nothings {}
+console.log(   $( $.map(stdGuide, a => [...a]) )   ); // big undefined mess
+
+console.log( stdGuide[77].constructor.name); // HTMLElement
+console.log( $(stdGuide[77]).constructor.name); // r
+console.log( stdGuide.constructor.name); // r
+console.log( stdGuide instanceof jQuery); // true. So why don't functions work?
+console.log( stdGuide.html() ); // undefined
+console.log( stdGuide.innerHTML ); // undefined
+console.log( stdGuide.clone().html() ); // undefined
+
+console.log($(stdGuide.clone()[77]).html()); // this works!!!
+console.log($(stdGuide[77]).html()); // as does this.
+  console.log((stdGuide.clone()).html()); // undefined
+console.log($(stdGuide).map());
+// element.normalize(); not jquery .. will this help?
+
+
+console.log($(stdGuide.clone()).html());
+stdGuide = $($.parseHTML(data)).find("#start-guide");
+console.log(stdGuide.clone()); //  node objects[?] of various types
+        // seems empty now.
+console.log(stdGuide);
+
+console.log(stdGuide.get(0).outerHTML);
+console.log(stdGuide.html()); // how is this under, for $$parstHTML(
+console.log(stdGuide.join(""));
+        console.log("prepping... found start guide >>>>>>>>>");
+console.log($($.parseHTML(data)).filter("#start-guide").html());
+//naf console.log($($.parseHTML(data)).filter("#start-guide").join( "" ));
+//ent = $(ent[0]).text();
+console.log($($($.parseHTML(data)).filter("#start-guide")[0]).text());
+// filter or find?
+stdGuide = $($.parseHTML(data)).find("#start-guide").outerHTML();
+        console.log(stdGuide); // why doesn't this work?
+                console.log("Found the #start-guide of the sucked in resource");
+      } else {
+        //$( "#innerGuide" ).html( data );
+        console.log("Find the body of the sucked in resource");
+        stdGuide = $($.parseHTML(data)).find("body");
+        console.log(stdGuide);
+                console.log("prepping... for no start-guide >>>>>>>>");
+        //stdGuide = $("body", $.parseHTML(data))[0].outerHTML;
+
+      }
+      console.log("Save the webpage for ...");
+      console.log(stdGuide);
+      console.log(stdGuide.prop('outerHTML'));
+console.log((stdGuide.clone()).html()); 
+      console.log($(stdGuide).innerHTML);
+      //let guide = {topic: topic, webPage: data}; 
+      //let guide = {topic: topic, webPage: stdGuide}; // a set of DOM nodes. Good? Bad?
+          // data was html as text // !!!!!!! All this work, but maybe I do want DOM notes
+      let guide = {topic: topic, webPage: $hold.html()};
+
+      actions.addGuide(guide);
+
+    })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+          console.log("error loading  " + textStatus + '--  ' + errorThrown);
+          console.log("incoming Text " + jqXHR.responseText);
+      })
+
+      .done(function(data) {
+        console.log( "finished loading guide" );
+      })
+      .always(function(data) {
+        console.log( "ALWASY for loading guide" );
+      });
+
+  }
+
+
+/** Get the store:*/
+/*
+function guideReducer(state = initialState, action) {
+  switch (action.type) {
+  case 'ADD_TOPIC':
+    // duplicate this and then push to is return state
+    console.log("adding ADD_TOPIC for " + action.topic.topic);
+    state.recentTopics.unshift(action.topic); // {action.topic.topic, action.topic.url};
+
+    //var newState = state.concat([action.topic]);
+    //return newState;
+
+    return state;
+
+  case 'ADD_GUIDE':
+    // put the whole webpage into data.
+    state.guides[action.guide.topic] = action.guide.webPage;
+     return state;
+
+  default:
+    return state
+  }
+}
+*/
+/*** ActionTypes sets up the data.i***
+const SEE_todos_initialState = {
+  keytopics: [],     //   {keys:[], topic: topicText, url:}  
+                     // deal w/ later -> reload makes decent sense anyway
+  guides: {},        //   .topic = webPage
+  recentTopics: [{"hello":"http://world.com"}],  //   [topics]. UI will need this, and feed it into guides.
+};    // todos was array of objects, this is just one object at top level.
+ */ 
+
+
+// todos: state.todos 
+// TodoActions, now GuideActions was bould
+//import guideReducer from '../
+// was:   let store = createStore(guideReducer);   Then add more for dev tools
+
+/*
+var store = createStore(guideReducer,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+*/
+// createStore should be in:
+// export default function configureStore(callback, isBg)
+
+
+/*
+console.log("about to subscribe and dispatch");
+store.subscribe(() =>
+  console.log(store.getState())
+);
+*/
+
+/** jQuery note:
+ * jQuery modifies the DOM, while React creates a virtual DOM of its own.
+ * jQuery should be used only in this module, and only to read the current
+ * page which React won't do anything with, while React creates the new
+ * guide-page -- only. 
+ * 
+ * The only confusing bit of this is highlighting text in the read-page.
+ * I guess that is jQuery's job, and just don't have React ever render
+ * the read-page (the news or social media page the user is reading.)
+ *
+ * If experts feel this is a misunderstanding, please put in issue queu!
+ *
+ * Also, this looks like a fancier way to do this: https://reactjs.org/docs/integrating-with-other-libraries.html and do these things within
+ * componentDidMount, componentWillUnmount, componentDidUpdate.
+ *
+ * Or not do it, this way (looks great): https://gomakethings.com/ditching-jquery#working-with-ajax-and-apis
+ **/ 
+
+//import * as types from '../constants/ActionTypes';
+ // !! not right, placeholder code.
+//import ReactDOM from 'react-dom'; // ??
+
+
+/***
+ * Read the web page you are on.
+ * Figure out the keywords from the sourceHost or stored data
+ * Load the Guide for any topics found, or stored data
+ * Prepare the topic and guide array so they can be used.
+ ***/
+
+/** @connect() returns a function that sucks in the function that follows
+ * it: it connects the state & dispatch to ResourcesThisPage.
+ * what connect() does — it passes state (via props) into our Presentational Component and actually returns a React component that wraps the Presentational one
+ *
+ * Normally, I think, you would only connect once. For Google Chrome,
+ * both inject and popup live sufficiently different lives that they
+ * each connect. (??) 
+ ** This is giving me errors. Going to hold off on store for now. */
+//console.log("about to try to connect.");
+
+@connect(
+  state => ({
+    todos: state.todos
+  }),
+  dispatch => ({
+    actions: bindActionCreators(TodoActions, dispatch)
+  })
+)
+export default class ResourcesThisPage extends Component {
+
+  static propTypes = {
+    //addTopic: PropTypes.func.isRequired
+    // these are required for the connect to work. 
+    todos: PropTypes.object.isRequired, // was array, not object, for todos
+                                        // example
+    actions: PropTypes.object.isRequired
+  };
+
+
+  // not used (yet), I think this just obfuscates
+  handleSaveX = (text) => {
+    if (text.length !== 0) {
+      this.props.addTopic(text);
+    }
+  };
+
+  // shouldComponentUpdate    we may need to re-render when
+  // additional tweets or facebook messages are added to a page,
+  // for now just update on new URLs.
+
+  constructor(props) {
+    super(props); 
+    this.state = { topicX: "" };
+    //this.readCurrentPage = this.readCurrentPage.bind(this);
+    this.readCurrentPage();
+      // the store is passed with props. To the constructor
+      // as well as render?
+
+  }
+
+
+    // Quit if looking at the host of the guide, to prevent loops and insanity
+  /*
+  }
+  //componentDidUpdate ?
+  componentDidMount() {
+  */ 
+  
+
+  //_readCurrentPage() {   // arrow method binds to class
+  readCurrentPage = () => {
+    let rtp = this;
+    const { todos, actions } = this.props;
+
+    if (window.location.host !== Config.sourceHost) {
+
+      /** Replace jQuery one day 
+      fetch('https://cognitivepolitics.com/hkpgsm/keywords.json').then(function(data) { 
+        return data.json();
+      **/
+
+      /** preflight check not needed
+       * Do we really need to do a check before just grabbing this data?
+       * This error: No 'Access-Control-Allow-Origin' header is present
+       * brought me here: https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe
+       * and in the final version, make sure extra calls aren't being made
+       * for no reason. Put aside for now. @ToDoLater @ToDoLater
+       **/
+
+      $.getJSON( 
+          'https://cognitivepolitics.com/hkpgsm/keywords.json', 
+          function( data ) {
+        //format: "json"
+        //
+        $.each( data.keytopics, function( i, l ){
+          var item = l;
+          $.each(item.keys, function(i,pattern) {
+console.log("test pattern: " + pattern);
+            // note: replace function might get used soon.
+            // document.body.innerHTML.replace(/hello/g, 'hi');
+            // node.textContent.  might be a thing.
+            // Which of these is better to use?
+            //console.log(document.body.innerHTML);
+            //console.log(document.body.textContent);
+            //if(~document.body.innerHTML.indexOf(pattern)) {
+            let referrer = document.body.innerHTML;
+            if (~document.body.innerHTML.search(new RegExp(pattern, "i"))) {
+            
+              console.log("Body contains pattern " + pattern);
+ 
+              // Replace the text in the page being read with links:
+              let rep = "/" + pattern + "/g";
+              let re = new RegExp(pattern,"g");
+              var content = $("body").html().replace(
+                re,
+                '<a href="" class="highlight" onClick="{this.buttonOnClick}">' + pattern + "</a>");
+              $("body").html(content);
+
+              loadSMG(item.topic, item.url,actions);
+              /* this.handleSave;  /* egads. So unclear. Back tf up */
+              // Save a Topic to the store
+              let Topic = {
+                [item.topic]: item.url,
+              };
+              actions.addTopic(Topic);
+console.log("Added " + item.topic);
+              //return item.topic;
+            }
+          });
+        });
+
+      })
+      .done(function(data) {
+        console.log( "finished loading keywords" );
+      })
+      .always(function(data) {
+        console.log( "ALWASY for loading keywords" );
+      })
+      .fail(function(jqXHR, textStatus, errorThrown) {
+          console.log("error loading keywords " + textStatus + '--  ' + errorThrown);
+          console.log("incoming Text " + jqXHR.responseText);
+      })
+    } else {
+      console.log("We seem to be at the source of the guider, " + 
+        Config.sourceHost );
+      //AAA this.setState({currentTopics:  []});
+      return;
+    }
+    console.log("Done readCurrentPage - Added a topic");
+  }   // end readCurrentPage
+
+
+ render() {
+    const { todos, actions } = this.props;
+
+    // I think it renders often, so reading it here gets reloaded over and
+    // over. Put this perhaps in the constructor? Or call it separately?
+
+    // Read from store. For efficiency, things read only here should go
+    // back to props.AAA
+  //let str = JSON.stringify(store.getState, null, 4);
+    console.log("************ Render ResourcesThisPage ***************");
+
+  //console.log(store.getState())
+
+    return (<div/>); // if we don't render anything, does that prevent reloads?
+    return (
+      <div id="RTP">RTP: this.props.topic} this.props.guide}</div>
+    );
+  }
+
+
+}
+
+
+
+

@@ -1,0 +1,143 @@
+
+.see1 {
+  border-left: 2px solid purple;
+  border-right: 2px solid purple;
+  border-bottom: 2px solid rgba(102,51,153, 0.3); 
+  padding: 6px 4px 2px 4px;
+}
+.see1:first-of-type {
+  border-top:  2px solid purple;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  padding-top: 4px;
+}
+.see1:last-of-type {
+  border-bottom: 2px solid purple;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+
+.see1, .see2, .see3, .see4 {   
+  background: #e9efe5;
+  /* CP green, except part transparent. */
+ }
+ 
+
+
+
+
+
+/***** Visibility *****/
+/* change this: .see1 is visible but big so hover doesn't expose. */
+.start .see3 { display: none; } /* toggle at different sizes? */
+XXX.start .see1:hover .see3 { display: block; }
+.start .see3x { display: block;}
+XXXXX.start .see1:hover .see3x { display: none; }
+.start p { margin-top: 3px; margin-bottom: 12px; }
+.start .see4  { display: none; } 
+.start .justshow { display: block; }
+.read .see2x,
+.read .see3x {
+  display: none;
+}
+
+.start h1, .start h2, .start h3 { font-size: 1.0em; }
+.start h1 { margin-bottom: 2px; } /* exist? */
+.start h2 { margin-bottom: 1px; margin-top:0; }
+/*.start p { margin: 2px 0; }*/
+.start h2 { font-size: 1.2em; }
+
+.blog-image { width: 100%; }
+
+/****** icons and lists *****/
+
+ul.guide > li { 
+  list-style-type: none;
+}
+li.plan-big:before, li.reply:before, li.post:before, li.dialogue:before {
+  display: inline-block;
+  padding-right: 5px;
+  float: left;
+}
+li.plan-big, li.reply, li.post, li.dialogue {
+  clear: left;
+  border-top: 5px solid #fefefe;
+}
+li.plan-big ul, li.reply ul, li.post ul, li.dialogue ul {
+  list-style-type: none;
+}
+li.plan-big li:before, li.reply li:before, li.post li:before, li.dialogue li:before {
+  display: inline-block;
+  padding-right: 4px;
+  float: left;
+  clear: left;
+}
+div.big:before {
+  float: left;
+  padding: 0 10px 4px 0;
+}
+div.big {
+  clear: left;
+}
+div.plan-big:before {
+  content:  url('./images/FlowChart-76px.png');
+}
+div.post:before {
+  content:  url('images/megaphone-blue_76.png');
+}
+div.reply:before {
+  content:  url('images/tennis-304408_76.png');
+}
+div.dialogue:before {
+  content:  url('images/dialogue_76.png');
+}
+li.dialogue li:before {
+  content:  url('images/dialogue_22.png');
+  margin-left: -20px;
+}
+li.dialogue li:first-child:before {
+  visibility: hidden;
+}
+
+/**** Generic ****/
+.flush { padding-left: 0; }
+ul.relist, ul.relist li {   list-style-type: circle; }
+
+body { font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+     } /* grabbed from cp site */
+.start h2 {
+  font-size: 1.22em;
+  padding: 2px 0;
+  color: rgb(24, 188, 156); font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; } /* grabbed from book, modified */ 
+.start h3 { font-weight: 500; margin: 0 2px; }
+
+.leverage { background: yellow; }
+.warning { background: pink; }
+.type { font-style: small-caps; font-size: .8em; }
+
+/* facebook iframes */
+iframe { position: relative; top: 2px; left: 1px; padding-right: 4px; }
+/* copy to facebook */
+.copy {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  background: yellow url("./images/material/ic_content_paste_black_18dp.png") no-repeat right;
+  background-size: 20px 20px;
+  text-indent: -9999px;
+}
+.copy .tooltip { display: none; }
+.copy { position: relative; }
+.copy:hover .tooltip {
+  position: absolute;
+  display: block;
+  text-indent: 0;
+  width: 150px;
+  bottom: 1.2em;
+  background: inherit;
+  background-image: none;
+  padding: 3px;
+  border: 1px solid #ddd;
+}
+   

@@ -1,0 +1,61 @@
+Still ToDo ArchiveNoChump SMG Example
+
+
+- add Git license. 
+
+** This doc is from the pre-React page, and a bit off, but here for 
+Stephen to edit.
+
+Checkout system = write your name, let Stephen know. Otherwise Stephen is 
+inching through these.
+
+
+Pre-Alpha into Alpha
+- {Window System} have to make it closable before it’s really ready to alpha
+  > open into a consistent window possible advice: https://developer.chrome.com/extensions/windows
+- switch from absolute position on the button to stuck on top
+- get clipboard copy-paste working {explore manifest permissions}
+Alpha-Plus
+- get json import working
+- deal with scrolling windows, like facebook (the main goal)
+
+I want to Learn React
+- let users click and drag the menu head
+
+
+
+Early:: Other / Not Tech
+Volunteer management. Gather Alpha team. Want to have 100 people at facebook.org/groups/smartly or elsewhere help in tiny ways and feel like they helped create it, so they’ll be enthused to be early users.	
+Build better checkout system
+
+
+
+{Window System}
+	- let users click and drag the menu head
+	- shut down for the day or other time period
+	- shut down for this website, permanently (gmail?)
+	- toggle between issues
+	- track what I’ve read so far and haven’t
+
+{efficiency}
+
+
+
+Later:
+understand: https://developer.chrome.com/extensions/event_pages
+give it an icon in the toolbar: https://developer.chrome.com/extensions/pageAction
+	https://developer.chrome.com/extensions/browserAction
+
+https://developer.chrome.com/extensions/content_scripts
+
+- explore manifest permissions:
+"permissions": [
+  "activeTab",
+  "https://ajax.googleapis.com/"
+/* Stephen: have not reviewed above, not sure about below:
+clipboardRead */
+clipboardWrite   document.execCommand('copy')
+see the list at: https://developer.chrome.com/apps/permissions
+
+
+

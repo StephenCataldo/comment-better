@@ -1,0 +1,13 @@
+*~
+*.swp
+
+node_modules
+npm-debug.log
+.DS_Store
+
+dev/
+
+*.zip
+*.crx
+*.pem
+update.xml

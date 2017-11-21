@@ -1,0 +1,6 @@
+  // @ToDo-scroll-source-integration: 
+  // run again when facebook or twitter scrolls in more data.
+
+I think the original design will read pages after they load. 
+Facebook and twitter are our main target, and also some news websites,
+add more articles without reloading. They should be read as they come in.

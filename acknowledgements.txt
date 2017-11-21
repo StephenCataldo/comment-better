@@ -1,0 +1,5 @@
+
++ Thanks to ArchiveNoChump by Steven Schoeffler for showing it could be done!
++ And the boilerplate from Jhen-Jie Hong:
+  https://github.com/jhen0409/react-chrome-extension-boilerplate/
+
