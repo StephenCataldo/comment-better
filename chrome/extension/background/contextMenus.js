@@ -28,7 +28,7 @@ function popWindow(type) {
 /* what's this */
 chrome.contextMenus.create({
   id: CONTEXT_MENU_ID,
-  title: 'React Chrome Extension Example Was GitHub Now General',
+  title: 'Soc Media Guide Insert',
   contexts: ['all'],
   /**
   documentUrlPatterns: [
