@@ -1,18 +1,17 @@
 
 #### Quick non-developer start
 
-1. Clone or download this repository, or just grab the build directory here
+1. Clone or download this repository, or *easiest* grab the "build" directory here
     https://github.com/StephenCataldo/guide-comment-insert--react/raw/master/build.zip
  and unzip it (try clicking on it after downloading to unzip it; ask for help
 if you get stuck).
    Note: Non-developers use only the /build directory of the download.
-2. In chrome, enter into the address bar:   
+2. In your chrome browser, enter into the address bar:   
 chrome://extensions 
 2a. Click on
 √ Developer Mode
 2b. Click "Load Unpacked Extension" and the select the extension directory
-called "build" within the download/cloned code.  (Developers: get node and
-npm running, and follow much more complex instructions below.)
+called "build" within the download/cloned code.  
 
 It should be running! When you go to a website with a keyword for which 
 the guide (currently set to CognitivePolitics.com) has a suggestion,
