@@ -1,8 +1,10 @@
 
 #### Quick non-developer start
 
-1. Clone or download this repository, or just grab
-    https://github.com/StephenCataldo/guide-comment-insert--react/blob/master/build.zip and unzip (un-compress) it.
+1. Clone or download this repository, or just grab the build directory here
+    https://github.com/StephenCataldo/guide-comment-insert--react/raw/master/build.zip
+ and unzip it (try clicking on it after downloading to unzip it; ask for help
+if you get stuck).
    Note: Non-developers use only the /build directory of the download.
 2. In chrome, enter into the address bar:   
 chrome://extensions 
