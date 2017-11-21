@@ -1,15 +1,16 @@
 
 #### Quick non-developer start
 
-1. Clone or download this repository, 
+1. Clone or download this repository, or just grab
+    https://github.com/StephenCataldo/guide-comment-insert--react/blob/master/build.zip and unzip (un-compress) it.
    Note: Non-developers use only the /build directory of the download.
-   Ignore (or even delete) the rest. 
 2. In chrome, enter into the address bar:   
 chrome://extensions 
 2a. Click on
 √ Developer Mode
 2b. Click "Load Unpacked Extension" and the select the extension directory
-called "build" within the download/cloned code. 
+called "build" within the download/cloned code.  (Developers: get node and
+npm running, and follow much more complex instructions below.)
 
 It should be running! When you go to a website with a keyword for which 
 the guide (currently set to CognitivePolitics.com) has a suggestion,
