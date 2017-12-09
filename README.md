@@ -1,3 +1,7 @@
+### Comment Better is using everything below here as boilerplate, from
+guide-comment-insert--react
+The projects might or might not be combined.
+
 
 #### Quick non-developer start
 

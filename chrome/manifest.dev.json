@@ -1,10 +1,10 @@
 {
   "version": "0.0.1",
-  "name": "Social Media Web Guide",
+  "name": "Comment Better",
   "manifest_version": 2,
-  "description": "Web Guide based on react-chrome-extension-boilerplate",
+  "description": "Edit your comment boxes with suggestions from communications experts. Based on react-chrome-extension-boilerplate. Uses same tools as Social Media Web Guide, intended to be packed together maybe.",
   "browser_action": {
-    "default_title": "React Chrome Web Guide",
+    "default_title": "Comment Better",
     "default_popup": "popup.html"
   },
   "icons": {
