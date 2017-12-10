@@ -1,8 +1,21 @@
 {
   "version": "0.0.1",
-  "name": "Comment Better",
+  "name": "Comment Better Build",
   "manifest_version": 2,
   "description": "Edit your comment boxes with suggestions from communications experts. Based on react-chrome-extension-boilerplate. Uses same tools as Social Media Web Guide, intended to be packed together maybe.",
+  "browser_action": {
+    "default_title": "Comment Better",
+    "default_popup": "popup.html"
+  },
+  "icons": {
+    "16": "img/megaphone-blue_purple-outline-16.png",
+    "48": "img/megaphone-blue_purple-outline-48.png",
+    "128": "img/megaphone-blue_purple-outline-128.png"
+  },
+  "background": {
+    "page": "background.html"
+  },
+
   "web_accessible_resources": [
     "inject.html", "img/attachButton.png","*"
   ],
