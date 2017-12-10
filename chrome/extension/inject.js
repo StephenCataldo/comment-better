@@ -50,12 +50,24 @@ function doTheThing() {
     'background': '#fcf',
     }); 
   // images in chrome extensions are trick, this generates an odd URL for it
-  var imgURL = chrome.extension.getURL("img/commentbetter-logo-filled-right-26.png");
+  var imgURL = chrome.extension.getURL("img/commentbetter-logo-filled-right.png");
+  var imgClipboard = chrome.extension.getURL("img/Clipboard-Icon.png");
 
   // via facebook cut and paste
   let image = "<img id='cbButton' src='" + imgURL +"' />";
-  let cbModal = '<div id="cbModal"></div>';
+  $(".clipboard").css("background-image", imgClipboard);
 
+  let modalTemplate = '<div class="cbModal">' +
+	'<div class="suggestion1">How would you define... ?</div>' +
+	'<div class="suggestion2">Good point...</div>' +
+	'<div class="suggestion3">What made you aware of this problem?</div>' +
+	'<div class="suggestion4">Want to talk about this in offline?</div>' +
+  '</div>';
+
+
+
+  //let cbModal = '<div id="cbModal"><span class="clipboard">Fake modal with clipboard</span></div>';
+  let cbModal = '<div id="cbModal">' + modalTemplate + '</div>';
 
     let htmlTemplate =  
 '<a id="cb-1" onClick="cbModal(1)" aria-label="Openings: Comment Better” class="_r1a _5f0v cbButton" data-hover="tooltip" data-tooltip-alignh="center" data-tooltip-content="Comment Better" role="button" href="#" id="js_1n">' + image + '</a>' + cbModal;
