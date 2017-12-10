@@ -1,23 +1,19 @@
 {
   "version": "0.0.1",
-  "name": "Social Media Web Guide",
+  "name": "Comment Better",
   "manifest_version": 2,
-  "description": "Web Guide based on react-chrome-extension-boilerplate",
-  "browser_action": {
-    "default_title": "React Chrome Web Guide",
-    "default_popup": "popup.html"
-  },
-  "icons": {
-    "16": "img/megaphone-blue_purple-outline-16.png",
-    "48": "img/megaphone-blue_purple-outline-48.png",
-    "128": "img/megaphone-blue_purple-outline-128.png"
-  },
+  "description": "Edit your comment boxes with suggestions from communications experts. Based on react-chrome-extension-boilerplate. Uses same tools as Social Media Web Guide, intended to be packed together maybe.",
   "web_accessible_resources": [
-    "inject.html"
+    "inject.html", "img/attachButton.png","*"
   ],
-  "background": {
-    "page": "background.html"
-  },
   "permissions": [ "contextMenus", "tabs", "storage", "<all_urls>" ],
-  "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+  "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;",
+  "content_scripts": [
+   {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": ["better_comment.css"]
+    }
+  ]
 }

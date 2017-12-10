@@ -2,6 +2,7 @@
 import jQuery from "./maybe_bad/jquery";
 window.$ = window.jQuery = jQuery;
 
+function cbModal(id) { console.log("open " + id); }
 
 // TEMP!!
 function sleep(ms) {
@@ -21,7 +22,7 @@ if ( document.readyState == "complete" ||
   console.log("document ready already ***");
 //injectActions();
 
-  // facebook is too whatever.
+  // facebook loads after document officially says it 's ready, so slow down.
   
 (async () => {
   console.log('a');
@@ -42,11 +43,34 @@ config.fb_post_search = '._1dwg'; // facebook posts
 var fb_post_count = 0;
 
 function doTheThing() {
+
+// .UFICommentAttachmentButtons is the box the buttons live in
+// We prepend or append a clickable image into that box
  $('.UFICommentAttachmentButtons').css({
     'background': '#fcf',
     }); 
-  //$('.UFICommentAttachmentButtons').append("<div class='launchGuide'></div>");
-  var imgURL = chrome.extension.getURL("img/attachButton.png");
+  // images in chrome extensions are trick, this generates an odd URL for it
+  var imgURL = chrome.extension.getURL("img/commentbetter-logo-filled-26.png");
 
-  $('.UFICommentAttachmentButtons').append("<img class='launchGuide' src='" + imgURL +"' />");//<img src="./img/attachButton.png">');
+  // via facebook cut and paste
+  let image = "<img class='cbButton' src='" + imgURL +"' />";
+  let cbModal = '<div class="cbModal">Yes, and...</div>';
+    let htmlTemplate =  
+'<a id="cb-1" onClick="cbModal(1)" aria-label="Openings: Better Comments” class="_r1a _5f0v cbButton" data-hover="tooltip" data-tooltip-alignh="center" data-tooltip-content="Better Comments" role="button" href="#" id="js_1n">' + image + '</a>' + cbModal;
+
+  /** @ToDos, perhaps
+   * - This modal could open down if the click is high on the screen.
+   * - Keep watching for what is broken by removing overflow: hidden. 
+   *   But looks fine. If problems, switch to laiding the cbModal into
+   *   a parent.
+   * - How does the modal close? Is it comfy for most users as is?
+   **/    
+
+
+  $('.UFICommentAttachmentButtons').prepend(htmlTemplate);
+  // use parent:    _3ccb, or _5jmm
+  $('.UFICommentAttachmentButtons').parents('._42ef').css("overflow", "visible");
+  // This is untested, might possibly work for all we know, in case that above
+  // overflow actually matters for something.
+  //$('.UFICommentAttachmentButtons').parents('_3ccb').append(cbModal);
 }

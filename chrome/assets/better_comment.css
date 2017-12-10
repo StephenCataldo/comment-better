@@ -1,14 +1,27 @@
-body { background: yellow; }
-.launchGuide { 
-  border: 5px solid red; 
+.cbButton { 
+  z-index: 1000;
+  overflow-y: visible;
+  position: relative;
+  padding-left:  /* if on right */
+  top: -12px; 
   /*
  * background-image: "img/attachButton.png";
   height: 20px;
   width: 20px;   */
 }
-.launchGuide .launch { display: none; }
-.launchGuide:hover .launch {
-   display: block;
-} 
+.cbButton img {
+  position: relative;
+  top: -4px;
+}
 
-
+div.cbModal {
+  position: absolute;
+  bottom: 44px;
+  right: 0px;
+  overflow: visible;
+  z-index: 99;
+  height: 400px;
+  width: 320px;
+  background: yellow;
+  border: 2px solid blue;
+}
