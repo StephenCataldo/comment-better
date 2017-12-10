@@ -1,67 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import { render } from 'react-dom';
-import Dock from 'react-dock';
-import { Provider } from 'react-redux';
-//import { loadResourcesThisPage } from './LoadResourcesThisPage';
-import ResourcesThisPage from './ResourcesThisPage';
+//import CommentBetter from './CommentBetter';
+import jQuery from "./maybe_bad/jquery";
+window.$ = window.jQuery = jQuery;
 
 
-class InjectApp extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { isVisible: false };
-  }
-
-  buttonOnClick = () => {
-    this.setState({ isVisible: !this.state.isVisible });
-    console.log("toggling the window"); // have not seen this
-  };
-
-// Seems like store = createStore is missing. Here also Root and App which work.
-// Note: http://www.thegreatcodeadventure.com/react-redux-tutorial-part-iii-async-redux/
-//  encourages creating the store here... it seems to be just props here, or has
-//  createStore been called ... and then having the store call the functions to load
-//  data. store.dispatch(loadCats());
-  
-
-  static propTypes = {
-    store: PropTypes.object.isRequired
-  };
-
-  render() {
-    const { store } = this.props;
-    return (
-        <div>
-      <Provider store={store}> 
-        <ResourcesThisPage/>
-      </Provider>
-        </div>
-    );
-
-/*
-          <button onClick={this.buttonOnClick}>
-            Open TodoApp
-          </button>
-          <Dock
-            position="right"
-            dimMode="transparent"
-            defaultSize={0.4}
-            isVisible={this.state.isVisible}
-          >
-            <iframe
-              style={{
-                width: '100%',
-                height: '100%',
-              }}
-              frameBorder={0}
-              allowTransparency="true"
-              src={chrome.extension.getURL(`inject.html?protocol=${location.protocol}`)}
-            />
-          </Dock>
-*/
-  }
+// TEMP!!
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
-
 
 // For simple page: document readyState is complete
 // The window tends to take a while to load. I think something done
@@ -74,38 +19,34 @@ var windw = window.window_name;
 if ( document.readyState == "complete" ||
       document.readyState == "interactive" ) {
   console.log("document ready already ***");
-  injectActions();
-} else {
+//injectActions();
+
+  // facebook is too whatever.
+  
+(async () => {
+  console.log('a');
+  await sleep(2700);
+  console.log('b');
+  doTheThing();
+  console.log('c');
+})()
+  
+
+  } else {
   console.log("window addEventListener for load ***");
-  window.addEventListener('load', injectActions());
+  window.addEventListener('load', doTheThing());
 }
 
-function injectActions() {
-  /** When window loads, search it for keyterms, then turn them into
-   *  links class="keyterm" and set up the data store
-   *  document readyState is complete
-   *  window readyState is undefined
-   **/
-  // Don't Inject the extension's own popup
-  if ( document.baseURI == "chrome-extension://jgokkghkbpkjknmigodgbiefmnkbplil/popup.html" ) { return; }
+var config = {};
+config.fb_post_search = '._1dwg'; // facebook posts
+var fb_post_count = 0;
 
-  const injectDOM = document.createElement('div');
-  injectDOM.className = 'inject-react-guide';
-  injectDOM.style.textAlign = 'center';
-  document.body.appendChild(injectDOM);
-  /** when is todoapp.js included, which brings the store? 
-   *  Why two of these render statements into the DOM
-   *  Ok, imitate todoapp store code.
-   *  todoapp points at Root. Will that load the whole regular
-   *  app? Is the point of todoapp.js to load the app when the button is
-   *  clicked ... and I want to imitate that, without including the ToDo App?.
-   /***/ 
-  chrome.storage.local.get('state', (obj) => {
-    const { state } = obj;
-    const initialState = JSON.parse(state || '{}');
+function doTheThing() {
+ $('.UFICommentAttachmentButtons').css({
+    'background': '#fcf',
+    }); 
+  //$('.UFICommentAttachmentButtons').append("<div class='launchGuide'></div>");
+  var imgURL = chrome.extension.getURL("img/attachButton.png");
 
-    const createStore = require('../../app/store/configureStore');
-     /***/
-    render(<InjectApp store={createStore(initialState)} />, injectDOM);
-  });
+  $('.UFICommentAttachmentButtons').append("<img class='launchGuide' src='" + imgURL +"' />");//<img src="./img/attachButton.png">');
 }
