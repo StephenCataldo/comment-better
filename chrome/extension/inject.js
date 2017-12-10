@@ -50,7 +50,7 @@ function doTheThing() {
     'background': '#fcf',
     }); 
   // images in chrome extensions are trick, this generates an odd URL for it
-  var imgURL = chrome.extension.getURL("img/commentbetter-logo-filled-26.png");
+  var imgURL = chrome.extension.getURL("img/commentbetter-logo-filled-right-26.png");
 
   // via facebook cut and paste
   let image = "<img id='cbButton' src='" + imgURL +"' />";
