@@ -6,7 +6,7 @@
   "web_accessible_resources": [
     "inject.html", "img/attachButton.png","*"
   ],
-  "permissions": [ "contextMenus", "tabs", "storage", "<all_urls>" ],
+  "permissions": [ "contextMenus", "tabs", "storage", "activeTab", "<all_urls>" ],
   "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;",
   "content_scripts": [
    {

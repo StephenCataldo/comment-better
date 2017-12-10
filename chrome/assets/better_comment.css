@@ -1,4 +1,4 @@
-.cbButton { 
+#cbButton { 
   z-index: 1000;
   overflow-y: visible;
   position: relative;
@@ -9,16 +9,16 @@
   height: 20px;
   width: 20px;   */
 }
-.cbButton img {
+#cbButton img {
   position: relative;
   top: -4px;
 }
 
-div.cbModal {
+div#cbModal {
   position: absolute;
   bottom: 44px;
   right: 0px;
-  overflow: visible;
+  display: none;
   z-index: 99;
   height: 400px;
   width: 320px;

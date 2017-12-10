@@ -53,10 +53,12 @@ function doTheThing() {
   var imgURL = chrome.extension.getURL("img/commentbetter-logo-filled-26.png");
 
   // via facebook cut and paste
-  let image = "<img class='cbButton' src='" + imgURL +"' />";
-  let cbModal = '<div class="cbModal">Yes, and...</div>';
+  let image = "<img id='cbButton' src='" + imgURL +"' />";
+  let cbModal = '<div id="cbModal"></div>';
+
+
     let htmlTemplate =  
-'<a id="cb-1" onClick="cbModal(1)" aria-label="Openings: Better Comments” class="_r1a _5f0v cbButton" data-hover="tooltip" data-tooltip-alignh="center" data-tooltip-content="Better Comments" role="button" href="#" id="js_1n">' + image + '</a>' + cbModal;
+'<a id="cb-1" onClick="cbModal(1)" aria-label="Openings: Comment Better” class="_r1a _5f0v cbButton" data-hover="tooltip" data-tooltip-alignh="center" data-tooltip-content="Comment Better" role="button" href="#" id="js_1n">' + image + '</a>' + cbModal;
 
   /** @ToDos, perhaps
    * - This modal could open down if the click is high on the screen.
@@ -73,4 +75,36 @@ function doTheThing() {
   // This is untested, might possibly work for all we know, in case that above
   // overflow actually matters for something.
   //$('.UFICommentAttachmentButtons').parents('_3ccb').append(cbModal);
+
+  /* Make the modal show up or close **/
+ var modal = document.getElementById('cbModal');
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("cbButton");
+
+  // @ToDo ... probably should close if click btn again
+  window.onclick = function(event) {
+    // click outside the modal, anywhere anytime, and it's done.
+    if (event.target != modal && event.target != btn ) {
+        modal.style.display = "none";
+    }
+  }
+  // Get the <span> element that closes the modal
+  //var span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+      modal.style.display = "block";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  /*
+  span.onclick = function() {
+      modal.style.display = "none";
+  }
+  */
+
+  /*** modal section done ***/
+
+
 }
