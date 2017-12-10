@@ -1,0 +1,14 @@
+body { background: yellow; }
+.launchGuide { 
+  border: 5px solid red; 
+  /*
+ * background-image: "img/attachButton.png";
+  height: 20px;
+  width: 20px;   */
+}
+.launchGuide .launch { display: none; }
+.launchGuide:hover .launch {
+   display: block;
+} 
+
+
