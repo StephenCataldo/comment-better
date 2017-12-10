@@ -1,27 +1,36 @@
 #cbButton { 
-  z-index: 1000;
-  overflow-y: visible;
-  position: relative;
-  padding-left:  /* if on right */
-  top: -12px; 
-  /*
- * background-image: "img/attachButton.png";
-  height: 20px;
-  width: 20px;   */
+	z-index: 1000;
+	overflow-y: visible;
+	position: relative;
+	padding-left:  /* if on right */
+	top: -12px; 
+	/*
+	* background-image: "img/attachButton.png";
+	height: 20px;
+	width: 20px;   */
 }
 #cbButton img {
-  position: relative;
-  top: -4px;
+	position: relative;
+	top: -4px;
 }
 
 div#cbModal {
-  position: absolute;
-  bottom: 44px;
-  right: 0px;
-  display: none;
-  z-index: 99;
-  height: 400px;
-  width: 320px;
-  background: yellow;
-  border: 2px solid blue;
+	position: absolute;
+	bottom: 44px;
+	right: 0px;
+	display: none;
+	z-index: 99;
+	background: white;
 }
+
+.suggestion1, .suggestion2, .suggestion3, .suggestion4 {
+	width:300px;
+	height:40px;
+	padding:10px;
+	margin:10px;
+	border-radius:10px;
+	color: white;
+	text-align: center;
+}
+
+.suggestion1 {background-color:#F15e25;} .suggestion2 {background-color:#Ee9a21;} .suggestion3 {background-color:#A0499c;} .suggestion4 {background-color:#5c4f9b;}
