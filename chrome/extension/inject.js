@@ -58,7 +58,7 @@ function doTheThing() {
   // via facebook cut and paste
   let image = "<img id='cbButton' src='" + imgURL +"' />";
   $(".clipboard").css("background-image", imgClipboard);
-  
+  imgClipboard = ''; // talk to designer!! 
 
   let modalTemplate = '<div class="cbModal">' +
 	'<div class="suggestion1">How would you define... ?' + imgClipboard + '</div>' +

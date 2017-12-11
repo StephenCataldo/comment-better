@@ -14,23 +14,49 @@
 	top: -4px;
 }
 
-div#cbModal {
+#cbModal {
 	position: absolute;
 	bottom: 44px;
-	right: 0px;
+	right: 5px;
 	display: none;
 	z-index: 99;
+	border-radius: 3px;
+	width: 280px;
 	background: white;
+	-webkit-box-shadow: 0px 0px 5px 1px rgba(150,150,150,1);
+	-moz-box-shadow: 0px 0px 5px 1px rgba(150,150,150,1);
+	box-shadow: 0px 0px 5px 1px rgba(150,150,150,1);
+}
+
+.menu {
+	background-color: #ccc;
+}
+
+.menuAffirm, .menuAsk, .menuRequest {
+	text-align: center;
+	color: ;
+}
+
+.menuAffirm {
+	text-align: center;
+}
+
+.menuAsk {
+	text-align: center;
+}
+
+.menuRequest {
+	text-align: center;
 }
 
 .suggestion1, .suggestion2, .suggestion3, .suggestion4 {
-	width:300px;
-	height:40px;
-	padding:10px;
-	margin:10px;
-	border-radius:10px;
+	width: 86%;
+	padding: 10px;
+	margin: 15px auto;
+	border-radius: 10px;
 	color: white;
 	text-align: center;
+	cursor: pointer;
 }
 
 .suggestion1 {background-color:#F15e25;} .suggestion2 {background-color:#Ee9a21;} .suggestion3 {background-color:#A0499c;} .suggestion4 {background-color:#5c4f9b;}
