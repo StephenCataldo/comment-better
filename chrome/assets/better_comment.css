@@ -16,8 +16,6 @@
 
 #cbModal {
 	position: absolute;
-	bottom: 44px;
-	right: 5px;
 	display: none;
 	z-index: 99;
 	border-radius: 3px;

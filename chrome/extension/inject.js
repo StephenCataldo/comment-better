@@ -3,6 +3,24 @@ import jQuery from "./maybe_bad/jquery";
 window.$ = window.jQuery = jQuery;
 var idsComplete = [];
 
+
+
+/** create the modal **/
+// Where should this really go? Should this be background?
+
+  let imgClipboard = ""; 
+  let modalTemplate = '<div id="cbModal">' +
+	'<div class="suggestion1">How would you define... ?' + imgClipboard + '</div>' +
+	'<div class="suggestion2">Good point...' + imgClipboard + '</div>' +
+	'<div class="suggestion3">What made you aware of this problem?' + imgClipboard + '</div>' +
+	'<div class="suggestion4">Want to talk about this in offline?' + imgClipboard + '</div>' +
+  '</div>';
+  let cbModal =  modalTemplate ;
+  $("body").prepend(cbModal); // prepend since facebook keeps rolling?
+
+
+
+
 console.log("CommentBetterButton Initiate!!!");
 
 function cbModal(id) { console.log("open " + id); }
@@ -324,15 +342,7 @@ console.log($(target).find('.UFICommentAttachmentButtons').html());
   let image = "<img class='cbb-image' src='" + imgURL +"' />";
   $(".clipboard").css("background-image", imgClipboard);
   imgClipboard = ''; // talk to designer!! 
-  
-  let modalTemplate = '<div id="cbModal">' +
-	'<div class="suggestion1">How would you define... ?' + imgClipboard + '</div>' +
-	'<div class="suggestion2">Good point...' + imgClipboard + '</div>' +
-	'<div class="suggestion3">What made you aware of this problem?' + imgClipboard + '</div>' +
-	'<div class="suggestion4">Want to talk about this in offline?' + imgClipboard + '</div>' +
-  '</div>';
-  let cbModal = '<div id="cbModal">' + modalTemplate + '</div>';
-
+ 
     let htmlTemplate = // _r1a _5f0v     might be added back to class 
 '<a onclick="openModal(e)" class="cbbutton"  aria-label="Openings: Comment Better" data-hover="tooltip" data-tooltip-alignh="center" data-tooltip-content="Comment Better" role="button" href="#">' + image + '</a>' + cbModal;
 // Overwrite cleaner, but might go back to above...
@@ -379,25 +389,42 @@ console.log($newbies[0].children[0]); // this is the button
 console.log(e);
 console.log(this); // the button! yes!
 
+    /** Positioning
+     * .position() is relative to parent, .offset() to document. 
+     **/ 
     let btn = this;
     let modal =  document.getElementById('cbModal');  /* or global var? */
 
+    let scrollTop = $(window).scrollTop(); //
+      // If the scrollTop + height of modal + gap > btnOffset.top, 
+    let btnOffset = $(this).offset();
+    let modalHeight = 230, // eyeball for now
+        modalGap = 10;   // maybe tighten in final work, 
+    if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
+      // Under 
+      let commentHeight = 32;
+      $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-100});
+    } else { // modal goes over, the normal expected behavior
+      $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-100}); 
+    }
+
+    console.log(modal); // yes, this is the modal.
     // When the user clicks on the button, open the modal
     modal.style.display = "block";
     /* Where? Position the modal: */
     // element.getBoundingClientRect() are relative to the viewport.
     //var bodyRect = document.body.getBoundingClientRect(),
     let btnRect = this.getBoundingClientRect();
-    //let modalRect = modal.btn.getBoundingClientRect();
+    let modalRect = modal.getBoundingClientRect();
   //  = elemRect.top - bodyRect.top;
     console.log("Where are my toys?");
     console.log(btnRect);
-    //console.log(modalRect);
+    console.log(modalRect);
 
 
   });
 
-
+  // This can probably be removed once we only have cbModal per page
   // use parent:    _3ccb, or _5jmm
   $('.UFICommentAttachmentButtons').parents('._42ef').css("overflow", "visible");
   // This is untested, might possibly work for all we know, in case that above
