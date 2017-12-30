@@ -1,5 +1,5 @@
-#cbButton { 
-	z-index: 1000;
+#cbbutton { 
+	z-index: 1000; /* 1000 too high, keep tryign */
 	overflow-y: visible;
 	position: relative;
 	padding-left:  /* if on right */
@@ -9,7 +9,7 @@
 	height: 20px;
 	width: 20px;   */
 }
-#cbButton img {
+#cbbutton img {
 	position: relative;
 	top: -4px;
 }
