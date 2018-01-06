@@ -13,27 +13,28 @@ var idsComplete = [];
 // Where should this really go? Should this be background?
 
   let imgClipboard = ""; 
+  //
   let modalTemplate = '<div id="cbModal">' +
-	'<div class="suggestion1">XHow would you define... ?' + imgClipboard + '</div>' +
-	'<div class="suggestion2">Good point...' + imgClipboard + '</div>' +
-	'<div class="suggestion3">What made you aware of this problem?' + imgClipboard + '</div>' +
-	'<div class="suggestion4">Want to talk about this in offline?' + imgClipboard + '</div>' +
+	'<div class="sg agree suggestion1">XHow would you define... ?' + imgClipboard + '</div>' +
+	'<div class="sg questionssuggestion2">Good point...' + imgClipboard + '</div>' +
+	'<div class="sg agree suggestion3">What made you aware of this problem?' + imgClipboard + '</div>' +
+	'<div class="sg agreesuggestion4">Want to talk about this in offline?' + imgClipboard + '</div>' +
   '</div>';
   let cbModal =  modalTemplate ;
-  $("body").prepend(cbModal); // prepend since facebook keeps rolling?
+//  THIS WORKS:  ----->
+//$("body").prepend(cbModal); // prepend since facebook keeps rolling?
 
 
 window.addEventListener('load', () => {
 
   // cataldo - this is fired by extension/background/inject.js
   console.log("window.addEventListener in inject");
-
+  //return; //nevermind
   const injectDOM = document.createElement('div');
   injectDOM.className = 'inject-react-example';
-  injectDOM.style.textAlign = 'center';
-  //document.body.prependChild(injectDOM); // @ToDo- not a function
   $('body').prepend(injectDOM);
   render(<CbbModal />, injectDOM);
+  
 });
 
 
@@ -65,14 +66,14 @@ if ( document.readyState == "complete" ||
   console.log('a');
   await sleep(2700);
   console.log('b');
-  doTheThing();
+  injectCBB();
   console.log('c');
 })()
   
 
   } else {
   console.log("window addEventListener for load ***");
-  window.addEventListener('load', doTheThing());
+  window.addEventListener('load', injectCBB());
 }
 
 
@@ -100,11 +101,11 @@ var observer = new MutationObserver(function(mutations) {
       // Is this a DOM element? Can I run functions off it?
       //console.log(mutation.addedNodes[0]);
       // They never seem to come more than one at a time, right?
-      // Only doTheThing for UFIList (and see if that works) and carefully
-      // avoid doTheThing again every time we doTheThing.
+      // Only injectCBB for UFIList (and see if that works) and carefully
+      // avoid injectCBB again every time we injectCBB.
       //this works, until we start sending unending #cb-modal and #cbb.
       //Which @ToDo should not be IDs, should they?
-      //doTheThing(mutation.addedNodes[0]);
+      //injectCBB(mutation.addedNodes[0]);
 
       // alternative, send just the good part: 
       // mutation.addedNodes[0].querySelectorAll(".UFIList");
@@ -200,7 +201,7 @@ var observer = new MutationObserver(function(mutations) {
 
       if (UFIList) { 
         console.log("About to do the thing");
-        doTheThing(UFIList);  //
+        injectCBB(UFIList);  //
       }
     
     }
@@ -284,12 +285,8 @@ var config = {};
 config.fb_post_search = '._1dwg'; // facebook posts
 var fb_post_count = 0;
 
-/*
-function dotheOtherThing(innerHTML) {
-  innerHTML
-*/
 
-function doTheThing(domElement) {
+function injectCBB(domElement) {
   //domElement is what $(xx).get() would get.
   let color =  "#fcf";
   let target = 'body';
@@ -303,13 +300,12 @@ function doTheThing(domElement) {
   }
   
 // .UFICommentAttachmentButtons is the box the buttons live in
-// We prepend or append a clickable image into that box
-
-console.log($(target).find('.UFICommentAttachmentButtons').html());
+/* This didn't work:
+//console.log($(target).find('.UFICommentAttachmentButtons').html());
  if($(target).find('.UFICommentAttachmentButtons').hasClass("mybuttoned")) { 
    console.log("***** IT ALREADY HAS THIS CLASS, ABORT *****");
  }
-
+*/
 
   // Grab the ID. (adding a class not work!)
   // ex: id="addComment_10214535777885405"
@@ -389,21 +385,19 @@ console.log($(target).find('.UFICommentAttachmentButtons').html());
   // (I don't want to force extra loose permissions).
   let $newbies = $(target).find('.UFICommentAttachmentButtons');
   $newbies.prepend(htmlTemplate);
-console.log("ATTACH CLICK");    
-console.log($newbies);
-console.log($newbies.find('cbbutton')); // length 0   :-(
-// Gives uncaught errors when undefined. Dig to make sure can simply be ignored:
-console.log($newbies[0].children[0]); // this is the button
+  console.log("ATTACH CLICK");    
+  console.log($newbies);
+  console.log($newbies.find('cbbutton')); // length 0   :-(
+  // Gives uncaught errors when undefined. 
+  // @ToDo: Dig to make sure can simply be ignored:
+  console.log($newbies[0].children[0]); // this is the button
 
   $($newbies[0].children[0]).click(function(e){
-  //$newbies.find('cbbutton').click(function(e){
-   
-
     //$(this.href).show();
     e.preventDefault();
     e.stopPropagation();
-console.log(e);
-console.log(this); // the button! yes!
+    //console.log(e);
+    //console.log(this); // the button! yes!
 
     /** Positioning
      * .position() is relative to parent, .offset() to document. 
@@ -419,23 +413,57 @@ console.log(this); // the button! yes!
     if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
       // Under 
       let commentHeight = 32;
-      $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-100});
+      $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-200});
     } else { // modal goes over, the normal expected behavior
-      $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-100}); 
+      $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-200}); 
     }
 
+    /********************* Temp: prep the Modal *******************/
+    // !!!!! @ToDo How often does this run? This is crap code, halfway
+    // between javascript and React for the moment. Clean up before publish....
+   
+    // @ToDo. Crazy issues with locked down cache on css while developing.
+    // Plus need to get chrome images into doc.
+
+    modal.style.height = "403px";
+
+    let imageUrl = chrome.extension.getURL("img/modal/cover_weaving-into-icon-40.png");
+    $(modal).find('#cp').css('background-image', 'url(' + imageUrl + ')');
+    imageUrl = chrome.extension.getURL("/img/modal/radciv.png");
+    // tab  
+    $(modal).find('#rcc').css('background-image', 'url(' + imageUrl + ')');
+    // and larger for main cbbContent.   
+    $(modal).find('#rcc .cbbContent').css('background-image', 'url(' + imageUrl + ')');
+
+    imageUrl = chrome.extension.getURL("/img/ic_favorite_border_18pt.png");
+    $(modal).find('.adv').css('background-image', 'url(' + imageUrl + ')');
+
+    $(modal).find('#tabs li').on('click', function() {  
+      $('.sg').hide();
+      console.log(this);
+      $(this).find('.sg').show();
+      e.stopPropagation();
+
+      
+    });
+
+
+
+//$('#cbModal').css({'height' : ''})
     console.log(modal); // yes, this is the modal.
     // When the user clicks on the button, open the modal
     modal.style.display = "block";
     /* Where? Position the modal: */
     // element.getBoundingClientRect() are relative to the viewport.
     //var bodyRect = document.body.getBoundingClientRect(),
+    /*
     let btnRect = this.getBoundingClientRect();
     let modalRect = modal.getBoundingClientRect();
   //  = elemRect.top - bodyRect.top;
     console.log("Where are my toys?");
     console.log(btnRect);
     console.log(modalRect);
+*/
 
 
   });
@@ -475,28 +503,3 @@ console.log(this); // the button! yes!
   //var span = document.getElementsByClassName("close")[0];
 }
 
-function openModal(e) { 
-  // Stop propagation of event:
-  // Do I need this? Looking at old advice on web...
-  if (!e) {
-    window.event.cancelBubble=true;
-    // event.bubbles = false
-  }
-  e.stopPropagation();
-
-
-  let btn = this;
-      modal =  document.getElementById('cbModal');  /* or global var? */
-
-  // When the user clicks on the button, open the modal
-  modal.style.display = "block";
-  /* Where? Position the modal: */
-  // element.getBoundingClientRect() are relative to the viewport.
-  //var bodyRect = document.body.getBoundingClientRect(),
-  let btnRect = btn.getBoundingClientRect(),
-      modalRect = modal.btn.getBoundingClientRect();
-//  = elemRect.top - bodyRect.top;
-  console.log("Where are my toys?");
-  console.log(btnRect);
-  console.log(modalRect);
-}
