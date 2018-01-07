@@ -11,9 +11,13 @@ export default class CbbModal extends Component {
   showThisTab(e) {
     //none anyway: e.preventDefault();
     e.stopPropagation();
-    console.log('The link was clicked.');
-    console.log(e);
-    console.log(this);
+    console.log('>>>>>  The tabk was clicked.');
+    console.log(e.target);
+    // Programmer note: probably switch this to React. Though
+    // some of what I've been reading indicates that css rather than
+    // DOM changes actually are faster. See: #jQuery_vs_React_hide
+    $('.cbbContent').hide();
+    $(e.target).find('.cbbContent').show();
   }
   
   render() {
@@ -99,7 +103,7 @@ export default class CbbModal extends Component {
 
       </div>
     </li>
-    <li id="p2">Group <br/>& Frame
+    <li id="p2" onClick={this.showThisTab}>Group <br/>& Frame
       <div className="cbbContent">
         <div id="cbb-1" className="sg sgrt question">Observations.
           <div className="more">
@@ -160,7 +164,7 @@ export default class CbbModal extends Component {
 
       </div>
     </li>
-    <li id="p3">Conflict <br/>& Trolls
+    <li id="p3" onClick={this.showThisTab}>Conflict <br/>& Trolls
       <div className="cbbContent">
        <div id="cbb-1" className="sg advice">Hold the Middle
           <div className="more">
@@ -247,14 +251,14 @@ export default class CbbModal extends Component {
       </div>
     </li>
 
-    <li id="questions" title="Ask yourself before posting.">?
+    <li onClick={this.showThisTab} id="questions" title="Ask yourself before posting.">?
       <div className="cbbContent">
         <div className="sg personal">2 Metaphors: the conversation and the issue.
         </div>
       </div>
     </li>
 
-    <li id="cp" title="Cognitive Politics Social Media Guide">
+    <li onClick={this.showThisTab} id="cp" title="Cognitive Politics Social Media Guide">
       <div className="cbbContent">
         <div className="sg personal">2 Metaphors: the conversation and the issue.
           <div className="more">
@@ -334,7 +338,7 @@ export default class CbbModal extends Component {
 
 
     </li>
-    <li id="rcc" title="Radical Civility Cycle">
+    <li onClick={this.showThisTab} id="rcc" title="Radical Civility Cycle">
       <div className="cbbContent">
         <div className="sg personal bottom">
           <a href="https://www.facebook.com/groups/smartly/">Join a Facebook community that teaches Radical Civility.</a>

@@ -408,8 +408,16 @@ function injectCBB(domElement) {
     let scrollTop = $(window).scrollTop(); //
       // If the scrollTop + height of modal + gap > btnOffset.top, 
     let btnOffset = $(this).offset();
-    let modalHeight = 230, // eyeball for now
+    let modalHeight = 404, // eyeball for now
         modalGap = 10;   // maybe tighten in final work, 
+
+    // If modal isn't read, gives an error. @ToDo But doesn't seem to 
+    //  be creating errors for users (so far as I see)
+    // Uncaught TypeError: Cannot read property 'style' of null
+    modal.style.height = modalHeight + "px";
+
+    $(modal).find("#p1 .cbbContent").show(); // not sure why css doesn't do this
+          // @ToDo-figure-this-out-and-cleanup
     if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
       // Under 
       let commentHeight = 32;
@@ -425,28 +433,30 @@ function injectCBB(domElement) {
     // @ToDo. Crazy issues with locked down cache on css while developing.
     // Plus need to get chrome images into doc.
 
-    modal.style.height = "403px";
-
+    
     let imageUrl = chrome.extension.getURL("img/modal/cover_weaving-into-icon-40.png");
     $(modal).find('#cp').css('background-image', 'url(' + imageUrl + ')');
     imageUrl = chrome.extension.getURL("/img/modal/radciv.png");
     // tab  
     $(modal).find('#rcc').css('background-image', 'url(' + imageUrl + ')');
     // and larger for main cbbContent.   
+    imageUrl = chrome.extension.getURL("/img/modal/radical_civility.jpg");
     $(modal).find('#rcc .cbbContent').css('background-image', 'url(' + imageUrl + ')');
 
     imageUrl = chrome.extension.getURL("/img/ic_favorite_border_18pt.png");
     $(modal).find('.adv').css('background-image', 'url(' + imageUrl + ')');
-
+/* Hide all the tabs ot clicked on. Hides all the tabs when none clicked on.
+ * .sg is too far down. #jQuery_vs_React_hide
+ *
+ * Comment this shit back out soon: */
     $(modal).find('#tabs li').on('click', function() {  
-      $('.sg').hide();
+   //   $('.sg').hide();
+      $('.sg').show();
       console.log(this);
-      $(this).find('.sg').show();
+   //   $(this).find('.sg').show();
       e.stopPropagation();
-
-      
     });
-
+/* */
 
 
 //$('#cbModal').css({'height' : ''})
@@ -489,9 +499,9 @@ function injectCBB(domElement) {
   if ( window == null ) { console.log("Hey, why is window null?????? ID: " + id); }
   window.onclick = function(event) {
     // click outside the modal, anywhere anytime, and it's done.
-    console.log("event target is a problem: ");
+    console.log("event target for click: ");
     console.log(event);
-    console.log(event.target.parentNode);
+    ///console.log(event.target.parentNode);
     // event.currentTarget
     // @ToDo: if you click on a div within modal, that's not modal
     if ((event.target != modal && event.target.parentNode != modal ) 
