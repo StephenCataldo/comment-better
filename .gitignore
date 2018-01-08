@@ -7,7 +7,7 @@ npm-debug.log
 
 dev/
 
-*.zip
+*/*.zip
 *.crx
 *.pem
 update.xml
