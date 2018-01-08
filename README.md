@@ -10,6 +10,13 @@ The projects might or might not be combined.
  and unzip it (try clicking on it after downloading to unzip it; ask for help
 if you get stuck).
    Note: Non-developers use only the /build directory of the download.
+
+  Open in browser:
+  https://github.com/StephenCataldo/comment-better/blob/master/build.zip
+  Click "Download" button (toward bottom, right)
+  build.zip downloads. Click it open (or ask for help if not!)
+    
+
 2. In your chrome browser, enter into the address bar:   
 chrome://extensions 
 2a. Click on
