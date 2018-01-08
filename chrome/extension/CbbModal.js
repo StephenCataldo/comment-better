@@ -78,7 +78,7 @@ export default class CbbModal extends Component {
             "Active Listening">
         <clip>Correct me if I'm wrong, for you this issue ...</clip></div>
         <div id="cbb-2"  className="sg sgrt agree">Good point...</div>
-        <div id="cbb-2"  className="sg sgrt agree"><clip>This issue stresses me out too.</clip>
+        <div id="cbb-2"  className="sg sgsm agree"><clip>This issue stresses me out too.</clip>
           <div className="more">
             Finding something you agree on is a powerful way to make
             conversations more civil, and open the possibility that might
@@ -198,12 +198,14 @@ export default class CbbModal extends Component {
 
 
 
-        <div id="cbb-1" className="sg advice">Messengers
+        <div id="cbb-1" className="sg sgsm advice">Echo Messengers
           <div className="more">
-            Find people
+            Find people that most of your audience sees as on "their side"
+            and echo their messages. Don't try to "own" their message,
+            to score points off it. Just get it out there.
           </div>
         </div>
-        <div id="cbb-1" className="sg advice">Repetition
+        <div id="cbb-1" className="sg sgrt advice">Repetition
           <div className="more">
             Hateful ideas and bullying often rely on the feeling that the
             group is together. Piling on "I statements" of decency
@@ -212,9 +214,12 @@ export default class CbbModal extends Component {
             <clip>That crosses a line for me. I would never vote for a
             politician who did that, whether I liked their policies or
             not</clip>
+            Note that using messengers and repetition never lets you "win"
+            a particular encounter. If you can imagine winning, you're 
+            problably not being effective!
           </div>
         </div>
-        <div id="cbb-1" className="sg personal">Avoid stale anger
+        <div id="cbb-1" className="sg sgsm personal">Avoid stale anger
           <div className="more">
             Not every political conversation is sunlight and roses.
             We don't encourage you to put up with abuse.
@@ -224,11 +229,7 @@ export default class CbbModal extends Component {
             talk only about what they did and what they could do.
           </div>
         </div>
-        <div id="cbb-1" className="sg advice">Avoid stale anger
-          <div className="more">
-          </div>
-        </div>
-        <div className="sg personal">Conversation Permissions. <clip>Do you want to talk politics</clip>
+        <div className="sg personal sgrt">Conversation Permissions: <clip>Do you want to talk politics</clip>
           <div className="more">
             Political conversations are often adversarial. Asking consent
             before talking politics can help. So can giving people permission
@@ -253,8 +254,45 @@ export default class CbbModal extends Component {
 
     <li onClick={this.showThisTab} id="questions" title="Ask yourself before posting.">?
       <div className="cbbContent">
-        <div className="sg personal">2 Metaphors: the conversation and the issue.
+        <div className="sg personal">Who's your audience? Your goal?
+          <div className="more">
+            Are you hoping to avoid an argument with a relative without
+            silencing yourself? Are you hoping to change someone's mind
+            through conversation? Or convince people listening to your
+            exchange? 
+          </div>  
         </div>
+        <div className="sg personal">What can you ask about?
+          <br/>Their values: _______________________
+          <br/>How they learned: ___________________
+          <br/>Their priorities: ___________________
+          <div className="more">
+            We recommend Jonathan Haidt's <em>The Righteous Mind</em>
+            to explore some common ways that good people see the world
+            in different ways — asking questions as if these
+            values may differ can be a good way for liberals and conservatives
+            tease out better understandings.
+          </div>
+        </div>
+
+        <div className="sg personal">What are your metaphors?
+          <br/>Issue: _______________________
+          <br/>Conversation: ________________
+          <div className="more">
+            Issues have metaphors: tax <em>relief</em> uses an underlying 
+            metaphor that taxes are a disease or affliction. 
+          </div>
+        </div>
+
+        <div className="sg personal">Can you win this conversation?
+          <div className="more">
+            If you can imagine them finally realizing that you are right
+            and they are wrong and you are the source of truth — you 
+            probably won't get anywhere. Have a conversation, not a 
+            struggle that has a winner!
+          </div>
+        </div>
+
       </div>
     </li>
 
