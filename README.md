@@ -5,7 +5,38 @@ The projects might or might not be combined.
 
 #### Quick non-developer start
 
-1. Clone or download this repository, or *easiest* grab the "build" directory here
+
+Download:
+1) Open in browser:
+ https://github.com/StephenCataldo/comment-better/blob/master/build.zip
+1b)  Click "Download" button (toward bottom, right)
+ build.zip downloads. Click it open to "unzip" it. (or ask for help if not
+ automatic!)  Move the resulting folder called "build" whereever 
+ you'd like to keep it.
+
+Run:
+2) In your chrome browser, enter into the address bar:
+chrome://extensions
+2b) Click on
+√ Developer Mode
+2c) Push the button "Load Unpacked Extension" (top left area) and then
+ select the directory called "build" (that you just unzipped)
+
+Open facebook, and look for a comment box — right next to the smiling 
+emojii for uploading an image should be the "Comment Better Button."
+Click it and send us feedback!
+Note: the extension sometimes fails to run, especially when you first
+download it. Reload facebook. Let us know how well it works overall.
+
+
+
+
+
+
+#### Original Version, 
+
+1. Get the Code
+1a. Clone or download this repository, or *easiest* grab the "build" directory here
     https://github.com/StephenCataldo/guide-comment-insert--react/raw/master/build.zip
  and unzip it (try clicking on it after downloading to unzip it; ask for help
 if you get stuck).
@@ -85,12 +116,6 @@ for the original react + redux + chrome extension boilerplate.
 
 # React Chrome Extension Boilerplate
 
-[![Build Status](https://travis-ci.org/jhen0409/react-chrome-extension-boilerplate.svg?branch=master)](https://travis-ci.org/jhen0409/react-chrome-extension-boilerplate)
-[![Build status: Windows](https://ci.appveyor.com/api/projects/status/b5xy6ev6oykth0d2/branch/master?svg=true)](https://ci.appveyor.com/project/jhen0409/react-chrome-extension-boilerplate/branch/master)
-[![NPM version](http://img.shields.io/npm/v/react-chrome-extension-boilerplate.svg?style=flat)](https://www.npmjs.com/package/react-chrome-extension-boilerplate)
-[![Dependency Status](https://david-dm.org/jhen0409/react-chrome-extension-boilerplate.svg)](https://david-dm.org/jhen0409/react-chrome-extension-boilerplate)
-[![devDependency Status](https://david-dm.org/jhen0409/react-chrome-extension-boilerplate/dev-status.svg)](https://david-dm.org/jhen0409/react-chrome-extension-boilerplate#info=devDependencies)
-
 > Boilerplate for Chrome Extension React.js project.
 
 ## Features
@@ -122,17 +147,51 @@ The inject script is being run by [chrome/extension/background/inject.js](chrome
 
 If you are receiving the error message `Failed to load resource: net::ERR_INSECURE_RESPONSE`, you need to allow invalid certificates for resources loaded from localhost. You can do this by visiting the following URL: `chrome://flags/#allow-insecure-localhost` and enabling **Allow invalid certificates for resources loaded from localhost**.
 
-## Installation
+### Installation
+
+
+## Basic Setup for new developers
+
+Short explanation if you like: we'll write code in ES2015+ (Javascript 2015 version) but then a program called Babel 
+rewrites it to be more compatible across browswers, and Webpack packs our code up in two ways: live when we are developing
+(so if you make a change and refresh your browser, it will be normally be there) and also built into a zip.
+
+To get that all working, you need npm — the Node web server and package manager running. This varies depending on your machine
+(Mac/Windows/Linux) and was surprisingly challenging for the first couple machines we worked on — most of the instructions
+assume you are a developer; i.e., if you have a Mac, of course you will have already have installed XCode, so the web
+tutorial might leave that out.
+
+Try these tutorials. We need feedback — I have the same problem, I installed XCode long ago...
+It's good to have a package manager like HomeBrew (mac) https://brew.sh/
+For Mac, I believe these instructions usually fail, because they skip the XCode part, but might reference after you do that:
+https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/
+
+
+Volunteers: talk to Stephen, where are you stuck. I think the safe if slow way is this:
+1) XCode. Untested so far, might be as simple as getting a terminal and typing:
+  xcode-select --install
+  and following instructions.
+2) Package Manager. Mac = Homebrew or Fink, https://docs.brew.sh/Installation.html Linux: apt-get (Ubuntu) or similar
+3) you might need curl ... feedback request, is it there already? Any other stumbling blocks?
+
+Then go to any of the tutorials and get npm and node running:
+http://blog.teamtreehouse.com/install-node-js-npm-mac (I suspect this is a good choice for Mac, feedback?)  Or
+https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/ (untried for Windows)
+
 
 ```bash
 # clone it
-$ git clone https://github.com/jhen0409/react-chrome-extension-boilerplate.git
+$ git clone git@github.com:StephenCataldo/comment-better.git
+(also would follow same instructs for the Guide-Comment-Insert extension, into a separate folder)
+$ git clone git@github.com:StephenCataldo/guide-comment-insert--react.git
+
+# cd guide-comment-insert--react
 
 # Install dependencies
 $ npm install
 ```
 
-## Development
+## Development. Create a Node server that watches for your code changes and updates your extension.
 
 * Run script
 ```bash
@@ -151,7 +210,7 @@ This boilerplate uses `Webpack` and `react-transform`, and use `Redux`. You can 
 
 You can use [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) on development mode.
 
-## Build
+## Build. Produce a version we can upload to Chrome store.
 
 ```bash
 # build files to './build'

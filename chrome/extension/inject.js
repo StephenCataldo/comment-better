@@ -9,7 +9,7 @@ var idsComplete = [];
 
 
 
-/** create the modal **/
+/** create the modal // TRASH THIS OLD VERSION // **/
 // Where should this really go? Should this be background?
 
   let imgClipboard = ""; 
