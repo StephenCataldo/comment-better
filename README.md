@@ -152,9 +152,15 @@ If you are receiving the error message `Failed to load resource: net::ERR_INSECU
 
 ## Basic Setup for new developers
 
-Short explanation if you like: we'll write code in ES2015+ (Javascript 2015 version) but then a program called Babel 
+# Short explanation if you like: 
+We'll write code in ES2015+ (Javascript 2015 version) 
+but then a program called Babel 
 rewrites it to be more compatible across browswers, and Webpack packs our code up in two ways: live when we are developing
-(so if you make a change and refresh your browser, it will be normally be there) and also built into a zip.
+(so if you make a change and refresh your browser, it will be normally be there) and also built into a zip. I've sometimes heard this called an "artifact" or
+an "artifact generation pipeline" — basically a way to compile your code using
+a variety of tools that you can ignore thanks to the boilerplate, and 
+something of a surprise if you're used to just writing and perhaps minimizing
+javascript scripts.
 
 To get that all working, you need npm — the Node web server and package manager running. This varies depending on your machine
 (Mac/Windows/Linux) and was surprisingly challenging for the first couple machines we worked on — most of the instructions

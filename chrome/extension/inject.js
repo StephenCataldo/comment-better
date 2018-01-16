@@ -3,7 +3,7 @@ import { render } from 'react-dom';
 import CbbModal from './CbbModal';
 
 //import CommentBetter from './CommentBetter';
-import jQuery from "./maybe_bad/jquery";
+import jQuery from "./libary/jquery";
 window.$ = window.jQuery = jQuery;
 var idsComplete = [];
 
