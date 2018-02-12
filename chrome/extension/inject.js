@@ -1,45 +1,40 @@
 import React, { Component, PropTypes } from 'react';
 import { render } from 'react-dom';
 import CbbModal from './CbbModal';
-
-//import CommentBetter from './CommentBetter';
-import jQuery from "./libary/jquery";
+import jQuery from "./library/jquery";
 window.$ = window.jQuery = jQuery;
 var idsComplete = [];
 
 
+// @ToDo: turn this crap into functions.
+/*** A. Prep the Modal, which is React ***/
+/*** Inject the CBB button three times:
+/*** B1. Run injectCBB() when document loads - or now, if it already has. ***/
+/*** B2. Create a MutationObserver. Runs after injectCBB is run onload ***/
+/*** B3. Inject button when users click "reply" links. ***/
+  // Perhaps MutationObserver could observe the comment boxes instead? 
+//
+// Update: the MutationObserver is prevented from chewing on the same
+// code over and over by injecting a class.
+//
+// if($(target).find('.UFICommentAttachmentButtons').hasClass("mybuttoned")) {
+//
+/*** C. injectCBB injects a button into the domElement ***/
 
-/** create the modal // TRASH THIS OLD VERSION // **/
-// Where should this really go? Should this be background?
-
-  let imgClipboard = ""; 
-  //
-  let modalTemplate = '<div id="cbModal">' +
-	'<div class="sg agree suggestion1">XHow would you define... ?' + imgClipboard + '</div>' +
-	'<div class="sg questionssuggestion2">Good point...' + imgClipboard + '</div>' +
-	'<div class="sg agree suggestion3">What made you aware of this problem?' + imgClipboard + '</div>' +
-	'<div class="sg agreesuggestion4">Want to talk about this in offline?' + imgClipboard + '</div>' +
-  '</div>';
-  let cbModal =  modalTemplate ;
-//  THIS WORKS:  ----->
-//$("body").prepend(cbModal); // prepend since facebook keeps rolling?
-
-
+/*** A. Prep the Modal, which is React ***/
 window.addEventListener('load', () => {
 
-  // cataldo - this is fired by extension/background/inject.js
-  console.log("window.addEventListener in inject");
+  console.log("window.addEventListener injected by extension/background/inject.js");
   //return; //nevermind
   const injectDOM = document.createElement('div');
   injectDOM.className = 'inject-react-example';
   $('body').prepend(injectDOM);
   render(<CbbModal />, injectDOM);
-  
 });
-
 
 console.log("CommentBetterButton Initiate!!!");
 
+// @ToDo: is this stil used?
 function cbModal(id) { console.log("open " + id); }
 
 // TEMP!!
@@ -47,9 +42,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// For simple page: document readyState is complete
-// The window tends to take a while to load. I think something done
-// faster might be ok?
+/*** B1. Run injectCBB() when document loads - or now, if it already has. ***/
 // Reread: https://stackoverflow.com/questions/588040/window-onload-vs-document-onload. Below is a hack, sometimes document, sometimes window, expected to
 // sometimes run twice (not a disaster). Document loaded should be sufficient
 // for the text-oriented, DOM-oriented injectActions.
@@ -57,29 +50,25 @@ console.log(window.window_name);
 var windw = window.window_name;
 if ( document.readyState == "complete" ||
       document.readyState == "interactive" ) {
-  console.log("document ready already ***");
-//injectActions();
-
+  console.log("document was ready already ***");
   // facebook loads after document officially says it 's ready, so slow down.
-  
-(async () => {
-  console.log('a');
-  await sleep(2700);
-  console.log('b');
-  injectCBB();
-  console.log('c');
-})()
-  
+    
+  (async () => {
+    console.log('a');
+    await sleep(1500);
+    console.log('b');
+    injectCBB();
+    console.log('c');
+  })()
+    
 
-  } else {
+} else {
   console.log("window addEventListener for load ***");
   window.addEventListener('load', injectCBB());
 }
 
 
-//  Create a MutationObserver. Run it after running the above?
-// started in:  CommentBetter.js
-// This code from tutorials.
+/***  B2. Create a MutationObserver. Runs after injectCBB is run onload ***/
 
 var observer = new MutationObserver(function(mutations) {
 	// For the sake of...observation...let's output the mutation to console to see how this all works
@@ -90,12 +79,6 @@ var observer = new MutationObserver(function(mutations) {
     if (mutation.addedNodes &&
        (mutation.addedNodes.length > 0)) {
 
-/*
-      console.log('-----Mutation-----');
-      //childlist is the only we bother with: console.log(mutation.type);
-      //console.log(mutation);
-      console.log(mutation.addedNodes);
-*/
         
       //This is the html, a piece of the DOM, that contains what we want.
       // Is this a DOM element? Can I run functions off it?
@@ -156,56 +139,12 @@ var observer = new MutationObserver(function(mutations) {
         return;
       }
 
-
-      // Something not writ with testing UFIList. I give up here.
-      // Is it some kind of caching issue?
-      if (null && UFIList != null){    // not working, give up.
-        console.log(UFIList.textContent); // just text, not useful
-        /* I never actually implemented this effort to see if UFIList contains
-         * the new class by hand, since the normal find efforts kept failing
-         * but the console shows it there.  Could try this in the future
-         * (this is merely cut-and-paste text of an idea...)
-        function DOMComb (oParent, oCallback) {
-          if (oParent.hasChildNodes()) {
-            for (var oNode = oParent.firstChild; oNode; oNode = oNode.nextSibling) {
-              DOMComb(oNode, oCallback);
-            }
-          }
-          oCallback.call(oParent);
-        }
-
-          DOMComb(UFIList, console.log());
-        */
-
-
-        console.log("Checking for UFIList");
-        console.log(UFIList); // can be null.
-        console.log(typeof(UFIList));
-        console.log(mutation.addedNodes[0].querySelector("a.cbbutton")); 
-        console.log(mutation.addedNodes[0].querySelector("mybuttoned"));
-        // I fail to understand why this is null
-        console.log(UFIList.querySelector(".cbbutton")); // failing,null when should work
-        console.log(UFIList.querySelectorAll(".cbbutton"));
-        
-        console.log($(UFIList).find(".mybuttoned")); // it's in there, but no. stumped
-            // a.cbbutton is in the children of previous, why not found
-        console.log($(UFIList).find("a.cbbutton"));
-
-        // Well, shit. Maybe it's a race condition or object thing. Need
-        // to modify the UFIList parent, rather than add to that object?
-        //
-        //
-        console.log("Last chance:");
-        console.log($(UFIList).find("UFICommentAttachmentButtons").hasClass("mybuttoned"));
-      }
-
       if (UFIList) { 
-        console.log("About to do the thing");
+        console.log("MutationObserver: Inject a CBB button into a node");
         injectCBB(UFIList);  //
       }
     
     }
-      // =  attributes, childList over and over
 
     // Next: if it is a node we've seen, nothing to do.
     // If not seen, 
@@ -264,20 +203,6 @@ if (targetNode) {
 observer.observe(targetNode, observerConfig);
   })();
 }
-//targetNode = document.getElementById("stream_pagelet");
-// workes with subtree true...
-
-
-//#stream_pagelet ... sometimes I see this.
-// aria-label="News Feed"
-
-
-
- //   var containerNode = document.getElementById("globalContainer");
- //   var bodyNode = document.getElementsByTagName("body");
-//Nothing: observer.observe(containerNode, observerConfig);
-//observer.observe(bodyNode, observerConfig);
-
 
 
 
@@ -286,27 +211,47 @@ config.fb_post_search = '._1dwg'; // facebook posts
 var fb_post_count = 0;
 
 
+
+/*** C. injectCBB injects a button into the domElement ***/
+/** function injectCBB(domElement)
+ * accepts an optional domElement,
+ *
+ */
 function injectCBB(domElement) {
+   
+
+
+  /*** C. injectCBB injects a button into the domElement ***/
   //domElement is what $(xx).get() would get.
   let color =  "#fcf";
   let target = 'body';
   if (domElement != null) {
     target = domElement;
     color =  "#dff";
-    console.log("found a feed thing");
+    console.log("injectCBB: add buttons to what the MutationObserver found");
       
   } else {
-    console.log("starting things found");
+    console.log("injectCBB: add buttons to initial html");
   }
-  
-// .UFICommentAttachmentButtons is the box the buttons live in
-/* This didn't work:
-//console.log($(target).find('.UFICommentAttachmentButtons').html());
- if($(target).find('.UFICommentAttachmentButtons').hasClass("mybuttoned")) { 
-   console.log("***** IT ALREADY HAS THIS CLASS, ABORT *****");
- }
-*/
+ 
+  /*** B3. Listen for reply buttons being clicked in the facebook nodes ***/
+  // Is it possible to add listeners to classes, when the html hasn't 
+  // been loaded yet? If so, this isn't neccessary
+  // Also, does the UI really require this, or this already a CBB nearby?
+  // Is there a way to get MutationObserver to note these? We add a class
+  // to prevent nodes from being re-searched, which stops us from noticing
+  // this.
+  // Might be better to undo that? 
+// !!! @ToDo   hey write this
+  $(target).find('.UFIReplyLink').click(function() {
+    console.log("XXXXXXXX trying to add event handler");
+    injectCBB(this);
+  });
 
+  /** early effort to use an ID system
+   * to prevent MutationObserver from processing
+   * the same code over and over. This needs work!)
+   */
   // Grab the ID. (adding a class not work!)
   // ex: id="addComment_10214535777885405"
   //
@@ -329,17 +274,18 @@ function injectCBB(domElement) {
    
 
 
- $(target).find('.UFICommentAttachmentButtons').css({
+  $(target).find('.UFICommentAttachmentButtons').css({
     'background': color,
-    }); 
- 
- if($(target).find('.UFICommentAttachmentButtons').hasClass("mybuttoned")) {
-   console.log("***** NOW IT HAS THIS CLASS, ABORT *****");
-   return;
- }
+  }); 
 
-
- $(target).find('.UFICommentAttachmentButtons').addClass( "mybuttoned" );  
+  // Figure out if already processed. @ToDo: this doesn't make sense
+  // here. Add this class, or figure out an id system, at a higher
+  // level and abort earlier.
+  if($(target).find('.UFICommentAttachmentButtons').hasClass("has-cbb-button")) {
+    console.log("***** This UFICommentAttachmentButtons was already processed  *****");
+    return;
+  }
+  $(target).find('.UFICommentAttachmentButtons').addClass( "has-cbb-button" );  
 
 // SHIT. Shut the observer from what we do below.
 
@@ -433,7 +379,7 @@ function injectCBB(domElement) {
     // @ToDo. Crazy issues with locked down cache on css while developing.
     // Plus need to get chrome images into doc.
 
-    
+ /* ERASE THIS   
     let imageUrl = chrome.extension.getURL("img/modal/cover_weaving-into-icon-40.png");
     $(modal).find('#cp').css('background-image', 'url(' + imageUrl + ')');
     imageUrl = chrome.extension.getURL("/img/modal/radciv.png");
@@ -445,10 +391,14 @@ function injectCBB(domElement) {
 
     imageUrl = chrome.extension.getURL("/img/ic_favorite_border_18pt.png");
     $(modal).find('.adv').css('background-image', 'url(' + imageUrl + ')');
+*/
+
+
+
 /* Hide all the tabs ot clicked on. Hides all the tabs when none clicked on.
  * .sg is too far down. #jQuery_vs_React_hide
  *
- * Comment this shit back out soon: */
+ * Comment this shit back out soon: 
     $(modal).find('#tabs li').on('click', function() {  
    //   $('.sg').hide();
       $('.sg').show();
@@ -460,9 +410,16 @@ function injectCBB(domElement) {
 
 
 //$('#cbModal').css({'height' : ''})
+    
+/* COMMENT THIS SHIT OUT, make sure it still works, erase if it does
     console.log(modal); // yes, this is the modal.
     // When the user clicks on the button, open the modal
     modal.style.display = "block";
+*/
+
+
+
+
     /* Where? Position the modal: */
     // element.getBoundingClientRect() are relative to the viewport.
     //var bodyRect = document.body.getBoundingClientRect(),
@@ -512,4 +469,7 @@ function injectCBB(domElement) {
   // Get the <span> element that closes the modal
   //var span = document.getElementsByClassName("close")[0];
 }
+
+
+
 
