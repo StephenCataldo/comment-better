@@ -29,8 +29,6 @@ const Tabs = React.createClass({
     });
   },
   _renderTitles() {
-    // The Tabs have Cards, each of which has a Label with child props
-    // to be displayed in this menu tab as a list item
     function labels(child, index) {
       let activeClass = (this.state.selected === index ? 'active' : '');
       return (
@@ -38,14 +36,13 @@ const Tabs = React.createClass({
           <a href="#" 
             className={activeClass}
             onClick={this.handleClick.bind(this, index)}>
-            {child.props.label}
+            {child.props.Label}
           </a>
         </li>
       );
     }
     return (
       <ul className="tabs__labels">
-        {this.props.children.map(labels.bind(this))}
       </ul>
     );
   },
@@ -58,13 +55,11 @@ const Tabs = React.createClass({
   },
   render() {
     // Disable all the complexity!!
-    /*
     return (
       <div className="tabs">
         {this.props.children}
       </div>
     );
-    */
     return (
       <div className="tabs">
         {this._renderTitles()}
@@ -82,13 +77,7 @@ const Card = React.createClass({
     Label: React.PropTypes.element.isRequired,
     children: React.PropTypes.element.isRequired
   },
-not right at all:
-  propTypes: {
-    Label: React.PropTypes.element.isRequired,
-    Pane: React.PropTypes.element.isRequired
-  },
   */
-  // We want the child Pane
   render() {
     return (
       <div>
@@ -167,20 +156,11 @@ export default class CbbModal extends Component {
     );
     */
 
-    /* Dealing with multiple children passed to the Card:
-     *
-     * - See SplitPane example: https://reactjs.org/docs/composition-vs-inheritance.html
-     * - use keys and filters: https://stackoverflow.com/questions/38038835/can-a-react-component-have-multiple-areas-for-child-content
-     *
-     */
-
-
     return (
       <div id="cbModal">
         <Tabs selected={0}>
-          <Card
-            label = { <span>Listen <br/>& Ask</span> }
-          >
+          <Card>
+            <Label>Listen <br/>& Ask</Label>
             <Pane>
               <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree"><clip>Yes. And...</clip>
               </div>
@@ -195,9 +175,8 @@ export default class CbbModal extends Component {
                "I statements."
             </Info>   
           </Card>
-          <Card
-            label = { <span>Group & Frame</span> }
-          >
+          <Card>
+            <Label>Group & Frame</Label>
             <Pane>
               <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree">Say what is important
                 to you, not the policy. For example: <clip>People are working full time jobs and not 

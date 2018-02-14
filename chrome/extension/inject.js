@@ -29,7 +29,10 @@ window.addEventListener('load', () => {
   const injectDOM = document.createElement('div');
   injectDOM.className = 'inject-react-example';
   $('body').prepend(injectDOM);
+  console.log("injected");
+
   render(<CbbModal />, injectDOM);
+  console.log("rendered");
 });
 
 console.log("CommentBetterButton Initiate!!!");
@@ -339,11 +342,12 @@ function injectCBB(domElement) {
   console.log($newbies[0].children[0]); // this is the button
 
   $($newbies[0].children[0]).click(function(e){
-    //$(this.href).show();
+    console.log("+++++++ button was clicked ++++++++++");
+    $(this.href).show();
     e.preventDefault();
     e.stopPropagation();
-    //console.log(e);
-    //console.log(this); // the button! yes!
+    console.log(e);
+    console.log(this); // the button! yes!
 
     /** Positioning
      * .position() is relative to parent, .offset() to document. 
@@ -356,6 +360,9 @@ function injectCBB(domElement) {
     let btnOffset = $(this).offset();
     let modalHeight = 404, // eyeball for now
         modalGap = 10;   // maybe tighten in final work, 
+
+
+    
 
     // If modal isn't read, gives an error. @ToDo But doesn't seem to 
     //  be creating errors for users (so far as I see)
@@ -379,7 +386,6 @@ function injectCBB(domElement) {
     // @ToDo. Crazy issues with locked down cache on css while developing.
     // Plus need to get chrome images into doc.
 
- /* ERASE THIS   
     let imageUrl = chrome.extension.getURL("img/modal/cover_weaving-into-icon-40.png");
     $(modal).find('#cp').css('background-image', 'url(' + imageUrl + ')');
     imageUrl = chrome.extension.getURL("/img/modal/radciv.png");
@@ -391,7 +397,6 @@ function injectCBB(domElement) {
 
     imageUrl = chrome.extension.getURL("/img/ic_favorite_border_18pt.png");
     $(modal).find('.adv').css('background-image', 'url(' + imageUrl + ')');
-*/
 
 
 
@@ -414,8 +419,10 @@ function injectCBB(domElement) {
 /* COMMENT THIS SHIT OUT, make sure it still works, erase if it does
     console.log(modal); // yes, this is the modal.
     // When the user clicks on the button, open the modal
+    */
+    // Or don't, this is the key line of the whole thing. Why not show()?
     modal.style.display = "block";
-*/
+
 
 
 
