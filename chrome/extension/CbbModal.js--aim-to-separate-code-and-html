@@ -1,4 +1,6 @@
 import React, { PropTypes, Component } from 'react';
+import TabsCbbModal, { Card, Label, Pane, Info } from './CbbModal'; // the code that makes this work
+
 //import style from '../assets/bccModalx.css';
 // I think we'll import a Tab system, which I need to write,
 // keeping this file clean and editable by devs? 
@@ -8,154 +10,12 @@ import React, { PropTypes, Component } from 'react';
 
 //XXXXX This cut-and-paste is pre 15.5 code, bad deal.
 
- 
-
-const Tabs = React.createClass({
-  displayName: 'Tabs',
-  getDefaultProps() {
-    return {
-      selected: 0
-    };
-  },
-  getInitialState() {
-    return {
-      selected: this.props.selected
-    };
-  },
-  handleClick(index, event) {
-    event.preventDefault();
-    this.setState({
-      selected: index
-    });
-  },
-  _renderTitles() {
-    // The Tabs have Cards, each of which has a Label with child props
-    // to be displayed in this menu tab as a list item
-    function labels(child, index) {
-      let activeClass = (this.state.selected === index ? 'active' : '');
-      return (
-        <li key={index}>
-          <a href="#" 
-            className={activeClass}
-            onClick={this.handleClick.bind(this, index)}>
-            {child.props.label}
-          </a>
-        </li>
-      );
-    }
-    return (
-      <ul className="tabs__labels">
-        {this.props.children.map(labels.bind(this))}
-      </ul>
-    );
-  },
-  _renderContent() {
-    return (
-      <div className="tabs__content">
-        {this.props.children[this.state.selected]}
-      </div>
-    );
-  },
-  render() {
-    // Disable all the complexity!!
-    /*
-    return (
-      <div className="tabs">
-        {this.props.children}
-      </div>
-    );
-    */
-    return (
-      <div className="tabs">
-        {this._renderTitles()}
-        {this._renderContent()}
-      </div>
-    );
-  }
-});
-// end Tabs
-
-const Card = React.createClass({
-  displayName: 'Card',
-/*
- * propTypes: {
-    Label: React.PropTypes.element.isRequired,
-    children: React.PropTypes.element.isRequired
-  },
-not right at all:
-  propTypes: {
-    Label: React.PropTypes.element.isRequired,
-    Pane: React.PropTypes.element.isRequired
-  },
-  */
-  // We want the child Pane
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
-  }
-});
-const Label = React.createClass({
-  displayName: 'Label',
-  /*
-  propTypes: {
-    children: React.PropTypes.array.isRequired
-    // element? string? = what do we want to send to Label. 
-    // Maybe not define, because docs are changing?
-  },
-  */
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
-  }
-});
-
-const Pane = React.createClass({
-  displayName: 'Pane',
-  /*propTypes: {
-    // array, and object, both?
-    children: React.PropTypes.array.isRequired
-  },
-  */
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
-  }
-});
-
-const Info = React.createClass({
-  displayName: 'Info',
-  /*
-   * propTypes: {
-    children: React.PropTypes.string.isRequired
-  },
-  */
-  render() {
-    return (<div/>); // no info yet!
-    return (
-      <div class="info">
-        {this.props.children}
-      </div>
-    );
-  }
-});
-
-
 export default class CbbModal extends Component { 
 
   constructor(props) {
     super(props);
   }
  
-
   render() {
 
     /* Dealing with multiple children passed to the Card:
@@ -166,7 +26,7 @@ export default class CbbModal extends Component {
 
     return (
       <div id="cbModal">
-        <Tabs selected={0}>
+        <TabsCbbModal selected={0}>
           <Card
             label = { <span>Listen <br/>& Ask</span> }
           >
@@ -301,7 +161,7 @@ export default class CbbModal extends Component {
 
 
 
-        </Tabs>
+        </TabsCbbModal>
       </div>
     );
   }

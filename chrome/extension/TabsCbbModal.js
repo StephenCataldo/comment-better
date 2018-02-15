@@ -1,3 +1,5 @@
+This file isn't right.
+
 import React, { PropTypes, Component } from 'react';
 //import style from '../assets/bccModalx.css';
 // I think we'll import a Tab system, which I need to write,
@@ -8,9 +10,12 @@ import React, { PropTypes, Component } from 'react';
 
 //XXXXX This cut-and-paste is pre 15.5 code, bad deal.
 
- 
+export default class TabsCbbModal extends Component { 
 
-const Tabs = React.createClass({
+  constructor(props) {
+    super(props);
+  }
+ 
   displayName: 'Tabs',
   getDefaultProps() {
     return {
@@ -70,7 +75,7 @@ const Tabs = React.createClass({
 });
 // end Tabs
 
-const Card = React.createClass({
+export const Card = React.createClass({
   displayName: 'Card',
 /*
  * propTypes: {
@@ -86,7 +91,7 @@ const Card = React.createClass({
     );
   }
 });
-const Label = React.createClass({
+export const Label = React.createClass({
   displayName: 'Label',
   /*
   propTypes: {
@@ -104,7 +109,7 @@ const Label = React.createClass({
   }
 });
 
-const Pane = React.createClass({
+export const Pane = React.createClass({
   displayName: 'Pane',
   /*propTypes: {
     // array, and object, both?
@@ -120,7 +125,7 @@ const Pane = React.createClass({
   }
 });
 
-const Info = React.createClass({
+export const Info = React.createClass({
   displayName: 'Info',
   /*
    * propTypes: {
@@ -137,62 +142,4 @@ const Info = React.createClass({
 });
 
 
-export default class CbbModal extends Component { 
 
-  constructor(props) {
-    super(props);
-  }
- 
-
-  render() {
-    //console.log("About to render cbModal - I think this doesn't fire regularly");
-
-    /*
-    return (
-      <div id="cbModal">Modal
-        <Tabs selected={0}>Tabs
-        </Tabs>
-      </div>
-    );
-    */
-
-    return (
-      <div id="cbModal">
-        <Tabs selected={0}>
-          <Card>
-            <Label>Listen <br/>& Ask</Label>
-            <Pane>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree"><clip>Yes. And...</clip>
-              </div>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg sgrt agree">
-                <clip>I think I see where you're coming from.</clip>
-              </div>
-
-            </Pane>
-            <Info>
-               This is a
-               great place to start asking clarifying questions, and eventually add
-               "I statements."
-            </Info>   
-          </Card>
-          <Card>
-            <Label>Group & Frame</Label>
-            <Pane>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree">Say what is important
-                to you, not the policy. For example: <clip>People are working full time jobs and not 
-                earning a living. This seems unfair to me.</clip> instead of a policy suggestion.
-              </div>
-            </Pane>
-            <Info>
-               "I statements" are powerful, and allow you to stick to your frame without creating
-               as much disagreement.
-            </Info>   
-          </Card>
-
-        </Tabs>
-      </div>
-    );
-  }
- 
-
-}
