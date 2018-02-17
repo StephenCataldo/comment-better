@@ -1,21 +1,70 @@
 /* Inside the modal itself */
 
 
+#menu {
+  background-color: #F6F7F9;
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+}
+/*
+ * #cbModal ul {
+  height: 40px;
+}
+#cbModal ul li {
+  height: 40px;
+  vertical-align: top;
+}
+*/
+ul.tabs__labels {
+  padding: 0;
+  height: 38px;
+  width: 100%;
+  overflow: none;
+}
+ul.tabs__labels li {
+  height: 38px;
+}
+.menuTab {
+  text-align: center;
+  color: #333;
+  cursor: pointer;
+  float: left; /* or inline-block? */
+  padding: 6px 12px;
+  margin: 0 0 0 -1px;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-top: none;
+}
+/* from @b, what for? */
+.active { background-color: #ddd; }
+.deselectTab { background-color: #F6F7F9; } /*#F6F7F9*/
+
+/***### tabs__content ###***/
+.tabs__content {
+  clear: both;
+}
+
+/*** i-button ***/
+div.i-button {
+  float: right;
+  padding: .2em .4em;
+  margin-left: 1em;
+  background: yellow; /* @ToDesign */
+  padding-bottom: 4px;
+}
 
 /*** Nav structure ***/
 #cbModal { 
   /* The React on facebook positions this absolute.
    * Expect it to vary per setup?
    * position: relative;  /* as anchor */ 
-  width: 402px;
-  height: 500px; /* too much! but easier to work with */
+  width: 380px;
+  height: 400px; /* too much! but easier to work with */
 }
-#cbModal ul {
-  padding-left: 20px;
-}
-#cbModal ul li {
-  display: inline-block;
-}
+
 #cbModal .cbbContent {
   position: absolute;
   top: 50px;
@@ -32,16 +81,7 @@
 #XXcbModal:hover #p1 .cbbContent { display: none; }
 #XXcbModal:hover #p1:hover .cbbContent { display: block; } 
 /* menu design -- DESIGNERS */
-#cbModal ul {
-  height: 40px;
-}
-#cbModal ul li {
-  background-color: pink;
-  border: blue;
-  padding: 2px 6px;
-  height: 40px;
-  vertical-align: top;
-}
+
 /* @ToDo: been playing with both hover and click to view */
 #XXcbModal ul li:hover .cbbContent {
   display: block;
@@ -55,13 +95,20 @@
   /*background-image: url("./img/modal/cover_weaving-into-icon-40.png");  */
   /*background-image: url('chrome-extension://__MSG_@@extension_id__/img/modal/cover_weaving-into-icon-40.png');*/
 }
-
-#cbModal ul li#rcc {
-  width: 40px;
-  height: 40px;
-  padding: 2px 0;
- /* background:  url("./img/modal/radciv.png") no-repeat;*/
+/* specific .menuTabs */
+#rcc {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 2px;
 }
+ /* background:  url("./img/modal/radciv.png") no-repeat;*/
+
+/* remove text when picture available */
+#rcc span {
+  display: none;
+}
+
 #cbModal ul li#questions :not(.cbbContent) {
   width: 40px;
   height: 40px;
@@ -116,12 +163,12 @@
 	cursor: pointer;
 }
 .sgsm {
-  width: 156px;
+  width: 146px;
   margin: 8px;
   float: left; /* stack, somewhat randomly */
 }
 .sgrt {
-  width: 156px;
+  width: 146px;
   margin: 8px;
   float: right; /* stack, somewhat randomly */
 }
@@ -157,3 +204,16 @@
   background: #e07000;
 }
 
+/* Info buttons should be visibly placed over the suggestions — this is a 
+ * design idea from the developer, artists free to fix 
+ */
+.info {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 10;
+  margin: 10px;
+  border: 6px solid rgba(255,255,255,.4);
+  padding: 8px;
+  background: white;
+}

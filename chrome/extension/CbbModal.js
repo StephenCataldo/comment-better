@@ -34,7 +34,7 @@ const Tabs = React.createClass({
     function labels(child, index) {
       let activeClass = (this.state.selected === index ? 'active' : '');
       return (
-        <li key={index}>
+        <li key={index} className="menuTab" id={child.props.id}>
           <a href="#" 
             className={activeClass}
             onClick={this.handleClick.bind(this, index)}>
@@ -108,7 +108,8 @@ const Label = React.createClass({
   */
   render() {
     return (
-      <div>
+      <div className="menuTab">
+        Does this Label ever fire anymore? Or been replaced?
         {this.props.children}
       </div>
     );
@@ -126,13 +127,39 @@ const Pane = React.createClass({
     return (
       <div>
         {this.props.children}
+        <div className="i-button">i</div>
       </div>
     );
   }
 });
 
+/** Info area
+ * Each of the choices between state and props is interesting.
+ * State for class could let users view Info button after Info
+ * button. Props are better for rapid open-shut.
+ *
+ * Loose clicks should close? esc should close?
+ */ 
 const Info = React.createClass({
   displayName: 'Info',
+
+  getDefaultProps() {
+    return {
+      open: 0
+    };
+  },
+  getInitialState() {
+    return {
+      open: this.props.open
+    };
+  },
+  handleClick(index, event) {
+    event.preventDefault();
+    this.setState({
+      open: index
+    });
+  },
+
   /*
    * propTypes: {
     children: React.PropTypes.string.isRequired
@@ -142,6 +169,7 @@ const Info = React.createClass({
     return (<div/>); // no info yet!
     return (
       <div class="info">
+        <div class="x-button">x</div>
         {this.props.children}
       </div>
     );
@@ -168,7 +196,7 @@ export default class CbbModal extends Component {
       <div id="cbModal">
         <Tabs selected={0}>
           <Card
-            label = { <span>Listen <br/>& Ask</span> }
+            label = { <span>Listen<br/> & Ask</span> }
           >
             <Pane>
               <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree"><clip>Yes. And...</clip>
@@ -195,7 +223,7 @@ export default class CbbModal extends Component {
           </Card>
 
           <Card
-            label = { <span>Group & Frame</span> }
+            label = { <span>Group<br/> & Frame</span> }
           >
             <Pane>
     
@@ -229,7 +257,7 @@ export default class CbbModal extends Component {
 
 
           <Card
-            label = { <span>Conflict & Trolls</span> }
+            label = { <span>Conflict<br/> & Trolls</span> }
           >
             <Pane>
               <div id="cbb-1" className="sg group gladiator"><clip>I feel like we here
@@ -268,12 +296,32 @@ export default class CbbModal extends Component {
           </Card>
 
           <Card
-            label = { <span></span> }
+            id="smg"
+            title = "Social Media Guide"
+            label = { <span>Cognitive Politics Social Media Guide</span> }
           >
             <Pane>
-              <div title="Yes. And..." className="sg sgsm agree">
-                <clip> 
-                </clip> 
+              <div title="" className="sg agree">
+                Conversations have metaphors. Do you fire facts like
+                artillery forcing the defender to hide in trenches?
+                Is this a competive sport, a chance to connect, a mutual
+                journey, a session of story-telling and listening?
+              </div>
+              <div title="steelman" className="sg">
+                Describe the other side's points more clearly than they
+                do. If false accusations are being made by your side, be the
+                one who steps in. Be seen as reasonable and willing to
+                compromise, leaving the other side feeling heard, and people
+                will engage with you differently.
+                <taxonomy>Active Listening: Steelman</taxonomy>
+              </div>
+              <div title="Big tent tension" className="sg">
+                Electoral majorities require a big tent approach. This
+                doesn't mean pathetically compromising until you stand for
+                nothing. It means expressing your heart fully ("I statements")
+                and passionately, but also making sure that
+                people can be on your side if they agree with you even 
+                a little. 
               </div>
             </Pane>
             <Info>
@@ -281,12 +329,56 @@ export default class CbbModal extends Component {
           </Card>
 
 
-          <Card id="rcc"
+          <Card 
+            id="rcc"
+            title="Radical Civility Cycle"
             label = { <span>Radical Civility Cycle</span> }
           >
             <Pane>
               <div className="sg personal bottom whitetext">
                 <a href="https://www.facebook.com/groups/smartly/">Join a Facebook community that teaches Radical Civility.</a>
+              </div>
+            </Pane>
+            <Info>
+            </Info>   
+          </Card>
+
+
+          <Card
+            id="cp"
+            title = "Cognitive Politics Steps"
+            label = { <span>Cognitive Politics Social Media Guide</span> }
+          >
+            <Pane>
+              <div title="" className="sg agree">
+                1. Find a way to get people talking so they feel heard.
+                Ask them questions that are curious rather than loaded.
+                Going sideways from the main debate is often helpful;
+                seek out details. Use Moral Foundation Theory to 
+                as a place to find interesting questions about values.
+              </div>
+              <div title="steelman" className="sg">
+                2. Active listening, merged with agreeing on everything
+                you can, and steelman their point of view.
+                <taxonomy>Active Listening: Steelman</taxonomy>
+              </div>
+              <div title="" className="sg">
+                3. Share your observations or values. "I statements" are great,
+                and make it easier for people to listen. It's good to know
+                your frame, and know your conclusion, but don't state your
+                conclusion: share the observations and values that led you
+                to your conclusion, and stop there.
+              </div>
+              <div title="" className="sg">
+                4. End with a request. Even if it isn't met, it's a good way
+                to wrap up the conversation:
+              </div>
+              <div title="" className="sgsm">
+                I hope we can keep talking.
+              </div>
+              <div title="" className="sgsm">
+                If I bought you a copy of (book, video), would you be interested
+                to (read, watch) it?
               </div>
             </Pane>
             <Info>

@@ -358,7 +358,7 @@ function injectCBB(domElement) {
     let scrollTop = $(window).scrollTop(); //
       // If the scrollTop + height of modal + gap > btnOffset.top, 
     let btnOffset = $(this).offset();
-    let modalHeight = 404, // eyeball for now
+    let modalHeight = 380, // eyeball for now
         modalGap = 10;   // maybe tighten in final work, 
 
 

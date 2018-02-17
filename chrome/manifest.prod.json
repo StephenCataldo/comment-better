@@ -1,5 +1,5 @@
 {
-  "version": "0.0.12",
+  "version": "0.0.13",
   "name": "Comment Better Build",
   "manifest_version": 2,
   "description": "Edit your comment boxes with suggestions from communications experts. Based on react-chrome-extension-boilerplate. Uses same tools as Social Media Web Guide, intended to be packed together maybe.",
@@ -26,7 +26,7 @@
       "matches": [
         "<all_urls>"
       ],
-      "css": ["better_comment.css", "bccModal.css"]
+      "css": ["better_comment.css", "ccbModal.css"]
     }
   ]
 }
