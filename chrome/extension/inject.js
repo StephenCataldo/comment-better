@@ -21,198 +21,232 @@ var idsComplete = [];
 //
 /*** C. injectCBB injects a button into the domElement ***/
 
-/*** A. Prep the Modal, which is React ***/
-window.addEventListener('load', () => {
-
-  console.log("window.addEventListener injected by extension/background/inject.js");
-  //return; //nevermind
-  const injectDOM = document.createElement('div');
-  injectDOM.className = 'inject-react-example';
-  $('body').prepend(injectDOM);
-  console.log("injected");
-
-  render(<CbbModal />, injectDOM);
-  console.log("rendered");
-});
 
 console.log("CommentBetterButton Initiate!!!");
 
-// @ToDo: is this stil used?
-function cbModal(id) { console.log("open " + id); }
+loadModal(); // A
+initialInjectCBBs(); // B1
+ObserverNewCommentBoxes(); // B2
+// function injectCBB(domElement) { // C, called by the B's,
+                                    // inserts the little orange CB-button  
 
-// TEMP!!
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+
+
+/*** A. Prep the Modal, which is React ***/
+function loadModal() {
+  window.addEventListener('load', () => {
+
+    console.log("A. window.addEventListener injected by extension/background/inject.js");
+    const injectDOM = document.createElement('div');
+    injectDOM.className = 'inject-react-example';
+    $('body').prepend(injectDOM);
+    render(<CbbModal />, injectDOM);
+    console.log("Rendered the modal");
+    // If problem: does the window ever load before we run this?
+  });
 }
 
-/*** B1. Run injectCBB() when document loads - or now, if it already has. ***/
-// Reread: https://stackoverflow.com/questions/588040/window-onload-vs-document-onload. Below is a hack, sometimes document, sometimes window, expected to
-// sometimes run twice (not a disaster). Document loaded should be sufficient
-// for the text-oriented, DOM-oriented injectActions.
-console.log(window.window_name);
-var windw = window.window_name;
-if ( document.readyState == "complete" ||
-      document.readyState == "interactive" ) {
-  console.log("document was ready already ***");
-  // facebook loads after document officially says it 's ready, so slow down.
-    
-  (async () => {
-    console.log('a');
-    await sleep(1500);
-    console.log('b');
-    injectCBB();
-    console.log('c');
-  })()
-    
+/** initialInjectCBBs buttons into comment boxes
+ */ 
+function initialInjectCBBs() {
+  //  @ToDo: there is a better way to do this
+  //  NOTICE: 20180219, this doesn't work in the function,
+  //  and I'm going to trust MutationObserver rather than use sleep.
+  //  If it works smoothly, erase the whole hackathon rush-job that used
+  //  sleep. If problems, code left to help back up to what worked...
+  /*
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+  */
 
-} else {
-  console.log("window addEventListener for load ***");
-  window.addEventListener('load', injectCBB());
+  /*** B1. Run injectCBB() when document loads - or now, if it already has. ***/
+  // Reread: https://stackoverflow.com/questions/588040/window-onload-vs-document-onload. Below is a hack, sometimes document, sometimes window, expected to
+  // sometimes run twice (not a disaster). Document loaded should be sufficient
+  // for the text-oriented, DOM-oriented injectActions.
+  console.log("B1. run injectCBB on the whole document, injecting the button on every comment box that has already loaded");
+  if ( document.readyState == "complete" ||
+        document.readyState == "interactive" ) {
+    console.log("B. Document was ready already.");
+    // facebook loads after document officially says it 's ready, so slow down.
+    // @ToDo = how overdone is this effort - with mutationobserver running,
+    // do we need to wait at all?
+    (async () => {
+      console.log('a');
+      //await sleep(1500);
+      console.log('b');
+      injectCBB();
+      console.log('c');
+    })()
+      
+
+  } else {
+    console.log("window addEventListener for load ***");
+    window.addEventListener('load', injectCBB());
+  }
 }
-
 
 /***  B2. Create a MutationObserver. Runs after injectCBB is run onload ***/
 
-var observer = new MutationObserver(function(mutations) {
-	// For the sake of...observation...let's output the mutation to console to see how this all works
-	// seeking 0:div.UFIList    
-
-/*	console.log('+++++++++++++++'); */
-	mutations.forEach(function(mutation) {
-    if (mutation.addedNodes &&
-       (mutation.addedNodes.length > 0)) {
-
-        
-      //This is the html, a piece of the DOM, that contains what we want.
-      // Is this a DOM element? Can I run functions off it?
-      //console.log(mutation.addedNodes[0]);
-      // They never seem to come more than one at a time, right?
-      // Only injectCBB for UFIList (and see if that works) and carefully
-      // avoid injectCBB again every time we injectCBB.
-      //this works, until we start sending unending #cb-modal and #cbb.
-      //Which @ToDo should not be IDs, should they?
-      //injectCBB(mutation.addedNodes[0]);
-
-      // alternative, send just the good part: 
-      // mutation.addedNodes[0].querySelectorAll(".UFIList");
-      // querySelector() returns onematch or null... better?
-      // if querySelectorAll, watch out for running against empty NodeList ...
-      // double-warning, that's not an array (use for, not foreach:
-      // https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches/
-
-      // @ToDO:
-      // NodeList [text]
-      // will give errors
-
-      // If we've been here already, run away. I'm seeing 3-5 runs per node.
-      // @ToDo: figure out why it runs more than once.
-      // @ToDo: I think this helps, and should stay here, perhaps ... now I see
-      // 1-3 buttons per node, not up to 5. Could be shifting internet speed though.
-      //
-      //
-      /* Valideation efforts all failed to work.
-      let valid = true;
-      console.log( mutation.addedNodes[0].querySelector(".UFICommentAttachmentButtons")); // the new class is there
-      console.log( mutation.addedNodes[0].querySelector(".UFICommentAttachmentButtons").className); // but it's not there. fubar.
-      try {
-        if ( mutation.addedNodes[0].querySelector(".cbbutton") ) {
-        // Note: fails if top-level, but those don't match below, so ok,
-        // but perhaps inefficient. @ToDo-effiency-review, later
-          console.log("WAS HERE ALREADY!!!");
-          valid = false;
-        } else {
-          console.log("WAS NOT HERE YET");
-        }
-      } catch(e) {
-        console.log("querySelector didn't work. This happens, not an error, leave.")
-        valid = false;
-        return;
-      } 
-
-      if (!valid) { return; }  
-      ****/
-
-      // Test that mutation.addedNodes[0] is a node 
-      // (dups commented out stuff above)
-      var UFIList;
-      try {
-        UFIList = mutation.addedNodes[0].querySelector(".UFIList");
-      } catch(e) {
-        // Not the UFIList mutation; expected.
-        return;
-      }
-
-      if (UFIList) { 
-        console.log("MutationObserver: Inject a CBB button into a node");
-        injectCBB(UFIList);  //
-      }
-    
-    }
-
-    // Next: if it is a node we've seen, nothing to do.
-    // If not seen, 
-    //   1) do the thing we do.
-    //   2) give it an attribute saying we've seen it.
-
-	});    
-});
-
-
-/*** Notes on MutationObserver
- *  It's much cleaner if I can find the parent into which the new
- *  nodes are added ... facebook makes this hard. It's ok to not observe
- *  the initial batch when the page is ready, which seem to have a different
- *  parent. It seems to keep sticking things like u_fetchstream_3_0,
- *  u_fetchstream_4_1, deeper and deeper, each within each other.
- *
- *  A post=node has classes like this: _5jmm _5pat _3lb4 k_t-2r1p193
- * 
- *
- **/ 
-// Notify me of everything!
-var observerConfig = {
-	//attributes: true, 
-	childList: true, // it was a mutation to the tree of nodes.
-	//characterData: true,
-  subtree: true // can't tell, suspect must be true
-};
- 
-// Node, config
-// In this case we'll listen to all changes to body and child nodes
-var targetNode = document.body; // @ToDo: narrow this down? No sidebar.
-//targetNode = document.querySelectorAll('[role=feed]')[0];
-targetNode = document.getElementById("content_container");
-  // works with subtree true, not otherwise
-
-// I've seen this just above the desired nodes (not sure if it is always
-// there at all!)
-// I don't even see this ... every time I look at fb it changes.
-targetNode = document.querySelector('div[role="feed"]');
-// Sometimes this works, but not sure about always or when.
-// not seen work with subtree false
-// And now it doesn't work?
-// This looks closest. It's not always ready. This could be solved
-// by waiting until it is found.
-console.log(targetNode);
-if (targetNode) {
-  observer.observe(targetNode, observerConfig);
-} else {
-  (async () => {
-    console.log('targetNode wait and try again');
-    await sleep(1700); // 2700 seems to work... 700 when connection good
-    console.log('how long did that take');
-    targetNode = document.querySelector('div[role="feed"]');
-    console.log(targetNode);
-observer.observe(targetNode, observerConfig);
-  })();
-}
-
-
-
+/* not used?
 var config = {};
 config.fb_post_search = '._1dwg'; // facebook posts
-var fb_post_count = 0;
+*/
 
+
+function ObserverNewCommentBoxes() {
+  var observer = new MutationObserver(function(mutations) {
+    // For the sake of...observation...let's output the mutation to console to see how this all works
+    // Comments open by default: 0:div.UFIList    
+    // Comments opened by clicking reply: div class="UFICommentContainer"
+
+  /*	console.log('+++++++++++++++'); */
+    mutations.forEach(function(mutation) {
+      if (mutation.addedNodes &&
+         (mutation.addedNodes.length > 0)) {
+
+          
+        /** Classes to act on:    
+         * 20180219 sane documentation effort
+          UFIList parent of all of it.
+            UFIReplyList = after click reply button.
+              UFIRow, UFIAddComment #addComment_xxxxxx
+            UFIRow (common class) #addComment_yyyyyy
+              UFICommentAttachmentButtons = initial loads.
+
+          First version injects button into all .UFICommentAttachmentButtons
+          within each UFIList (the bottom of a post=node.)
+
+
+
+        */    
+
+
+        //This is the html, a piece of the DOM, that contains what we want.
+        // Is this a DOM element? Can I run functions off it?
+        //console.log(mutation.addedNodes[0]);
+        // They never seem to come more than one at a time, right?
+        // Only injectCBB for UFIList (and see if that works) and carefully
+        // avoid injectCBB again every time we injectCBB.
+        //this works, until we start sending unending #cb-modal and #cbb.
+        //Which @ToDo should not be IDs, should they?
+        //injectCBB(mutation.addedNodes[0]);
+
+        // alternative, send just the good part: 
+        // mutation.addedNodes[0].querySelectorAll(".UFIList");
+        // querySelector() returns onematch or null... better?
+        // if querySelectorAll, watch out for running against empty NodeList ...
+        // double-warning, that's not an array (use for, not foreach:
+        // https://css-tricks.com/snippets/javascript/loop-queryselectorall-matches/
+
+        // @ToDO:
+        // NodeList [text]
+        // will give errors
+
+        // If we've been here already, run away. I'm seeing 3-5 runs per node.
+        // @ToDo: figure out why it runs more than once.
+        // @ToDo: I think this helps, and should stay here, perhaps ... now I see
+        // 1-3 buttons per node, not up to 5. Could be shifting internet speed though.
+        //
+        //
+        /* Valideation efforts all failed to work.
+        let valid = true;
+        console.log( mutation.addedNodes[0].querySelector(".UFICommentAttachmentButtons")); // the new class is there
+        console.log( mutation.addedNodes[0].querySelector(".UFICommentAttachmentButtons").className); // but it's not there. fubar.
+        try {
+          if ( mutation.addedNodes[0].querySelector(".cbbutton") ) {
+          // Note: fails if top-level, but those don't match below, so ok,
+          // but perhaps inefficient. @ToDo-effiency-review, later
+            console.log("WAS HERE ALREADY!!!");
+            valid = false;
+          } else {
+            console.log("WAS NOT HERE YET");
+          }
+        } catch(e) {
+          console.log("querySelector didn't work. This happens, not an error, leave.")
+          valid = false;
+          return;
+        } 
+
+        if (!valid) { return; }  
+        ****/
+
+        // Test that mutation.addedNodes[0] is a node 
+        // (dups commented out stuff above)
+        var UFIList;
+        try {
+          UFIList = mutation.addedNodes[0].querySelector(".UFIList");
+        } catch(e) {
+          // Not the UFIList mutation; expected.
+          return;
+        }
+
+        if (UFIList) { 
+          console.log("MutationObserver: Inject a CBB button into a node");
+          injectCBB(UFIList);  //
+        }
+      
+      }
+
+      // Next: if it is a node we've seen, nothing to do.
+      // If not seen, 
+      //   1) do the thing we do.
+      //   2) give it an attribute saying we've seen it.
+
+    });    
+  });
+
+
+  /*** Notes on MutationObserver
+   *  It's much cleaner if I can find the parent into which the new
+   *  nodes are added ... facebook makes this hard. It's ok to not observe
+   *  the initial batch when the page is ready, which seem to have a different
+   *  parent. It seems to keep sticking things like u_fetchstream_3_0,
+   *  u_fetchstream_4_1, deeper and deeper, each within each other.
+   *
+   *  A post=node has classes like this: _5jmm _5pat _3lb4 k_t-2r1p193
+   * 
+   *
+   **/ 
+  // Notify me of everything!
+  var observerConfig = {
+    //attributes: true, 
+    childList: true, // it was a mutation to the tree of nodes.
+    //characterData: true,
+    subtree: true // can't tell, suspect must be true
+  };
+   
+  // Node, config
+  // In this case we'll listen to all changes to body and child nodes
+  var targetNode = document.body; // @ToDo: narrow this down? No sidebar.
+  //targetNode = document.querySelectorAll('[role=feed]')[0];
+  targetNode = document.getElementById("content_container");
+    // works with subtree true, not otherwise
+
+  // I've seen this just above the desired nodes (not sure if it is always
+  // there at all!)
+  // I don't even see this ... every time I look at fb it changes.
+  targetNode = document.querySelector('div[role="feed"]');
+  // Sometimes this works, but not sure about always or when.
+  // not seen work with subtree false
+  // And now it doesn't work?
+  // This looks closest. It's not always ready. This could be solved
+  // by waiting until it is found.
+  console.log(targetNode);
+  if (targetNode) {
+    observer.observe(targetNode, observerConfig);
+  } else {
+    (async () => {
+      console.log('targetNode wait and try again');
+      // @ToDo: now this is an error, but rarely seen. What's up?
+      await sleep(1700); // 2700 seems to work... 700 when connection good
+      console.log('how long did that take');
+      targetNode = document.querySelector('div[role="feed"]');
+      console.log(targetNode);
+  observer.observe(targetNode, observerConfig);
+    })();
+  }
+}
 
 
 /*** C. injectCBB injects a button into the domElement ***/
@@ -263,14 +297,18 @@ function injectCBB(domElement) {
   // Also, after adding this code, for the first time I see
   // "NOW IT HAS THIS CLASS, ABORT" below. 
   let id = $(target).find('.UFIAddComment').prop('id');
-  console.log("Now test ids:");
+  console.log("The id of the .UFIAddComment section is:");
   console.log(id);
-  if (idsComplete.indexOf(id) > -1) {
-    console.log("This idsComplete was found already: " + id);
+  if (!id) {
+    console.log("++++++++++ UFIAddComment has no id. Was a reply button clicked? The target from which we were seeking the UFIAddComment was:");
+    console.log($(target));
+
+  } else if (idsComplete.indexOf(id) > -1) {
+    console.log("This post has already been processed, id: " + id);
     return;
   } else {
     idsComplete.push(id);
-    console.log("idsComplete now...");
+    console.log("This id was not in idsComplete. So push id to idsComplete, which is now:");
     console.log(idsComplete);
   }
   console.log("New id added to list, so add the button for that id."); 
@@ -332,24 +370,28 @@ function injectCBB(domElement) {
   // don't let functions run straightforwardly
   // Bet there are better ways to do this. @ToDo-refactor
   // (I don't want to force extra loose permissions).
-  let $newbies = $(target).find('.UFICommentAttachmentButtons');
-  $newbies.prepend(htmlTemplate);
-  console.log("ATTACH CLICK");    
-  console.log($newbies);
-  console.log($newbies.find('cbbutton')); // length 0   :-(
+  let $newBtnSections = $(target).find('.UFICommentAttachmentButtons');
+  $newBtnSections.prepend(htmlTemplate);
+  /*
+  console.log("Attaching onClick function to the new button");    
+  console.log($newBtnSections);
+  console.log($newBtnSections.find('cbbutton')); // length 0   :-(
+  */
   // Gives uncaught errors when undefined. 
   // @ToDo: Dig to make sure can simply be ignored:
-  console.log($newbies[0].children[0]); // this is the button
+  console.log($newBtnSections[0].children[0]); // this is the button
 
-  $($newbies[0].children[0]).click(function(e){
-    console.log("+++++++ button was clicked ++++++++++");
+  $($newBtnSections[0].children[0]).click(function(e){
+    //console.log("+++++++ button was clicked ++++++++++");
     $(this.href).show();
     e.preventDefault();
     e.stopPropagation();
+    /* turn back on if button click not working..
     console.log(e);
     console.log(this); // the button! yes!
+    */
 
-    /** Positioning
+    /** Position the modal
      * .position() is relative to parent, .offset() to document. 
      **/ 
     let btn = this;
@@ -367,6 +409,8 @@ function injectCBB(domElement) {
     // If modal isn't read, gives an error. @ToDo But doesn't seem to 
     //  be creating errors for users (so far as I see)
     // Uncaught TypeError: Cannot read property 'style' of null
+    console.log("Modal is: ");
+    console.log(modal);
     modal.style.height = modalHeight + "px";
 
     $(modal).find("#p1 .cbbContent").show(); // not sure why css doesn't do this
@@ -473,9 +517,7 @@ function injectCBB(domElement) {
         modal.style.display = "none";
     }
   }
-  // Get the <span> element that closes the modal
-  //var span = document.getElementsByClassName("close")[0];
-}
+} // done injectCBB into document or new mutation
 
 
 
