@@ -1,3 +1,8 @@
+/* v0.13 CbbModal works, cutting content from v.12 and adding images back.
+ * I'm guessing this version will get trashed, use v0.12 to find old content,
+ * new stuff here likely to survive...
+ */
+
 import React, { PropTypes, Component } from 'react';
 //import style from '../assets/bccModalx.css';
 // I think we'll import a Tab system, which I need to write,

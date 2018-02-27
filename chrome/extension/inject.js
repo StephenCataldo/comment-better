@@ -424,6 +424,9 @@ function injectCBB(domElement) {
     }
 
     /********************* Temp: prep the Modal *******************/
+
+    /** Prep images for the modal, Chrome extensions are odd:
+     */ 
     // !!!!! @ToDo How often does this run? This is crap code, halfway
     // between javascript and React for the moment. Clean up before publish....
    

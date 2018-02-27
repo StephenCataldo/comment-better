@@ -65,7 +65,7 @@ div.i-button {
   height: 400px; /* too much! but easier to work with */
 }
 
-#cbModal .cbbContent {
+XX#cbModal .cbbContent {
   position: absolute;
   top: 50px;
   left: 0;
@@ -74,7 +74,7 @@ div.i-button {
 }
 /* show #p1 unless competing hover, or clicks on or off 
  * (playing wiht multiple methods to experiment with UI) */
-#cbModal #p1 .cbbContent {
+XX#cbModal #p1 .cbbContent {
   display: block; /**** !!!!!!!!!!!!!! *********/
 }
 /* show if no competing hover. */
@@ -87,26 +87,23 @@ div.i-button {
   display: block;
 }
 
-/* Menu tabs */
-#cbModal ul li#cp { 
-  width: 40px;
-  height: 40px;
+/*** Tab Card labels ***/
+.image-tab-label {
+  width: 46px;
+  height: 46px;
   padding: 2px 0;
-  /*background-image: url("./img/modal/cover_weaving-into-icon-40.png");  */
-  /*background-image: url('chrome-extension://__MSG_@@extension_id__/img/modal/cover_weaving-into-icon-40.png');*/
 }
+/* remove text when picture available */
+.image-tab-label span {
+  display: none;
+}
+
 /* specific .menuTabs */
-#rcc {
+#XXXrcc {
   width: 36px;
   height: 36px;
   padding: 0;
   margin: 2px;
-}
- /* background:  url("./img/modal/radciv.png") no-repeat;*/
-
-/* remove text when picture available */
-#rcc span {
-  display: none;
 }
 
 #cbModal ul li#questions :not(.cbbContent) {
@@ -116,8 +113,10 @@ div.i-button {
   font-size: 2em;
   text-align: center; 
 }
-
-#cbModal ul li#rcc .cbbContent {
+/* See inject.js :
+ * Prep images for the modal, Chrome extensions are odd:
+ */ 
+#rcc sg {
   /*background:  url("./img/modal/radical_civility.jpg") no-repeat;*/
   background-size: 360px 280px;
   width: 360px;

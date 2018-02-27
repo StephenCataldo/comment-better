@@ -1,3 +1,10 @@
+/* Stephen's orginal pile of ideas:
+ * This works, and is probably worth looking at content ideas which
+ * will be cut for quick cleanup moving forward. 
+ */
+
+
+
 import React, { PropTypes, Component } from 'react';
 //import style from '../assets/bccModalx.css';
 
