@@ -77,15 +77,7 @@ XX#cbModal .cbbContent {
 XX#cbModal #p1 .cbbContent {
   display: block; /**** !!!!!!!!!!!!!! *********/
 }
-/* show if no competing hover. */
-#XXcbModal:hover #p1 .cbbContent { display: none; }
-#XXcbModal:hover #p1:hover .cbbContent { display: block; } 
-/* menu design -- DESIGNERS */
 
-/* @ToDo: been playing with both hover and click to view */
-#XXcbModal ul li:hover .cbbContent {
-  display: block;
-}
 
 /*** Tab Card labels ***/
 .image-tab-label {
@@ -98,15 +90,8 @@ XX#cbModal #p1 .cbbContent {
   display: none;
 }
 
-/* specific .menuTabs */
-#XXXrcc {
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  margin: 2px;
-}
 
-#cbModal ul li#questions :not(.cbbContent) {
+XX#cbModal ul li#questions :not(.cbbContent) {
   width: 40px;
   height: 40px;
   padding: 2px 0;
@@ -116,8 +101,16 @@ XX#cbModal #p1 .cbbContent {
 /* See inject.js :
  * Prep images for the modal, Chrome extensions are odd:
  */ 
-#rcc sg {
+div.rcc {
   /*background:  url("./img/modal/radical_civility.jpg") no-repeat;*/
+  /* weird interactions. Not sure if this works at all, it suddenly
+   * seemed to when first inserted, but may have been the other code
+   * finally firing.
+   */
+
+  /*Failed:background-image: url(chrome.extension.getURL("./img/modal/radical_civility.jpg")); /* seems to take a moment to load? confusing. *
+  background-image: url(chrome.extension.getURL("/img/modal/radical_civility.jpg")); /* seems to take a moment to load? confusing. */
+  background: url('chrome-extension://__MSG_@@extension_id__/img/modal/radical_civility.jpg') no-repeat;
   background-size: 360px 280px;
   width: 360px;
   height: 360px;
@@ -194,7 +187,8 @@ XX#cbModal #p1 .cbbContent {
 .active-listening, .tactic  {background-color:#D15e55;} .question {background-color:#F15e25;} .group, .agree {background-color:#Ee9a21;} .advice {background-color:#A0499c;} .personal {background-color:#5c4f9b;}
 
 .adv {
-  /* background-image: url("./img/ic_favorite_border_18pt.png"); */
+  /* not know to work yet,... */
+  background: url('chrome-extension://__MSG_@@extension_id__/img/ic_favorite_border_18pt.png'); 
   height: 18px;
   width: 18px;
   float: right;

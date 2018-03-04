@@ -1,14 +1,16 @@
+/** CbbModal is both the tab system, and the "cards" themselves.
+ * Intent to separate out the tab system from content.
+ * Idea is that this component can be switched out for different content,
+ * and ideally this is the file to be edited by designers.
+ *
+ * See tab system:
+ * https://toddmotto.com/creating-a-tabs-component-with-react/#render
+ *
+ * @ToDo: some boilerplate from pre 15.5 code, review for modern code stnds.
+ */
+
 import React, { PropTypes, Component } from 'react';
-//import style from '../assets/bccModalx.css';
-// I think we'll import a Tab system, which I need to write,
-// keeping this file clean and editable by devs? 
-// I like:
-// https://toddmotto.com/creating-a-tabs-component-with-react/#render
-// 
 
-//XXXXX This cut-and-paste is pre 15.5 code, bad deal.
-
- 
 
 const Tabs = React.createClass({
   displayName: 'Tabs',
@@ -96,9 +98,14 @@ not right at all:
   },
   */
   // We want the child Pane
+  //
+  // Id problem: orig design had the Pane as a child
+  // of the tab, so unique id. Now they are separate.
+  // So, redesigning, the id in the tabs matches a class
+  // in the Pane. If smooth, erase this note.
   render() {
     return (
-      <div>
+      <div className={this.props.id}>
         {this.props.children}
       </div>
     );

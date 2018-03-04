@@ -413,8 +413,10 @@ function injectCBB(domElement) {
     console.log(modal);
     modal.style.height = modalHeight + "px";
 
-    $(modal).find("#p1 .cbbContent").show(); // not sure why css doesn't do this
+    // 20190302 $(modal).find("#p1 .cbbContent").show(); // not sure why css doesn't do this
           // @ToDo-figure-this-out-and-cleanup
+  
+    // Position the modal vertically.
     if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
       // Under 
       let commentHeight = 32;
@@ -433,19 +435,50 @@ function injectCBB(domElement) {
     // @ToDo. Crazy issues with locked down cache on css while developing.
     // Plus need to get chrome images into doc.
 
+
+    // @ToDo: chrome-extension://__MSG_@@extension_id__/img in the css
+    // seems to work. Refactor all this.
+
     let imageUrl = chrome.extension.getURL("img/modal/cover_weaving-into-icon-40.png");
     $(modal).find('#cp').css('background-image', 'url(' + imageUrl + ')');
     imageUrl = chrome.extension.getURL("/img/modal/radciv.png");
     // tab  
     $(modal).find('#rcc').css('background-image', 'url(' + imageUrl + ')');
     // and larger for main cbbContent.   
-    imageUrl = chrome.extension.getURL("/img/modal/radical_civility.jpg");
-    $(modal).find('#rcc .cbbContent').css('background-image', 'url(' + imageUrl + ')');
+    // Problem: that .rcc doesn't exist till clicked, react doesn't
+    // display. Have to change the css, not attach css to the found object.
+
 
     imageUrl = chrome.extension.getURL("/img/ic_favorite_border_18pt.png");
     $(modal).find('.adv').css('background-image', 'url(' + imageUrl + ')');
 
+    // Attach a stylesheet with the dynamically created images,
+    // on known classes.
 
+    // .rcc pane:
+    /*
+    imageUrl = chrome.extension.getURL("/img/modal/radical_civility.jpg");
+    var imageStyle = document.createElement('style');
+    imageStyle.type = 'text/css';
+    */
+/*    
+    var rules = document.createTextNode(".rcc{'background', 'red'}");//'background-image', 'url(' + imageUrl + ')}");
+    imageStyle.appendChild(rules);
+    document.getElementsByTagName("head")[0].appendChild(imageStyle);
+
+
+
+    // Try again
+    var styleEl = document.createElement('style'), styleSheet;
+
+  // Append style element to head
+  document.head.appendChild(styleEl);
+
+  // Grab style sheet
+    var myStyle = document.createElement('style');
+    myStyle.insertRule(".rcc { background: red; }", 0);
+    document.head.appendChild(myStyle);
+*/
 
 /* Hide all the tabs ot clicked on. Hides all the tabs when none clicked on.
  * .sg is too far down. #jQuery_vs_React_hide
