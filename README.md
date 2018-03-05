@@ -197,7 +197,7 @@ $ git clone git@github.com:StephenCataldo/guide-comment-insert--react.git
 $ npm install
 ```
 
-## Development. Create a Node server that watches for your code changes and updates your extension.
+## Development. Create a Node server that watches for your code changes and updates your extension. Many changes will appear as soon as you reload a page; css changes tend to require breaking out of the command and running again.
 
 * Run script
 ```bash

@@ -62,21 +62,11 @@ div.i-button {
    * Expect it to vary per setup?
    * position: relative;  /* as anchor */ 
   width: 380px;
+  width: 405px; /* I think go back to 380, when top menu can scroll! @ToDo */
   height: 400px; /* too much! but easier to work with */
 }
 
-XX#cbModal .cbbContent {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  height: 300px;
-  display: none; /* display after click or hover, not sure which */
-}
-/* show #p1 unless competing hover, or clicks on or off 
- * (playing wiht multiple methods to experiment with UI) */
-XX#cbModal #p1 .cbbContent {
-  display: block; /**** !!!!!!!!!!!!!! *********/
-}
+
 
 
 /*** Tab Card labels ***/
@@ -91,13 +81,7 @@ XX#cbModal #p1 .cbbContent {
 }
 
 
-XX#cbModal ul li#questions :not(.cbbContent) {
-  width: 40px;
-  height: 40px;
-  padding: 2px 0;
-  font-size: 2em;
-  text-align: center; 
-}
+
 /* See inject.js :
  * Prep images for the modal, Chrome extensions are odd:
  */ 
@@ -115,7 +99,17 @@ div.rcc {
   width: 360px;
   height: 360px;
 }
+#smg {
+  background: url('chrome-extension://__MSG_@@extension_id__/img/modal/smg-40.png');
+}
+div.smg {
+  background: url('chrome-extension://__MSG_@@extension_id__/img/modal/smg.png') no-repeat;
+  background-size: 360px 280px; /* @ToDo: adjust a little */
+  
+  width: 360px;
+  height: 360px;
 
+}
 .menu {
 	background-color: #ccc;
 }
@@ -143,6 +137,7 @@ div.rcc {
   left: 60px;
 }
 .whitetext { color: white; }
+.whitetext a { color: #efe7ff; } 
 
 /*.group, .tactic, .question, .agree, .advice, .personal {*/
 .sg {
@@ -184,7 +179,7 @@ div.rcc {
   border: 10px solid #eee;
 
 }
-.active-listening, .tactic  {background-color:#D15e55;} .question {background-color:#F15e25;} .group, .agree {background-color:#Ee9a21;} .advice {background-color:#A0499c;} .personal {background-color:#5c4f9b;}
+.active-listening, .tactic  {background-color:#D15e55;} .question {background-color:#F15e25;} .group, .agree {background-color:#Ee9a21;} .advice {background-color:#A0499c;} .personal {background-color:#5c4f9b;} .gladiator { background-color: red; } .observe { background-color: #333; }
 
 .adv {
   /* not know to work yet,... */

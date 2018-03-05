@@ -213,19 +213,19 @@ export default class CbbModal extends Component {
             label = { <span>Listen<br/> & Ask</span> }
           >
             <Pane>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree"><clip>Yes. And...</clip>
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree"><clip>Yes. And...</clip>
               </div>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg sgrt agree">
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree">
                 <clip>I think I see where you're coming from.</clip>
               </div>
-              <div className="sg sgrt agree">`
+              <div className="sg agree">`
                 <clip>I hear what you’re saying. I agree about... I also see...</clip>
               </div>
-              <div className="sg sgrt agree">`
+              <div className="sg agree">`
                 <clip>Tell me more about ... </clip>
               </div>
 
-              <div id="cbb-3" className="sg sgrt question"><clip>What made you aware of </clip> this problem?</div>
+              <div id="cbb-3" className="sg question"><clip>What made you aware of </clip> this problem?</div>
 
 
             </Pane>
@@ -237,13 +237,38 @@ export default class CbbModal extends Component {
           </Card>
 
           <Card
+            label = { <span>Open<br/> & Close</span> }
+          >
+            <Pane>
+    
+              <div className="sg observer"><clip>My experience was ..."</clip></div>
+
+              <div className="sg group"><clip>I agree with you about ... and 
+              about ... and about .... What do you think of ...</clip> 
+              <br/>(taxonomy/value: tit-for-tat listening/fairness)
+              </div>
+
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree">Say what is important
+                to you, not the policy. For example: <clip>People are working full time jobs and not 
+                earning a living. This seems unfair to me.</clip> instead of a policy suggestion.
+              </div>
+            </Pane>
+            <Info>
+               "I statements" are powerful, and allow you to stick to your frame without creating
+               as much disagreement.
+            </Info>   
+          </Card>
+
+
+
+          <Card
             label = { <span>Group<br/> & Frame</span> }
           >
             <Pane>
     
               <div className="sg"><clip>My experience was ..."</clip></div>
 
-              <div id="cbb-1" className="sg group gladiator"><clip>I don't see this as left vs.
+              <div className="sg gladiator"><clip>I don't see this as left vs.
           right,
           but as ordinary people vs. those who'd take our democracy away.</clip>              </div>
 
@@ -258,10 +283,6 @@ export default class CbbModal extends Component {
               <br/>(taxonomy/value: tit-for-tat listening/fairness)
               </div>
 
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree">Say what is important
-                to you, not the policy. For example: <clip>People are working full time jobs and not 
-                earning a living. This seems unfair to me.</clip> instead of a policy suggestion.
-              </div>
             </Pane>
             <Info>
                "I statements" are powerful, and allow you to stick to your frame without creating
@@ -352,7 +373,7 @@ export default class CbbModal extends Component {
           >
             <Pane>
               <div className="sg personal bottom whitetext">
-                <a href="https://www.facebook.com/groups/smartly/">Join a Facebook community that teaches Radical Civility.</a>
+                Join the <a href="https://www.facebook.com/groups/smartly/">Social Media Approaches for Respect and Tolerance</a> community to practivce the Radical Civility Cycle.
               </div>
             </Pane>
             <Info>
