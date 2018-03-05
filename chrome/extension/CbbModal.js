@@ -141,11 +141,12 @@ const Pane = React.createClass({
     return (
       <div className="cbbContent">
         {this.props.children}
-        <div className="i-button">i</div>
       </div>
     );
   }
 });
+/*         <div className="i-button">i</div> */
+
 
 /** Info area
  * Each of the choices between state and props is interesting.
@@ -423,6 +424,26 @@ export default class CbbModal extends Component {
             </Info>   
           </Card>
 
+
+
+          <Card
+            id="adv"
+            className="image-tab-label-tiny"
+            title = "Share the Comment Better Button"
+            label = { <span>Share the Comment Better Button</span> }
+          >
+            <Pane>
+              <div className="sg adv"><clip>I'm experimenting with tips  
+                to make my political
+                conversations saner and more civil. I pop up tips
+                right in my comment box: join me using the 
+                <a href="http://cognitivepolitics.org/comment-better-button"
+                >Comment Better Button.</a></clip>
+              </div>
+            </Pane>
+            <Info>
+            </Info>
+          </Card>
 
 
 
