@@ -1,0 +1,221 @@
+/* Inside the modal itself */
+
+
+#menu {
+  background-color: #F6F7F9;
+  width: 100%;
+  display: block;
+  cursor: pointer;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+}
+/*
+ * #cbModal ul {
+  height: 40px;
+}
+#cbModal ul li {
+  height: 40px;
+  vertical-align: top;
+}
+*/
+ul.tabs__labels {
+  padding: 0;
+  height: 38px;
+  width: 100%;
+  overflow: none;
+}
+ul.tabs__labels li {
+  height: 38px;
+}
+.menuTab {
+  text-align: center;
+  color: #333;
+  cursor: pointer;
+  float: left; /* or inline-block? */
+  padding: 6px 12px;
+  margin: 0 0 0 -1px;
+  border: 1px solid #ccc;
+  border-right: none;
+  border-top: none;
+}
+/* from @b, what for? */
+.active { background-color: #ddd; }
+.deselectTab { background-color: #F6F7F9; } /*#F6F7F9*/
+
+/***### tabs__content ###***/
+.tabs__content {
+  clear: both;
+}
+
+/*** i-button ***/
+div.i-button {
+  float: right;
+  padding: .2em .4em;
+  margin-left: 1em;
+  background: yellow; /* @ToDesign */
+  padding-bottom: 4px;
+}
+
+/*** Nav structure ***/
+#cbModal { 
+  /* The React on facebook positions this absolute.
+   * Expect it to vary per setup?
+   * position: relative;  /* as anchor */ 
+  width: 380px;
+  width: 405px; /* I think go back to 380, when top menu can scroll! @ToDo */
+                /* 405 worked before the little heart was added */
+  width: 423px;
+  height: 400px; /* too much! but easier to work with */
+}
+
+
+
+
+/*** Tab Card labels ***/
+.image-tab-label {
+  width: 46px;
+  height: 48px;
+  margin-top: 2px;
+  padding: 2px 0;
+}
+.image-tab-label-tiny {
+  width: 23px;
+  height: 48px;
+  padding: 2px 0;
+}
+/* remove text when picture available */
+.image-tab-label span, .image-tab-label-tiny span {
+  display: none;
+}
+
+
+
+/* See inject.js :
+ * Prep images for the modal, Chrome extensions are odd:
+ */ 
+#cp {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/modal/cover_weaving-into-icon-40.png');
+} 
+#rcc {
+  background-image: url('chrome-extension://__MSG_@@extension_id__/img/modal/radciv.png');
+}
+
+div.rcc {
+  /*background:  url("./img/modal/radical_civility.jpg") no-repeat;*/
+  /* weird interactions. Not sure if this works at all, it suddenly
+   * seemed to when first inserted, but may have been the other code
+   * finally firing.
+   */
+
+  /*Failed:background-image: url(chrome.extension.getURL("./img/modal/radical_civility.jpg")); /* seems to take a moment to load? confusing. *
+  background-image: url(chrome.extension.getURL("/img/modal/radical_civility.jpg")); /* seems to take a moment to load? confusing. */
+  background: url('chrome-extension://__MSG_@@extension_id__/img/modal/radical_civility.jpg') no-repeat;
+  background-size: 360px 280px;
+  width: 360px;
+  height: 360px;
+}
+#smg {
+  background: url('chrome-extension://__MSG_@@extension_id__/img/modal/smg-40.png');
+}
+div.smg {
+  background: url('chrome-extension://__MSG_@@extension_id__/img/modal/smg.png') no-repeat;
+  background-size: 360px 280px; /* @ToDo: adjust a little */
+  
+  width: 360px;
+  height: 360px;
+
+}
+.menu {
+	background-color: #ccc;
+}
+
+.menuAffirm, .menuAsk, .menuRequest {
+	text-align: center;
+	color: ;
+}
+
+.menuAffirm {
+	text-align: center;
+}
+
+.menuAsk {
+	text-align: center;
+}
+
+.menuRequest {
+	text-align: center;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 2px;
+  left: 60px;
+}
+.whitetext { color: white; }
+.whitetext a { color: #efe7ff; } 
+
+/*.group, .tactic, .question, .agree, .advice, .personal {*/
+.sg {
+	width: 300px; /* 86% */
+	padding: 10px;
+	margin: 8px auto;
+	border-radius: 10px;
+	color: white;
+	text-align: center;
+	cursor: pointer;
+}
+.sgsm {
+  width: 146px;
+  margin: 8px;
+  float: left; /* stack, somewhat randomly */
+}
+.sgrt {
+  width: 146px;
+  margin: 8px;
+  float: right; /* stack, somewhat randomly */
+}
+
+
+.sg clip {
+  color: #fcfcfc;
+  font-weight: bold;
+}
+.sg .more {
+  display: none;
+}
+.sg:hover .more {
+  position: absolute;
+  display: block;
+  background: inherit;
+  padding: 2px;
+  top: 0;
+  left: 180px;
+  width: 150px;
+  border: 10px solid #eee;
+
+}
+.active-listening, .tactic  {background-color:#D15e55;} .question {background-color:#F15e25;} .group, .agree {background-color:#Ee9a21;} .advice {background-color:#A0499c;} .personal {background-color:#5c4f9b;} .gladiator { background-color: red; } .observe { background-color: #333; }
+.adv { background-color: orange; /* what's our orange? */ }
+
+#adv {
+  /* not know to work yet,... */
+  background: url('chrome-extension://__MSG_@@extension_id__/img/ic_favorite_border_18pt.png'); 
+  height: 18px;
+  width: 18px;
+  float: right;
+  margin-top: 12px;
+}
+
+/* Info buttons should be visibly placed over the suggestions — this is a 
+ * design idea from the developer, artists free to fix 
+ */
+.info {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 10;
+  margin: 10px;
+  border: 6px solid rgba(255,255,255,.4);
+  padding: 8px;
+  background: white;
+}
