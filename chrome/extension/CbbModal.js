@@ -341,27 +341,9 @@ export default class CbbModal extends Component {
             label = { <span>Cognitive Politics Social Media Guide</span> }
           >
             <Pane>
-              <div title="" className="sg agree">
-                Conversations have metaphors. Do you fire facts like
-                artillery forcing the defender to hide in trenches?
-                Is this a competive sport, a chance to connect, a mutual
-                journey, a session of story-telling and listening?
-              </div>
-              <div title="steelman" className="sg">
-                Describe the other side's points more clearly than they
-                do. If false accusations are being made by your side, be the
-                one who steps in. Be seen as reasonable and willing to
-                compromise, leaving the other side feeling heard, and people
-                will engage with you differently.
-                <taxonomy>Active Listening: Steelman</taxonomy>
-              </div>
-              <div title="Big tent tension" className="sg">
-                Electoral majorities require a big tent approach. This
-                doesn't mean pathetically compromising until you stand for
-                nothing. It means expressing your heart fully ("I statements")
-                and passionately, but also making sure that
-                people can be on your side if they agree with you even 
-                a little. 
+              <div title="Social Media Guide" 
+                 className="sg gothere bottom whitetext">
+                Explore the <a href="http://cognitivepolitics.org/social-media-guide-progressives">Social Media Guide for Progressives</a>
               </div>
             </Pane>
             <Info>
@@ -392,35 +374,35 @@ export default class CbbModal extends Component {
             label = { <span>Cognitive Politics Social Media Guide</span> }
           >
             <Pane>
-              <div title="" className="sg agree">
+              <div title="" className="sg question">
                 1. Find a way to get people talking so they feel heard.
                 Ask them questions that are curious rather than loaded.
-                Going sideways from the main debate is often helpful;
+                <info>Going sideways from the main debate is often helpful;
                 seek out details. Use Moral Foundation Theory to 
-                as a place to find interesting questions about values.
+                as a place to find interesting questions about values.</info>
               </div>
-              <div title="steelman" className="sg">
-                2. Active listening, merged with agreeing on everything
+              <div title="steelman" className="sg agree">
+                2. A variant of active listening merged with 
+                agreeing on everything
                 you can, and steelman their point of view.
                 <taxonomy>Active Listening: Steelman</taxonomy>
               </div>
-              <div title="" className="sg">
-                3. Share your observations or values. "I statements" are great,
-                and make it easier for people to listen. It's good to know
+              <div title="" className="sg observe">
+                3. In your head, backtrack from your conclusion, 
+                and your metaphor: then
+                share the observation and value that inexorably lead to
+                your conclusion. "I statements" are great,
+                and make it easier for people to listen without having to
+                agree right away. <info> It's good to know
                 your frame, and know your conclusion, but don't state your
                 conclusion: share the observations and values that led you
-                to your conclusion, and stop there.
+                to your conclusion, and stop there.</info>
               </div>
-              <div title="" className="sg">
+              <div title="" className="sg personal">
                 4. End with a request. Even if it isn't met, it's a good way
-                to wrap up the conversation:
-              </div>
-              <div title="" className="sgsm">
-                I hope we can keep talking.
-              </div>
-              <div title="" className="sgsm">
-                If I bought you a copy of (book, video), would you be interested
-                to (read, watch) it?
+                to wrap up the conversation: <clip>I hope we can keep
+                talking.</clip> <clip>I'd love to watch this video ...
+                with you</clip>
               </div>
             </Pane>
             <Info>
@@ -447,12 +429,6 @@ export default class CbbModal extends Component {
             <Info>
             </Info>
           </Card>
-
-
-
-
-
-
 
 
         </Tabs>

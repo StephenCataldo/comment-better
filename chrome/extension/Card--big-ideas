@@ -1,0 +1,37 @@
+
+          <Card
+            id="smg"
+            className="image-tab-label"
+            title = "Social Media Guide"
+            label = { <span>Cognitive Politics Social Media Guide</span> }
+          >
+            <Pane>
+              <div title="" className="sg agree">
+                Conversations have metaphors. Do you fire facts like
+                artillery forcing the defender to hide in trenches?
+                Is this a competive sport, a chance to connect, a mutual
+                journey, a session of story-telling and listening?
+              </div>
+              <div title="steelman" className="sg">
+                Describe the other side's points more clearly than they
+                do. If false accusations are being made by your side, be the
+                one who steps in. Be seen as reasonable and willing to
+                compromise, leaving the other side feeling heard, and people
+                will engage with you differently.
+                <taxonomy>Active Listening: Steelman</taxonomy>
+              </div>
+              <div title="Big tent tension" className="sg">
+                Electoral majorities require a big tent approach. This
+                doesn't mean pathetically compromising until you stand for
+                nothing. It means expressing your heart fully ("I statements")
+                and passionately, but also making sure that
+                people can be on your side if they agree with you even 
+                a little. 
+              </div>
+            </Pane>
+            <Info>
+            </Info>   
+          </Card>
+
+
+
