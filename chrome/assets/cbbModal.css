@@ -1,5 +1,6 @@
 /* Inside the modal itself */
 
+info { display: none; } /* remove this once info system works */
 
 #menu {
   background-color: #F6F7F9;

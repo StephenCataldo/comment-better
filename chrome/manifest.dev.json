@@ -1,5 +1,5 @@
 {
-  "version": "0.0.14",
+  "version": "0.0.15",
   "name": "Comment Better",
   "manifest_version": 2,
   "description": "Edit your comment boxes with suggestions from communications experts. Based on react-chrome-extension-boilerplate. Uses same tools as Social Media Web Guide, intended to be packed together maybe.",

@@ -1,5 +1,6 @@
 /* Inside the modal itself */
 
+info { display: none; } /* remove this once info system works */
 
 #menu {
   background-color: #F6F7F9;
@@ -37,6 +38,9 @@ ul.tabs__labels li {
   border: 1px solid #ccc;
   border-right: none;
   border-top: none;
+}
+.cbbContent {
+  padding-top: 4px; /* breathing space at top of sg's */
 }
 /* from @b, what for? */
 .active { background-color: #ddd; }
@@ -109,8 +113,8 @@ div.rcc {
 
   /*Failed:background-image: url(chrome.extension.getURL("./img/modal/radical_civility.jpg")); /* seems to take a moment to load? confusing. *
   background-image: url(chrome.extension.getURL("/img/modal/radical_civility.jpg")); /* seems to take a moment to load? confusing. */
-  background: url('chrome-extension://__MSG_@@extension_id__/img/modal/radical_civility.jpg') no-repeat;
-  background-size: 360px 280px;
+  background: url('chrome-extension://__MSG_@@extension_id__/img/modal/radical_civility.jpg') no-repeat center top;
+  background-size: 324px 252px;
   width: 360px;
   height: 360px;
 }
@@ -154,7 +158,7 @@ div.smg {
 .whitetext { color: white; }
 .whitetext a { color: #efe7ff; } 
 
-/*.group, .tactic, .question, .agree, .advice, .personal {*/
+/*.group, .tactic, .question, .agree, .observe, .advice, .personal {*/
 .sg {
 	width: 300px; /* 86% */
 	padding: 10px;
@@ -164,6 +168,8 @@ div.smg {
 	text-align: center;
 	cursor: pointer;
 }
+/* sgsm and sgrt create half-width boxes. Not
+ * used in v.15, but available if designers want. */
 .sgsm {
   width: 146px;
   margin: 8px;
@@ -177,8 +183,14 @@ div.smg {
 
 
 .sg clip {
-  color: #fcfcfc;
+  color: #ffe0cc; /* adjust to our orange @ToDoDesign */
   font-weight: bold;
+}
+.sg noclip {
+  color: #f0f5f5;
+  text-decoration:line-through;
+  text-decoration: #d1e0e0 single line-through;
+  /* @ToDoDesign: */
 }
 .sg .more {
   display: none;
@@ -194,7 +206,7 @@ div.smg {
   border: 10px solid #eee;
 
 }
-.active-listening, .tactic  {background-color:#D15e55;} .question {background-color:#F15e25;} .group, .agree {background-color:#Ee9a21;} .advice {background-color:#A0499c;} .personal {background-color:#5c4f9b;} .gladiator { background-color: red; } .observe { background-color: #333; }
+.active-listening, .tactic  {background-color:#D15e55;} .question {background-color:#F15e25;} .group, .agree {background-color:#Ee9a21;} .advice {background-color:#A0499c;} .gothere {background-color: #29a329; } .personal {background-color:#5c4f9b;} .gladiator { background-color: red; } .observe { background-color: #333; }
 .adv { background-color: orange; /* what's our orange? */ }
 
 #adv {

@@ -221,7 +221,9 @@ You can use [redux-devtools-extension](https://github.com/zalmoxisus/redux-devto
 ```bash
 # build files to './build'
 $ npm run build
-```
+```The dev plus patient participants version:
+$ npm run build && zip -r build.zip build
+(untested! if this works, erase this line!)
 
 ## Compress
 
