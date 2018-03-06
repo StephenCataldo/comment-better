@@ -227,6 +227,8 @@ export default class CbbModal extends Component {
               </div>
 
               <div id="cbb-3" className="sg question"><clip>What made you aware of </clip> this problem?</div>
+              <div className="sg personal">Getting permission helps people relax and connect: <clip>Do you want to talk about this?</clip>
+              </div>
 
 
             </Pane>
@@ -242,17 +244,24 @@ export default class CbbModal extends Component {
           >
             <Pane>
     
-              <div className="sg observer"><clip>My experience was ..."</clip></div>
+              <div className="sg observe"><clip>My experience was ..."</clip></div>
 
               <div className="sg group"><clip>I agree with you about ... and 
               about ... and about .... What do you think of ...</clip> 
               <br/>(taxonomy/value: tit-for-tat listening/fairness)
               </div>
 
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg sgsm agree">Say what is important
-                to you, not the policy. For example: <clip>People are working full time jobs and not 
-                earning a living. This seems unfair to me.</clip> instead of a policy suggestion.
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree">Say what is important
+                to you, your values, your heart.
+        For example: <clip>I want to live in a world where </clip> people who
+      work a full time job can raise a family. Agreeing on a policy like
+      minimum wage comes much, much later.
               </div>
+              <div className="sg personal"><clip>What do you think of this?</clip>
+              invites someone to converse, rather than feel like they are
+              attacking you if they see something else.</div>
+
+
             </Pane>
             <Info>
                "I statements" are powerful, and allow you to stick to your frame without creating
@@ -267,7 +276,7 @@ export default class CbbModal extends Component {
           >
             <Pane>
     
-              <div className="sg"><clip>My experience was ..."</clip></div>
+              <div className="sg observe ask"><clip>My experience was ... What was yours?"</clip></div>
 
               <div className="sg gladiator"><clip>I don't see this as left vs.
           right,
@@ -303,24 +312,18 @@ export default class CbbModal extends Component {
               <div id="cbb-1" className="sg group gladiator"><clip>I doubt this
           view represents most ...</clip></div>
               <div id="cbb-1" className="sg group gladiator">
-                Echo messengers: nothing to cut and paste here, because the less you say the better.
-                Find people the audience will respect saying the right thing, and share their voice.
+                Echo messengers: find people your audience will respect who
+                are saying the right thing, and share their voice.
+                Nothing to cut and paste here: just share, 
+                the less you say the better.
               </div>
               <div id="cbb-1" className="sg group gladiator">
-                Keep it personal: Avoid saying <noclip>All <em>group x</em> are rude.</noclip> 
-                If someone is rude, keep it about them <clip>I'm trying to listen to what you have
+                Keep it personal: Avoid saying <noclip>All you <em>Group X</em> are rude.</noclip> 
+                If someone is rude to you, set your boundaries one-to-one:
+      <clip>I'm trying to listen to what you have
                 to say, and I don't see you returning the favor. I'm hoping to connect with you,
-                even if our politics are different, but this seems disrespectful. Unless we change how
-                we communicate, I'm going to spend my time elsewhere.</clip>  Or be more blunt if the 
-                situation doesn't deserve tact — just keep people responsible for their own actions, 
-                it's more powerful than trying group responsibility.
+                even if our politics are different, but this feels disrespectfulto me. What are you hoping to get out of this conversation?</clip>
               </div>
-              <div className="sg personal sgrt">Get permission: <clip>Do you want to talk politics</clip>
-              </div>
-              <div className="sg personal sgrt"><clip>What do you think of this?</clip>
-              invites someone to converse, rather than feel like they are
-              attacking you if they see something else.</div>
-
             </Pane>
             <Info>
                   "I statements" with strong beliefs are powerful in reasonable
@@ -373,8 +376,8 @@ export default class CbbModal extends Component {
             label = { <span>Radical Civility Cycle</span> }
           >
             <Pane>
-              <div className="sg personal bottom whitetext">
-                Join the <a href="https://www.facebook.com/groups/smartly/">Social Media Approaches for Respect and Tolerance</a> community to practivce the Radical Civility Cycle.
+              <div className="sg gothere bottom whitetext">
+                Join this Radical Civility practice community:<br/><a href="https://www.facebook.com/groups/smartly/">Social Media Approaches for Respect and Tolerance</a>.
               </div>
             </Pane>
             <Info>
@@ -436,7 +439,7 @@ export default class CbbModal extends Component {
               <div className="sg adv"><clip>I'm experimenting with tips  
                 to make my political
                 conversations saner and more civil. I pop up tips
-                right in my comment box: join me using the 
+                right in my comment box: join me using the&nbsp;
                 <a href="http://cognitivepolitics.org/comment-better-button"
                 >Comment Better Button.</a></clip>
               </div>
