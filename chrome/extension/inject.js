@@ -281,7 +281,7 @@ function injectCBB(domElement) {
   // Might be better to undo that? 
 // !!! @ToDo   hey write this
   $(target).find('.UFIReplyLink').click(function() {
-    console.log("XXXXXXXX trying to add event handler");
+    console.log("Trying to add event handler");
     injectCBB(this);
   });
 
@@ -391,31 +391,28 @@ function injectCBB(domElement) {
     console.log(this); // the button! yes!
     */
 
+
     /** Position the modal
      * .position() is relative to parent, .offset() to document. 
      **/ 
     let btn = this;
     let modal =  document.getElementById('cbModal');  /* or global var? */
+    let scrollTop = $(window).scrollTop();
 
-    let scrollTop = $(window).scrollTop(); //
-      // If the scrollTop + height of modal + gap > btnOffset.top, 
+    // Config: the scrollTop + height of modal + gap > btnOffset.top, 
     let btnOffset = $(this).offset();
     let modalHeight = 380, // eyeball for now
         modalGap = 10;   // maybe tighten in final work, 
 
 
-    
-
     // If modal isn't read, gives an error. @ToDo But doesn't seem to 
-    //  be creating errors for users (so far as I see)
+    //  be creating errors for users (so far as I see), but consider
+    //  error handling use cases.
     // Uncaught TypeError: Cannot read property 'style' of null
     console.log("Modal is: ");
     console.log(modal);
     modal.style.height = modalHeight + "px";
 
-    // 20190302 $(modal).find("#p1 .cbbContent").show(); // not sure why css doesn't do this
-          // @ToDo-figure-this-out-and-cleanup
-  
     // Position the modal vertically.
     if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
       // Under 
@@ -425,43 +422,12 @@ function injectCBB(domElement) {
       $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-200}); 
     }
 
-    /********************* Temp: prep the Modal *******************/
-
-
-    // @ToDo: chrome-extension://__MSG_@@extension_id__/img in the css
-    // seems to work. Refactor all this.
-
-    /*  NOT SURE IF THIS IS WORKING YET
-    let imageUrl = chrome.extension.getURL("/img/ic_favorite_border_18pt.png");
-    $(modal).find('.adv').css('background-image', 'url(' + imageUrl + ')');
-    */
-
-   
-/* COMMENT THIS SHIT OUT, make sure it still works, erase if it does
-    console.log(modal); // yes, this is the modal.
-    // When the user clicks on the button, open the modal
-    */
-    // Or don't, this is the key line of the whole thing. Why not show()?
+    // Why not show()?
     modal.style.display = "block";
 
-
-
-
-
-    /* Where? Position the modal: */
-    // element.getBoundingClientRect() are relative to the viewport.
-    //var bodyRect = document.body.getBoundingClientRect(),
-    /*
-    let btnRect = this.getBoundingClientRect();
-    let modalRect = modal.getBoundingClientRect();
-  //  = elemRect.top - bodyRect.top;
-    console.log("Where are my toys?");
-    console.log(btnRect);
-    console.log(modalRect);
-*/
-
-
   });
+
+  /** Deal with overflows **/
 
   // This can probably be removed once we only have cbModal per page
   // use parent:    _3ccb, or _5jmm
@@ -470,13 +436,12 @@ function injectCBB(domElement) {
   // overflow actually matters for something.
   //$('.UFICommentAttachmentButtons').parents('_3ccb').append(cbModal);
 
-  /* Make the modal show up or close **/
+
+  /** Add event handling to the button so it opens the modal **/
+
   var modal = document.getElementById('cbModal');
-
-  // Get the button that opens the modal
+  // The button that opens the modal  @ToDo/look at: byId?
   var btn = document.getElementById("cbButton");
-
-  // @ToDo, redo modals entirely. Don't set up each separately here.
 
   // @ToDo ... probably should close if click btn again
   // window is apparently null?
