@@ -309,6 +309,13 @@ export default class CbbModal extends Component {
                 are gladiators,
                 decent people fighting while the emperor laughs in the stands.</clip>
               </div>
+							<div id="cbb-1" className="sg group gladiator">
+								<clip>We don't do that here.</clip> Set boundaries while 
+								welcoming people to be on the inside, to be part of "we." 
+								<a href=
+								"http://thagomizer.com/blog/2017/09/29/we-don-t-do-that-here.html"
+								>more</a>
+							</div>
               <div id="cbb-1" className="sg group gladiator"><clip>I doubt this
           view represents most ...</clip></div>
               <div id="cbb-1" className="sg group gladiator">
