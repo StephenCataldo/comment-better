@@ -54,17 +54,18 @@ function initialInjectCBBs() {
   //  and I'm going to trust MutationObserver rather than use sleep.
   //  If it works smoothly, erase the whole hackathon rush-job that used
   //  sleep. If problems, code left to help back up to what worked...
-  /*
+
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  */
+
 
   /*** B1. Run injectCBB() when document loads - or now, if it already has. ***/
   // Reread: https://stackoverflow.com/questions/588040/window-onload-vs-document-onload. Below is a hack, sometimes document, sometimes window, expected to
   // sometimes run twice (not a disaster). Document loaded should be sufficient
   // for the text-oriented, DOM-oriented injectActions.
   console.log("B1. run injectCBB on the whole document, injecting the button on every comment box that has already loaded");
+
   if ( document.readyState == "complete" ||
         document.readyState == "interactive" ) {
     console.log("B. Document was ready already.");
@@ -233,6 +234,12 @@ function ObserverNewCommentBoxes() {
   // This looks closest. It's not always ready. This could be solved
   // by waiting until it is found.
   console.log(targetNode);
+
+  function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+
   if (targetNode) {
     observer.observe(targetNode, observerConfig);
   } else {
@@ -379,6 +386,11 @@ function injectCBB(domElement) {
   */
   // Gives uncaught errors when undefined. 
   // @ToDo: Dig to make sure can simply be ignored:
+	if ($newBtnSections.length == 0) {
+		console.log("newBtnSections was not defined. Appears to happen ... um, at Victory Point cafe, and nowhere else, so far.");
+		return;
+	}
+
   console.log($newBtnSections[0].children[0]); // this is the button
 
   $($newBtnSections[0].children[0]).click(function(e){
