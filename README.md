@@ -4,6 +4,8 @@ Table of Important Contents
 
 
 ## Quick non-developer start
+## Purpose & Plan
+## https://github.com/StephenCataldo/comment-better#developer-guide-the-boilerplate-our-version-and-developer-installs
 
 
 Download:
@@ -142,7 +144,7 @@ Then go to any of the tutorials and get npm and node running:
 http://blog.teamtreehouse.com/install-node-js-npm-mac (I suspect this is a good choice for Mac, feedback?)  Or
 https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/ (untried for Windows)
 
-#### Commands to run the dev version
+#### Commands to set up the dev version
 
 ```bash
 # clone it
@@ -156,7 +158,8 @@ $ git clone git@github.com:StephenCataldo/guide-comment-insert--react.git
 $ npm install
 ```
 
-## Development. Create a Node server that watches for your code changes and updates your extension. Many changes will appear as soon as you reload a page; css changes tend to require breaking out of the command and running again.
+#### Commands to run your dev version
+This creates a Node server that watches for your code changes and updates your extension. Many changes will appear as soon as you reload a page; css changes tend to require breaking out of the command and running again.
 
 * Run script
 ```bash
@@ -173,8 +176,12 @@ webpack built 7eff4817f3d4a59be59d in 74ms"
 (And it behaves as if it hanging ... but it's hanging working.)
 
 Every time you change your code, npm will still be running, and the extension
-in the dev directory will be updated.
+in the dev directory will be updated - you'll see another "webpack building"
+message each time it needs to.
 
+It should be working!
+
+### More notes & building the build version
 
 #### React/Redux hot reload
 
@@ -184,7 +191,7 @@ This boilerplate uses `Webpack` and `react-transform`, and use `Redux`. You can 
 
 You can use [redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension) on development mode.
 
-## Build. Produce a version we can upload to Chrome store.
+#### Build. Produce a version we can upload to Chrome store.
 
 ```bash
 # build files to './build'
@@ -199,7 +206,7 @@ git commit -m "This is a standard commit `after npm run dev`"
 
 
 
-## Compress
+#### Compress
 
 ```bash
 # compress build folder to {manifest.name}.zip and crx
@@ -209,18 +216,21 @@ $ npm run compress -- [options]
 
 
 
-### React Chrome Extension Boilerplate
+## Based on: React Chrome Extension Boilerplate
+
+Notes here are left from the project we forked as boilerplate. Only for the
+nerdiest.
 
 > Boilerplate for Chrome Extension React.js project.
 
-## Features
+### Features
 
  - Simple [React](https://github.com/facebook/react)/[Redux](https://github.com/rackt/redux) examples of Chrome Extension Window & Popup & Inject pages
  - Hot reloading React/Redux (Using [Webpack](https://github.com/webpack/webpack) and [React Transform](https://github.com/gaearon/react-transform))
  - Write code with ES2015+ syntax (Using [Babel](https://github.com/babel/babel))
  - E2E tests of Window & Popup & Inject pages (Using [Chrome Driver](https://www.npmjs.com/package/chromedriver), [Selenium Webdriver](https://www.npmjs.com/package/selenium-webdriver))
 
-## Examples
+### Examples
 
 The example is edited from [Redux](https://github.com/rackt/redux) TodoMVC example.
 
@@ -253,7 +263,10 @@ If you want to build `crx` file (auto update), please provide options, and add `
 
 See [autoupdate guide](https://developer.chrome.com/extensions/autoupdate) for more information.
 
-## Test
+### Test
+
+(Testing not set up for Better Comment Button. Great task for someone to take
+on!)
 
 * `test/app`: React components, Redux actions & reducers tests
 * `test/e2e`: E2E tests (use [chromedriver](https://www.npmjs.com/package/chromedriver), [selenium-webdriver](https://www.npmjs.com/package/selenium-webdriver))
@@ -276,7 +289,7 @@ $ npm run test-e2e
 
 
 
-## Crap notes go below here!
+## Crappy old notes go below here!
 
 ### Thoughts on UX
 
