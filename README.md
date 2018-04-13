@@ -1,6 +1,6 @@
-### Comment Better is using everything below here as boilerplate, from
-guide-comment-insert--react
-The projects might or might not be combined.
+Table of Important Contents
+
+- Quick non-developer start
 
 
 ## Quick non-developer start
@@ -67,34 +67,23 @@ See: "Basic Setup for new developers" below the description of the project.
 
 ## Purpose & Plan
 
-There are basically three projects here:
-1) A "Comment Better Button" that you install for your browser, 
-providing general advice on improved (and civil) communications techniques.
-2) A "Comment Better Button" that 
+###There are three intertwined variants here:
+All help you leave more civil, more effective, better framed comments
+when you are online, providing cut-and-paste templates from which you can
+leave replies faster.
 
-### Guide to the Issues: guide-comment-insert
-When you read an article online, this chrome extension checks a list of keywords of "issues" connected to URLs from a "guide," and makes them accessible. It is intended for commenting: providing cut-and-paste quick replies to articles. 
+####1) A "Comment Better Button" that you install as an extension for your browser, 
+providing general advice on improved (and civil) communications techniques,
+starting with facebook comments (intending to expand where it shows up,
+one day).
+####2) A "Comment Better Button" that you install on websites you host, such
+as a Drupal blog, for your readers to use.
+####3) The project CBB was based on, guide-comment-insert--react:
+When you read an article online, this chrome extension checks a list of keywords of "issues" connected to URLs from a guide, and makes them accessible. 
+The beta-test guide is at CognitivePolitics.org, but that can be switched.
 
 
-## Guide to Issues
-  
-# Phase 1: Expert Guides
-
-When you read an article, this chrome extension checks a list of keywords
-of "issues" or topics connected to URLs from a "guide," and makes them
-accessible. It is intended for commenting: providing cut-and-paste
-quick replies to articles. The initial client is CogntivePolitics.org
-and perhaps a facebook group Social Media Approaches for Respect and
-Tolerance.
-
-# Phase 1B: Facebook and Twitter.
-
-The main use-case is for commenting on facebook and twitter (as well
-as news articles and blogs). Phase 1B is more tight integration with these
-particular sites, integrating with posts or tweets instead of entire
-pages.
-
-# Phase 2: DIY
+#### Phase 2: DIY
 
 This may one day become (or be integrated with) a bookmark tool,
 so that when you come across an article you find convincing,
