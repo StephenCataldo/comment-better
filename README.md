@@ -91,64 +91,22 @@ or a well-footnoted source that backs up your opinions on a topic,
  you can connect it to a keyword or hashtag and have it available
 when commenting on that topic.
 
-## Thoughts on UX
 
-# When a keyword loads how does user see it?
+## Developer Guide: the Boilerplate, our version, and developer installs
 
-Original code creates a menu-like link, dropped over the page, kindof 
-annoying. Very annoying. Don't do that. Go with the usual extension
-approach of adding a little icon next to the top bar. When a keyword is 
-found in the page:
-1) highlight it.
-2) perhaps create a small dropdown menu under the icon at the top. Perhaps
-temporary, just long enough to get the mouse to it if people want to react
-right away, then out of the way... but having reminded user that the tool
-is active for this page.
-
-#### Below here related to original boilerplate, 
-####              and how to do builds 
-> Thank you to https://github.com/jhen0409/react-chrome-extension-boilerplate/
+Thank you to https://github.com/jhen0409/react-chrome-extension-boilerplate/
 for the original react + redux + chrome extension boilerplate.
 
-# React Chrome Extension Boilerplate
 
-> Boilerplate for Chrome Extension React.js project.
+### Installation for Developers
 
-## Features
+#### Short explanation if you like: 
 
- - Simple [React](https://github.com/facebook/react)/[Redux](https://github.com/rackt/redux) examples of Chrome Extension Window & Popup & Inject pages
- - Hot reloading React/Redux (Using [Webpack](https://github.com/webpack/webpack) and [React Transform](https://github.com/gaearon/react-transform))
- - Write code with ES2015+ syntax (Using [Babel](https://github.com/babel/babel))
- - E2E tests of Window & Popup & Inject pages (Using [Chrome Driver](https://www.npmjs.com/package/chromedriver), [Selenium Webdriver](https://www.npmjs.com/package/selenium-webdriver))
+Very high-level intro: we run a package manager (npm) to gather up the files
+we need and do some translating to the right version of javascript. For
+example, there are two variants to create a working version that is updated as
+you change the files [dev] or pack everything up in a build.
 
-## Examples
-
-The example is edited from [Redux](https://github.com/rackt/redux) TodoMVC example.
-
-#### Popup
-
-![Popup](https://cloud.githubusercontent.com/assets/3001525/14128490/dc05e9f8-f653-11e5-9de6-82d1de01844a.gif)
-
-The `todos` state will be saved to `chrome.storage.local`.
-
-#### Window
-
-![Window](https://cloud.githubusercontent.com/assets/3001525/14128489/da176b62-f653-11e5-9bff-fefc35232358.gif)
-
-The context menu is created by [chrome/extension/background/contextMenus.js](chrome/extension/background/contextMenus.js).
-
-#### Inject page
-
-The inject script is being run by [chrome/extension/background/inject.js](chrome/extension/background/inject.js). A simple example will be inject bottom of page(`https://github.com/*`) if you visit.
-
-If you are receiving the error message `Failed to load resource: net::ERR_INSECURE_RESPONSE`, you need to allow invalid certificates for resources loaded from localhost. You can do this by visiting the following URL: `chrome://flags/#allow-insecure-localhost` and enabling **Allow invalid certificates for resources loaded from localhost**.
-
-## Installation for Developers
-
-
-## Basic Setup for new developers
-
-# Short explanation if you like: 
 We'll write code in ES2015+ (Javascript 2015 version) 
 but then a program called Babel 
 rewrites it to be more compatible across browswers, and Webpack packs our code up in two ways: live when we are developing
@@ -158,12 +116,16 @@ a variety of tools that you can ignore thanks to the boilerplate, and
 something of a surprise if you're used to just writing and perhaps minimizing
 javascript scripts.
 
+#### Prep: install npm if needed.
+
 To get that all working, you need npm — the Node web server and package manager running. This varies depending on your machine
 (Mac/Windows/Linux) and was surprisingly challenging for the first couple machines we worked on — most of the instructions
 assume you are a developer; i.e., if you have a Mac, of course you will have already have installed XCode, so the web
 tutorial might leave that out.
 
-Try these tutorials. We need feedback — I have the same problem, I installed XCode long ago...
+Try these tutorials AND PLEASE TAKE NOTES. We need feedback — I installed XCode long ago so I can't do it for the first
+time again, notes from beginner experiences will really help:
+
 It's good to have a package manager like HomeBrew (mac) https://brew.sh/
 For Mac, I believe these instructions usually fail, because they skip the XCode part, but might reference after you do that:
 https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/
@@ -180,6 +142,7 @@ Then go to any of the tutorials and get npm and node running:
 http://blog.teamtreehouse.com/install-node-js-npm-mac (I suspect this is a good choice for Mac, feedback?)  Or
 https://www.taniarascia.com/how-to-install-and-use-node-js-and-npm-mac-and-windows/ (untried for Windows)
 
+#### Commands to run the dev version
 
 ```bash
 # clone it
@@ -244,6 +207,41 @@ $ npm run build
 $ npm run compress -- [options]
 ```
 
+
+
+### React Chrome Extension Boilerplate
+
+> Boilerplate for Chrome Extension React.js project.
+
+## Features
+
+ - Simple [React](https://github.com/facebook/react)/[Redux](https://github.com/rackt/redux) examples of Chrome Extension Window & Popup & Inject pages
+ - Hot reloading React/Redux (Using [Webpack](https://github.com/webpack/webpack) and [React Transform](https://github.com/gaearon/react-transform))
+ - Write code with ES2015+ syntax (Using [Babel](https://github.com/babel/babel))
+ - E2E tests of Window & Popup & Inject pages (Using [Chrome Driver](https://www.npmjs.com/package/chromedriver), [Selenium Webdriver](https://www.npmjs.com/package/selenium-webdriver))
+
+## Examples
+
+The example is edited from [Redux](https://github.com/rackt/redux) TodoMVC example.
+
+#### Popup
+
+![Popup](https://cloud.githubusercontent.com/assets/3001525/14128490/dc05e9f8-f653-11e5-9de6-82d1de01844a.gif)
+
+The `todos` state will be saved to `chrome.storage.local`.
+
+#### Window
+
+![Window](https://cloud.githubusercontent.com/assets/3001525/14128489/da176b62-f653-11e5-9bff-fefc35232358.gif)
+
+The context menu is created by [chrome/extension/background/contextMenus.js](chrome/extension/background/contextMenus.js).
+
+#### Inject page
+
+The inject script is being run by [chrome/extension/background/inject.js](chrome/extension/background/inject.js). A simple example will be inject bottom of page(`https://github.com/*`) if you visit.
+
+If you are receiving the error message `Failed to load resource: net::ERR_INSECURE_RESPONSE`, you need to allow invalid certificates for resources loaded from localhost. You can do this by visiting the following URL: `chrome://flags/#allow-insecure-localhost` and enabling **Allow invalid certificates for resources loaded from localhost**.
+
 #### Options
 
 If you want to build `crx` file (auto update), please provide options, and add `update.xml` file url in [manifest.json](https://developer.chrome.com/extensions/autoupdate#update_url manifest.json).
@@ -274,3 +272,24 @@ $ npm run test-e2e
 ## LICENSE
 
 [MIT](LICENSE)
+
+
+
+
+## Crap notes go below here!
+
+### Thoughts on UX
+
+#### When a keyword loads how does user see it?
+
+Original code creates a menu-like link, dropped over the page, kindof 
+annoying. Very annoying. Don't do that. Go with the usual extension
+approach of adding a little icon next to the top bar. When a keyword is 
+found in the page:
+1) highlight it.
+2) perhaps create a small dropdown menu under the icon at the top. Perhaps
+temporary, just long enough to get the mouse to it if people want to react
+right away, then out of the way... but having reminded user that the tool
+is active for this page.
+
+
