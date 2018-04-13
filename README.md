@@ -1,11 +1,10 @@
 Table of Important Contents
 
+- [Quick non-developer start](#quick-non-developer-start)
 - [Purpose & Plan](#purpose--plan)
-- [Quick non-developer start]()
 - [Developer Guide](#developer-guide-the-boilerplate-our-version-and-developer-installs)
 
-## Purpose & Plan
-
+## Quick non-developer start
 
 Download:
 1) Open in browser:
