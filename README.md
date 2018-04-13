@@ -3,7 +3,7 @@ guide-comment-insert--react
 The projects might or might not be combined.
 
 
-#### Quick non-developer start
+## Quick non-developer start
 
 
 Download:
@@ -29,11 +29,12 @@ Note: the extension sometimes fails to run, especially when you first
 download it. Reload facebook. Let us know how well it works overall.
 
 
+If that was confusing, read the version below, written at a different time.
+@ToDo: somebody *new* go through all the steps and combine these/erase.
 
 
 
-
-#### Original Version, 
+##### Non-Developer Version 0
 
 1. Get the Code
 1a. Clone or download this repository, or *easiest* grab the "build" directory here
@@ -62,10 +63,16 @@ of your browser.
 
 Developers should follow instructions from the boilerplate, below. Note that
 the /build directory will often be behind your own    'npm run dev'
+See: "Basic Setup for new developers" below the description of the project.
 
-#### Purpose & Plan
+## Purpose & Plan
 
-# guide-comment-insert
+There are basically three projects here:
+1) A "Comment Better Button" that you install for your browser, 
+providing general advice on improved (and civil) communications techniques.
+2) A "Comment Better Button" that 
+
+### Guide to the Issues: guide-comment-insert
 When you read an article online, this chrome extension checks a list of keywords of "issues" connected to URLs from a "guide," and makes them accessible. It is intended for commenting: providing cut-and-paste quick replies to articles. 
 
 
@@ -147,7 +154,7 @@ The inject script is being run by [chrome/extension/background/inject.js](chrome
 
 If you are receiving the error message `Failed to load resource: net::ERR_INSECURE_RESPONSE`, you need to allow invalid certificates for resources loaded from localhost. You can do this by visiting the following URL: `chrome://flags/#allow-insecure-localhost` and enabling **Allow invalid certificates for resources loaded from localhost**.
 
-### Installation
+## Installation for Developers
 
 
 ## Basic Setup for new developers
@@ -208,6 +215,15 @@ $ npm run dev
 * If you're developing Inject page, please allow `https://localhost:3000` connections. (Because `injectpage` injected GitHub (https) pages, so webpack server procotol must be https.)
 * [Load unpacked extensions](https://developer.chrome.com/extensions/getstarted#unpacked) with `./dev` folder.
 
+What you'll see if it works, something like:
+"webpack building...
+webpack built 7eff4817f3d4a59be59d in 74ms"
+(And it behaves as if it hanging ... but it's hanging working.)
+
+Every time you change your code, npm will still be running, and the extension
+in the dev directory will be updated.
+
+
 #### React/Redux hot reload
 
 This boilerplate uses `Webpack` and `react-transform`, and use `Redux`. You can hot reload by editing related files of Popup & Window & Inject page.
@@ -224,6 +240,12 @@ $ npm run build
 ```The dev plus patient participants version:
 $ npm run build && zip -r build.zip build
 (untested! if this works, erase this line!)
+
+#> Our process. Run builds on up-to-date master, then
+git add .
+git commit -m "This is a standard commit `after npm run dev`"
+
+
 
 ## Compress
 
