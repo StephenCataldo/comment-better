@@ -1,11 +1,10 @@
 Table of Important Contents
 
-- Quick non-developer start
+- [Purpose & Plan](#purpose--plan)
+- [Quick non-developer start]()
+- [Developer Guide](#developer-guide-the-boilerplate-our-version-and-developer-installs)
 
-
-## Quick non-developer start
 ## Purpose & Plan
-## https://github.com/StephenCataldo/comment-better#developer-guide-the-boilerplate-our-version-and-developer-installs
 
 
 Download:
