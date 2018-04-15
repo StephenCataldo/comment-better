@@ -4,6 +4,12 @@ Table of Important Contents
 - [Purpose & Plan](#purpose--plan)
 - [Developer Guide](#developer-guide-the-boilerplate-our-version-and-developer-installs)
 
+## Intro
+## Look at what we did so far!
+<video controls="controls" width="800" height="600" 
+       name="Video Name" src="./CBB Intro Screencast.mov"></video>
+
+
 ## Quick non-developer start
 
 Download:
