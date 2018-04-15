@@ -5,6 +5,10 @@ Table of Important Contents
 - [Developer Guide](#developer-guide-the-boilerplate-our-version-and-developer-installs)
 
 ## Intro
+
+[![Watch the video](./cbb-intro.png)](https://youtu.be/aERGAV6e3P0)
+
+0
 <video controls="controls" width="800" height="600" 
        name="Video Name" src="./CBB Intro Screencast.mov"></video>
 2
