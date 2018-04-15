@@ -5,9 +5,14 @@ Table of Important Contents
 - [Developer Guide](#developer-guide-the-boilerplate-our-version-and-developer-installs)
 
 ## Intro
-## Look at what we did so far!
 <video controls="controls" width="800" height="600" 
        name="Video Name" src="./CBB Intro Screencast.mov"></video>
+2
+<video width="320" height="240" controls>
+  <source src="CBB Intro Screencast.mov" type="video/mp4">
+</video>
+3
+![CBB Intro Screencast.mov](img/markdown_video.mov)
 
 
 ## Quick non-developer start
