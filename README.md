@@ -8,17 +8,6 @@ Table of Important Contents
 
 [![Watch the video](./cbb-intro.png)](https://youtu.be/aERGAV6e3P0)
 
-0
-<video controls="controls" width="800" height="600" 
-       name="Video Name" src="./CBB Intro Screencast.mov"></video>
-2
-<video width="320" height="240" controls>
-  <source src="CBB Intro Screencast.mov" type="video/mp4">
-</video>
-3
-![CBB Intro Screencast.mov](img/markdown_video.mov)
-
-
 ## Quick non-developer start
 
 Download:
