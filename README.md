@@ -183,6 +183,22 @@ message each time it needs to.
 
 It should be working!
 
+### OMG So much code.
+
+Before starting, note that /dev and /build are output directories, created
+by npm commandsr; don't use them as source files.
+
+/chrome creates the injected script: the comment better button is nothing else
+  so far.  chrome/README_key-files.txt has the key files, start there!
+
+/chrome also contains code to create a version of this that can operate on
+  a website, right now Drupal sites, injecting the button into your own blog.
+/app creates the app, which lives on its own - not injected into the web pages.
+  Much of the bullhorn project lives there: when you click the bullhorn,
+  it opens this app. An injected script (so, in /chrome) prepares the script.
+
+
+
 ### More notes & building the build version
 
 #### React/Redux hot reload
