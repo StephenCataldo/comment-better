@@ -6,7 +6,7 @@ import MainSection from '../components/MainSection';
 import * as TodoActions from '../actions/todos';
 import style from './App.css';
 // npm install jquery bootstrap --save
-import jQuery from "../../chrome/extension//maybe_bad/jquery";
+import jQuery from "../../chrome/extension/library/jquery";
 window.$ = window.jQuery = jQuery;
 
 
