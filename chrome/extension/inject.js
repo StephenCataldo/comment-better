@@ -264,7 +264,6 @@ function ObserverNewCommentBoxes() {
 function injectCBB(domElement) {
    
 
-
   /*** C. injectCBB injects a button into the domElement ***/
   //domElement is what $(xx).get() would get.
   let color =  "#fcf";
@@ -413,7 +412,7 @@ function injectCBB(domElement) {
 
     // Config: the scrollTop + height of modal + gap > btnOffset.top, 
     let btnOffset = $(this).offset();
-    let modalHeight = 380, // eyeball for now
+    let modalHeight = 360, // eyeball for now
         modalGap = 10;   // maybe tighten in final work, 
 
 
@@ -435,8 +434,13 @@ function injectCBB(domElement) {
     }
 
     // Why not show()?
-    modal.style.display = "block";
-
+    if (modal && modal.style.display != "block")
+      modal.style.display = "block"
+    else {
+      // ToDo: Fix height problem so that modal always appears on
+      $(modal).offset({ top: 0, left: 0});
+      modal.style.display = "none"
+    }
   });
 
   /** Deal with overflows **/
@@ -468,6 +472,7 @@ function injectCBB(domElement) {
     // @ToDo: if you click on a div within modal, that's not modal
     if ((event.target != modal && event.target.parentNode != modal ) 
          && event.target != btn ) {
+        $(modal).offset({ top: 0, left: 0});
         modal.style.display = "none";
     }
   }
