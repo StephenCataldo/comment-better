@@ -473,8 +473,18 @@ function injectCBB(domElement) {
 
     //modal should be declared within this function so that it is not sometimes null
     var modal = document.getElementById('cbModal');
-    if ((event.target != modal && event.target.parentNode != modal ) 
-         && event.target != btn ) {
+
+
+    var content = document.getElementsByClassName('cbbContent')
+
+    //converts the cbbContent class into an array
+    var contentArray = [].slice.call(content)
+
+    //If you click outside of the cbbContent class, it closes the modal
+    if ((!contentArray.includes(event.target)) 
+         && event.target !== btn ) {
+        console.log(event.target)
+        //console.log(event.target.parentNode)
         $(modal).offset({ top: 0, left: 0});
         modal.style.display = "none";
     }
