@@ -28,6 +28,19 @@ const Tabs = React.createClass({
     console.log("Label clicked in React:CbbModal:Tabs, index: " + index);
     event.stopPropagation();
     event.preventDefault();
+    Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
+      div.onclick = function() {
+        document.execCommand("copy")
+      }
+      div.addEventListener("copy", function(e) {
+        e.preventDefault()
+        if (e.clipboardData) {
+          e.clipboardData.setData('text/plain', e.target.innerText);
+        } else if (window.clipboardData) {
+          window.clipboardData.setData('Text', e.target.innerText);
+        }
+      })
+    })
     this.setState({
       selected: index
     });
