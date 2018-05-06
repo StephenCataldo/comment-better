@@ -262,7 +262,7 @@ function ObserverNewCommentBoxes() {
  *
  */
 function injectCBB(domElement) {
-   
+
 
   /*** C. injectCBB injects a button into the domElement ***/
   //domElement is what $(xx).get() would get.
@@ -391,8 +391,7 @@ function injectCBB(domElement) {
 	}
 
   console.log($newBtnSections[0].children[0]); // this is the button
-
-  $($newBtnSections[0].children[0]).click(function(e){
+  $($newBtnSections[0].children[0]).on("click", function(e) {
     //console.log("+++++++ button was clicked ++++++++++");
     $(this.href).show();
     e.preventDefault();
@@ -408,6 +407,20 @@ function injectCBB(domElement) {
      **/ 
     let btn = this;
     let modal =  document.getElementById('cbModal');  /* or global var? */
+    Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
+      div.onclick = function() {
+        document.execCommand("copy")
+      }
+      div.addEventListener("copy", function(e) {
+        e.preventDefault()
+        if (e.clipboardData) {
+          e.clipboardData.setData('text/plain', e.target.innerText);
+        } else if (window.clipboardData) {
+          window.clipboardData.setData('Text', e.target.innerText);
+        }
+      })
+    })
+
     let scrollTop = $(window).scrollTop();
 
     // Config: the scrollTop + height of modal + gap > btnOffset.top, 
@@ -470,10 +483,12 @@ function injectCBB(domElement) {
     ///console.log(event.target.parentNode);
     // event.currentTarget
     // @ToDo: if you click on a div within modal, that's not modal
-    if ((event.target != modal && event.target.parentNode != modal ) 
-         && event.target != btn ) {
-        $(modal).offset({ top: 0, left: 0});
-        modal.style.display = "none";
+
+    //modal should be declared within this function so that it is not sometimes null
+    var modal = document.getElementById('cbModal');
+    if ((event.target != modal && event.target.parentNode != modal ) && event.target != btn ) {
+      $(modal).offset({ top: 0, left: 0});
+      modal.style.display = "none";
     }
   }
 } // done injectCBB into document or new mutation
