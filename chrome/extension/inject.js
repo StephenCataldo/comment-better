@@ -515,8 +515,15 @@ function injectCBB(domElement) {
     /** Position the modal
      * .position() is relative to parent, .offset() to document.
      **/
-    let btn = this;
-    let modal =  document.getElementById('cbModal');  /* or global var? */
+
+    // ToDo: figure out if stack overflow can be avoided
+    let getModal = function() {
+      let modal = document.getElementById('cbModal')
+      if (!modal)
+        setTimeout(getModal(), 500)
+      return modal
+    }
+    let modal =  getModal();  /* or global var? */
     let scrollTop = $(window).scrollTop();
 
     // Config: the scrollTop + height of modal + gap > btnOffset.top,
