@@ -501,7 +501,7 @@ function injectCBB(domElement) {
 
   console.log($newBtnSections[0].children[0]); // this is the button
 
-  $($newBtnSections[0].children[0]).click(function(e){
+  $($newBtnSections[0].children[0]).click(function(e) {
     //console.log("+++++++ button was clicked ++++++++++");
     $(this.href).show();
     e.preventDefault();
@@ -517,46 +517,42 @@ function injectCBB(domElement) {
      **/
 
     // ToDo: figure out if stack overflow can be avoided
-    let getModal = function() {
-      let modal = document.getElementById('cbModal')
-      if (!modal)
-        setTimeout(getModal(), 500)
-      return modal
-    }
-    let modal =  getModal();  /* or global var? */
-    let scrollTop = $(window).scrollTop();
+    let modal = document.getElementById('cbModal') /* or global var? */
+    if (modal) {
+      let scrollTop = $(window).scrollTop();
 
-    // Config: the scrollTop + height of modal + gap > btnOffset.top,
-    let btnOffset = $(this).offset();
-    let modalHeight = 360, // eyeball for now
-        modalGap = 10;   // maybe tighten in final work, 
+      // Config: the scrollTop + height of modal + gap > btnOffset.top,
+      let btnOffset = $(this).offset();
+      let modalHeight = 360, // eyeball for now
+          modalGap = 10;   // maybe tighten in final work, 
 
 
-    // If modal isn't read, gives an error. @ToDo But doesn't seem to
-    //  be creating errors for users (so far as I see), but consider
-    //  error handling use cases.
-    // Uncaught TypeError: Cannot read property 'style' of null
-    console.log("Modal is: ");
-    console.log(modal);
-    modal.style.height = modalHeight + "px";
+      // If modal isn't read, gives an error. @ToDo But doesn't seem to
+      //  be creating errors for users (so far as I see), but consider
+      //  error handling use cases.
+      // Uncaught TypeError: Cannot read property 'style' of null
+      console.log("Modal is: ");
+      console.log(modal);
+      modal.style.height = modalHeight + "px";
 
 
-    // Position the modal vertically.
-    if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
-      // Under
-      let commentHeight = 32;
-      $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-200});
-    } else { // modal goes over, the normal expected behavior
-      $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-200});
-    }
+      // Position the modal vertically.
+      if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
+        // Under
+        let commentHeight = 32;
+        $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-200});
+      } else { // modal goes over, the normal expected behavior
+        $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-200});
+      }
 
-    // Why not show()?
-    if (modal && modal.style.display != "block")
-      modal.style.display = "block"
-    else {
-      // ToDo: Fix height problem so that modal always appears on
-      $(modal).offset({ top: 0, left: 0});
-      modal.style.display = "none"
+      // Why not show()?
+      if (modal && modal.style.display != "block")
+        modal.style.display = "block"
+      else {
+        // ToDo: Fix height problem so that modal always appears on
+        $(modal).offset({ top: 0, left: 0});
+        modal.style.display = "none"
+      }
     }
   });
 
