@@ -25,7 +25,13 @@
     "matches": [
       "<all_urls>"
     ],
-    "css": ["better_comment.css", "cbbModal.css"]
+    "css": ["better_comment.css"]
+  },
+  {
+    "matches": [
+      "https://www.facebook.com/*"
+    ],
+    "css": ["cbbModal.css"]
   }
   ]
 }
