@@ -1,8 +1,8 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "name": "Social Media Citizen Tools: Comment Better Button & Bullhorn",
   "manifest_version": 2,
-  "description": "Social media tools for active, civil citizenship: The Comment Better Buttons inserts suggestions from communications experts into comment boxes on your browser (so far, Facebook). The Social Media Guide or 'bullhorn' searches for political keywords and provides suggestions on how respond from a framing/editorial/activist source. Currently configured to Cognitive Politics — you can fork and choose your own source. Tech: based on react-chrome-extension-boilerplate",
+  "description": "Social media tools for active, civil citizenship: The Comment Better Buttons inserts suggestions from communications experts into comment boxes on your browser (so far, Facebook). The Social Media Guide or 'bullhorn' searches for political keywords and provides suggestions on how respond from a framing/editorial/activist source. Currently configured to Cognitive Politics — you can fork and choose your own source. Tech: based on react-chrome-extension-boilerplate. 0.1.2 integrates Stanford teams commits",
   "browser_action": {
     "default_title": "Comment Better Button & Social Media Toolkit",
     "default_popup": "popup.html"

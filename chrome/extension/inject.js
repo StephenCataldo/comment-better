@@ -501,7 +501,6 @@ function injectCBB(domElement) {
 
   console.log($newBtnSections[0].children[0]); // this is the button
   $($newBtnSections[0].children[0]).on("click", function(e) {
-
     //console.log("+++++++ button was clicked ++++++++++");
     $(this.href).show();
     e.preventDefault();
@@ -557,14 +556,14 @@ function injectCBB(domElement) {
     }
 
 
-      // Why not show()?
-      if (modal && modal.style.display != "block")
-        modal.style.display = "block"
-      else {
-        // ToDo: Fix height problem so that modal always appears on
-        $(modal).offset({ top: 0, left: 0});
-        modal.style.display = "none"
-      }
+    //  Toggle the modal ( Why not show() ? )
+    //  Code review and better documentation needed here. @ToDo
+    if (modal && modal.style.display != "block") {
+      modal.style.display = "block";
+    } else {
+      // ToDo: Fix height problem so that modal always appears on
+      $(modal).offset({ top: 0, left: 0});
+      modal.style.display = "none";
     }
   });
 
