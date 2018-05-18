@@ -565,7 +565,7 @@ function injectCBB(domElement) {
 
   /** Add event handling to the button so it opens the modal **/
 
-  var modal = document.getElementById('cbModal');
+  
   // The button that opens the modal  @ToDo/look at: byId?
   var btn = document.getElementById("cbButton");
 
@@ -580,8 +580,21 @@ function injectCBB(domElement) {
     ///console.log(event.target.parentNode);
     // event.currentTarget
     // @ToDo: if you click on a div within modal, that's not modal
-    if ((event.target != modal && event.target.parentNode != modal ) 
-         && event.target != btn ) {
+
+    //modal should be declared within this function so that it is not sometimes null
+    var modal = document.getElementById('cbModal');
+
+
+    var content = document.getElementsByClassName('cbbContent')
+
+    //converts the cbbContent class into an array
+    var contentArray = [].slice.call(content)
+
+    //If you click outside of the cbbContent class, it closes the modal
+    if ((!contentArray.includes(event.target)) 
+         && event.target !== btn ) {
+        console.log(event.target)
+        //console.log(event.target.parentNode)
         $(modal).offset({ top: 0, left: 0});
         modal.style.display = "none";
     }
