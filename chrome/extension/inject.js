@@ -500,8 +500,8 @@ function injectCBB(domElement) {
   }
 
   console.log($newBtnSections[0].children[0]); // this is the button
+  $($newBtnSections[0].children[0]).on("click", function(e) {
 
-  $($newBtnSections[0].children[0]).click(function(e) {
     //console.log("+++++++ button was clicked ++++++++++");
     $(this.href).show();
     e.preventDefault();
@@ -513,37 +513,49 @@ function injectCBB(domElement) {
 
 
     /** Position the modal
-     * .position() is relative to parent, .offset() to document.
-     **/
-
-    // ToDo: figure out if stack overflow can be avoided
-    let modal = document.getElementById('cbModal') /* or global var? */
-    if (modal) {
-      let scrollTop = $(window).scrollTop();
-
-      // Config: the scrollTop + height of modal + gap > btnOffset.top,
-      let btnOffset = $(this).offset();
-      let modalHeight = 360, // eyeball for now
-          modalGap = 10;   // maybe tighten in final work, 
-
-
-      // If modal isn't read, gives an error. @ToDo But doesn't seem to
-      //  be creating errors for users (so far as I see), but consider
-      //  error handling use cases.
-      // Uncaught TypeError: Cannot read property 'style' of null
-      console.log("Modal is: ");
-      console.log(modal);
-      modal.style.height = modalHeight + "px";
-
-
-      // Position the modal vertically.
-      if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
-        // Under
-        let commentHeight = 32;
-        $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-200});
-      } else { // modal goes over, the normal expected behavior
-        $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-200});
+     * .position() is relative to parent, .offset() to document. 
+     **/ 
+    let btn = this;
+    let modal =  document.getElementById('cbModal');  /* or global var? */
+    Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
+      div.onclick = function() {
+        document.execCommand("copy")
       }
+      div.addEventListener("copy", function(e) {
+        e.preventDefault()
+        if (e.clipboardData) {
+          e.clipboardData.setData('text/plain', e.target.innerText);
+        } else if (window.clipboardData) {
+          window.clipboardData.setData('Text', e.target.innerText);
+        }
+      })
+    })
+
+    let scrollTop = $(window).scrollTop();
+
+    // Config: the scrollTop + height of modal + gap > btnOffset.top, 
+    let btnOffset = $(this).offset();
+    let modalHeight = 360, // eyeball for now
+        modalGap = 10;   // maybe tighten in final work, 
+
+
+    // If modal isn't read, gives an error. @ToDo But doesn't seem to 
+    //  be creating errors for users (so far as I see), but consider
+    //  error handling use cases.
+    // Uncaught TypeError: Cannot read property 'style' of null
+    console.log("Modal is: ");
+    console.log(modal);
+    modal.style.height = modalHeight + "px";
+
+    // Position the modal vertically.
+    if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
+      // Under 
+      let commentHeight = 32;
+      $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-200});
+    } else { // modal goes over, the normal expected behavior
+      $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-200}); 
+    }
+
 
       // Why not show()?
       if (modal && modal.style.display != "block")
@@ -567,6 +579,8 @@ function injectCBB(domElement) {
 
 
   /** Add event handling to the button so it opens the modal **/
+  // Review where modal is applied.
+  var modal = document.getElementById('cbModal');
 
   
   // The button that opens the modal  @ToDo/look at: byId?
@@ -586,8 +600,6 @@ function injectCBB(domElement) {
 
     //modal should be declared within this function so that it is not sometimes null
     var modal = document.getElementById('cbModal');
-
-
     var content = document.getElementsByClassName('cbbContent')
 
     //converts the cbbContent class into an array
