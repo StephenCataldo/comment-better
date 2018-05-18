@@ -214,13 +214,13 @@ You can use [redux-devtools-extension](https://github.com/zalmoxisus/redux-devto
 ```bash
 # build files to './build'
 $ npm run build
-```The dev plus patient participants version:
+```Or, create and zip the build in one line, ready to share:
 $ npm run build && zip -r build.zip build
-(untested! if this works, erase this line!)
 
-#> Our process. Run builds on up-to-date master, then
+#> For early development, we're committing the builds to git & GitHub, like so:
 git add .
-git commit -m "This is a standard commit `after npm run dev`"
+git commit -m "This is a standard commit `after npm run build`"
+git push origin {branch}
 
 
 
