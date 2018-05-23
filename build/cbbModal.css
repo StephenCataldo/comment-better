@@ -41,6 +41,8 @@ ul.tabs__labels li {
 }
 .cbbContent {
   padding-top: 4px; /* breathing space at top of sg's */
+  height: 305px;  /*cbModal height (360) - menuTab.undefined height (51) - padding-top (4) */
+  overflow-y: scroll;
 }
 /* from @b, what for? */
 .active { background-color: #ddd; }
@@ -48,6 +50,7 @@ ul.tabs__labels li {
 
 /***### tabs__content ###***/
 .tabs__content {
+  /*overflow-y: scroll;*/
   clear: both;
 }
 
