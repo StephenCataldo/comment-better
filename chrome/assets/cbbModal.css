@@ -15,7 +15,7 @@ info { display: none; } /* remove this once info system works */
   height: 40px;
 }
 #cbModal ul li {
-  height: 40px;
+
   vertical-align: top;
 }
 */
@@ -41,6 +41,8 @@ ul.tabs__labels li {
 }
 .cbbContent {
   padding-top: 4px; /* breathing space at top of sg's */
+  height: 305px;
+  overflow-y: scroll; /*cbModal height (360) - menuTab.undefined height (51) - padding-top (4) */
 }
 /* from @b, what for? */
 .active { background-color: #ddd; }
@@ -48,6 +50,7 @@ ul.tabs__labels li {
 
 /***### tabs__content ###***/
 .tabs__content {
+  /*overflow-y: scroll;*/
   clear: both;
 }
 
@@ -77,6 +80,7 @@ div.i-button {
 
 /*** Tab Card labels ***/
 .image-tab-label {
+  height: 40px;
   width: 46px;
   height: 48px;
   margin-top: 2px;
