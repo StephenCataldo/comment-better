@@ -516,11 +516,24 @@ function injectCBB(domElement) {
      **/ 
     let btn = this;
     let modal =  document.getElementById('cbModal');  /* or global var? */
+
+    /* !!! This is the wrong spot for the clipboard code. 
+     * There is one modal — "ById" — but every $newBtnSections runs this code,
+     * setting up listeners on the same modal.
+     */ 
     if (modal) {
+      //** Add listeners within the modal, for a clipboard **//
       Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
         div.onclick = function() {
           document.execCommand("copy")
         }
+        // reverse-engineering: this looks like a failed effort to paste
+        // a comment? The above is a paste, that does work?
+        // Getting buckets of these:
+        // Uncaught TypeError: Cannot read property 'setData' of undefined
+        // I believe this is running for every dev within the modal, every time 
+        // "copy" is run, not just the one div that should be copied?
+        console.log("Setting up listerners for copy");
         div.addEventListener("copy", function(e) {
           e.preventDefault()
           if (e.clipboardData) {
@@ -528,15 +541,17 @@ function injectCBB(domElement) {
           } else if (window.clipboardData) {
             window.clipboardData.setData('Text', e.target.innerText);
           }
+          window.clipboardData.setData('Text', "hi there");
         })
       })
 
-      let scrollTop = $(window).scrollTop();
-
+      //** Figure out where to 
       // Config: the scrollTop + height of modal + gap > btnOffset.top, 
       let btnOffset = $(this).offset();
       let modalHeight = 360, // eyeball for now
           modalGap = 10;   // maybe tighten in final work, 
+
+      let scrollTop = $(window).scrollTop();
 
 
       // If modal isn't read, gives an error. @ToDo But doesn't seem to 
@@ -607,6 +622,10 @@ function injectCBB(domElement) {
 
     //converts the cbbContent class into an array
     var contentArray = [].slice.call(content)
+
+    // #Clipboard2
+    // We have a listener on the bubble already, copying it to the clipboard.
+    // Now, paste it into comment box here? Or do this in the listener?
 
     //If you click outside of the cbbContent class, it closes the modal
     if ((!contentArray.includes(event.target)) 
