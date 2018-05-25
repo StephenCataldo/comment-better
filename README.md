@@ -306,21 +306,3 @@ $ npm run test-e2e
 
 
 
-
-## Crappy old notes go below here!
-
-### Thoughts on UX
-
-#### When a keyword loads how does user see it?
-
-Original code creates a menu-like link, dropped over the page, kindof 
-annoying. Very annoying. Don't do that. Go with the usual extension
-approach of adding a little icon next to the top bar. When a keyword is 
-found in the page:
-1) highlight it.
-2) perhaps create a small dropdown menu under the icon at the top. Perhaps
-temporary, just long enough to get the mouse to it if people want to react
-right away, then out of the way... but having reminded user that the tool
-is active for this page.
-
-
