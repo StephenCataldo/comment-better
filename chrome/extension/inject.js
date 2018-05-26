@@ -522,26 +522,33 @@ function injectCBB(domElement) {
      * setting up listeners on the same modal.
      */ 
     if (modal) {
+      //#Clipboard1
       //** Add listeners within the modal, for a clipboard **//
       Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
+        /* Does this help?*/
         div.onclick = function() {
           document.execCommand("copy")
         }
-        // reverse-engineering: this looks like a failed effort to paste
-        // a comment? The above is a paste, that does work?
         // Getting buckets of these:
         // Uncaught TypeError: Cannot read property 'setData' of undefined
         // I believe this is running for every dev within the modal, every time 
         // "copy" is run, not just the one div that should be copied?
-        console.log("Setting up listerners for copy");
+        console.log("Setting up listerners for copy"); // runs 11 times each time I click the cbButton
         div.addEventListener("copy", function(e) {
+          // reverse-engineering: this fires when we click a bubble.
+          console.log(e); // ClipboardEvent 
+          //type: "copy", target: clip, currentTarget: div.tabs__content
+
           e.preventDefault()
           if (e.clipboardData) {
+            // Runs 25 times on a click that should cause a paste
+            console.log("Setting the clipboard data via the event.");
             e.clipboardData.setData('text/plain', e.target.innerText);
           } else if (window.clipboardData) {
+            // Never runs that Stephen has seen. What is this for?
+            console.log("PLEASE REPORT THIS IF SEEN. Setting data for clipboard.");
             window.clipboardData.setData('Text', e.target.innerText);
           }
-          window.clipboardData.setData('Text', "hi there");
         })
       })
 
@@ -612,6 +619,7 @@ function injectCBB(domElement) {
     // click outside the modal, anywhere anytime, and it's done.
     console.log("event target for click: ");
     console.log(event);
+
     ///console.log(event.target.parentNode);
     // event.currentTarget
     // @ToDo: if you click on a div within modal, that's not modal
@@ -625,6 +633,12 @@ function injectCBB(domElement) {
 
     // #Clipboard2
     // We have a listener on the bubble already, copying it to the clipboard.
+    // That bubble is inside the modal: a single object on the page, weakly
+    // related to the current facebook node. But I think the clipboard stops
+    // propagation... an important choice. We don't come here?
+    console.log("Was propagation stopped, if you clicked the clipboard?");
+    // NO, we do get here.
+    //
     // Now, paste it into comment box here? Or do this in the listener?
 
     //If you click outside of the cbbContent class, it closes the modal
