@@ -17,15 +17,10 @@ console.log("Hello Activists");
  */
 
 
-
-console.log(window.window_name);
 var windw = window.window_name;
-if ( document.readyState == "complete" ||
-      document.readyState == "interactive" ) {
-  console.log("document ready already ***");
+if ( document.readyState == "complete" || document.readyState == "interactive" ) {
   injectActions();
 } else {
-  console.log("window addEventListener for load ***");
   window.addEventListener('load', injectActions());
 }
 
@@ -105,7 +100,6 @@ class InjectApp extends Component {
 
 
 /*--------- CBB Below Here, whenever possible ----------*/
-console.log("Getting to the new stuff");
 import CbbModal from './CbbModal';
 import jQuery from "./library/jquery";
 window.$ = window.jQuery = jQuery;
@@ -143,8 +137,6 @@ ObserverNewCommentBoxes(); // B2
 /*** A. Prep the Modal, which is React ***/
 function loadModal() {
   window.addEventListener('load', () => {
-    console.log("*****************************************************");
-    console.log("A. window.addEventListener injected by extension/background/inject.js");
     const injectDOM = document.createElement('div');
     injectDOM.className = 'inject-react-example';
     $('body').prepend(injectDOM);
@@ -177,21 +169,16 @@ function initialInjectCBBs() {
 
   if ( document.readyState == "complete" ||
     document.readyState == "interactive" ) {
-    console.log("B. Document was ready already.");
     // facebook loads after document officially says it 's ready, so slow down.
     // @ToDo = how overdone is this effort - with mutationobserver running,
     // do we need to wait at all?
     (async () => {
       console.log('a');
-      //await sleep(1500);
-      console.log('b');
       injectCBB();
-      console.log('c');
+      console.log('b');
     })()
 
-
   } else {
-    console.log("window addEventListener for load ***");
     window.addEventListener('load', injectCBB());
   }
 }
@@ -291,7 +278,6 @@ if (!valid) { return; }
         }
 
         if (UFIList) {
-          console.log("MutationObserver: Inject a CBB button into a node");
           injectCBB(UFIList);  //
         }
 
@@ -318,7 +304,6 @@ if (!valid) { return; }
  *
  *
  **/
-  // Notify me of everything!
 var observerConfig = {
     //attributes: true,
     childList: true, // it was a mutation to the tree of nodes.
@@ -342,7 +327,6 @@ var observerConfig = {
   // And now it doesn't work?
   // This looks closest. It's not always ready. This could be solved
   // by waiting until it is found.
-  console.log(targetNode);
 
   function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -353,12 +337,9 @@ var observerConfig = {
     observer.observe(targetNode, observerConfig);
   } else {
     (async () => {
-      console.log('targetNode wait and try again');
       // @ToDo: now this is an error, but rarely seen. What's up?
       await sleep(1700); // 2700 seems to work... 700 when connection good
-      console.log('how long did that take');
       targetNode = document.querySelector('div[role="feed"]');
-      console.log(targetNode);
       observer.observe(targetNode, observerConfig);
     })();
   }
@@ -373,7 +354,6 @@ function injectCBB(domElement) {
 
 
   /*** C. injectCBB injects a button into the domElement ***/
-    //domElement is what $(xx).get() would get.
   let color =  "#fcf";
   let target = 'body';
   if (domElement != null) {
@@ -393,7 +373,8 @@ function injectCBB(domElement) {
   // to prevent nodes from being re-searched, which stops us from noticing
   // this.
   // Might be better to undo that?
-// !!! @ToDo   hey write this
+
+  // !!! @ToDo   hey write this
   $(target).find('.UFIReplyLink').click(function() {
     console.log("Trying to add event handler");
     injectCBB(this);
@@ -412,8 +393,7 @@ function injectCBB(domElement) {
     // Also, after adding this code, for the first time I see
     // "NOW IT HAS THIS CLASS, ABORT" below.
   let id = $(target).find('.UFIAddComment').prop('id');
-  console.log("The id of the .UFIAddComment section is:");
-  console.log(id);
+  console.log("The id of the .UFIAddComment section is:" + id);
   if (!id) {
     console.log("++++++++++ UFIAddComment has no id. Was a reply button clicked? The target from which we were seeking the UFIAddComment was:");
     console.log($(target));
@@ -442,9 +422,6 @@ function injectCBB(domElement) {
   }
   $(target).find('.UFICommentAttachmentButtons').addClass( "has-cbb-button" );
 
-// SHIT. Shut the observer from what we do below.
-
-
   // images in chrome extensions are trick, this generates an odd URL for it
   var imgURL = chrome.extension.getURL("img/commentbetter-logo-filled-right.png");
   var imgClipboard = chrome.extension.getURL("img/Clipboard-Icon-20.png");
@@ -462,20 +439,7 @@ function injectCBB(domElement) {
     //'<a id="cbb' +  + '" onclick="openModal(e)" class="cbbutton">' + image + '</a>';
     '<a class="cbbutton">' + image + '</a>';
 
-
-
-// Note: htmlTemplate might be applied more than once at a time. No id's!
-
-
-  /** @ToDos, perhaps
-   * - This modal could open down if the click is high on the screen.
-   * - Keep watching for what is broken by removing overflow: hidden.
-   *   But looks fine. If problems, switch to laiding the cbModal into
-   *   a parent.
-   * - How does the modal close? Is it comfy for most users as is?
-   **/
-
-
+    // Note: htmlTemplate might be applied more than once at a time. No id's!
 
     // We're refinding, @ToDo, efficiency.
     //$(target).find('.UFICommentAttachmentButtons').prepend(htmlTemplate);
@@ -487,29 +451,16 @@ function injectCBB(domElement) {
     // (I don't want to force extra loose permissions).
   let $newBtnSections = $(target).find('.UFICommentAttachmentButtons');
   $newBtnSections.prepend(htmlTemplate);
-  /*
-  console.log("Attaching onClick function to the new button");
-  console.log($newBtnSections);
-  console.log($newBtnSections.find('cbbutton')); // length 0   :-(
-  */
-  // Gives uncaught errors when undefined.
-  // @ToDo: Dig to make sure can simply be ignored:
+
   if ($newBtnSections.length == 0) {
     console.log("newBtnSections was not defined. Appears to happen ... um, at Victory Point cafe, and nowhere else, so far.");
     return;
   }
 
-  console.log($newBtnSections[0].children[0]); // this is the button
   $($newBtnSections[0].children[0]).on("click", function(e) {
-    //console.log("+++++++ button was clicked ++++++++++");
     $(this.href).show();
     e.preventDefault();
     e.stopPropagation();
-    /* turn back on if button click not working..
-    console.log(e);
-    console.log(this); // the button! yes!
-    */
-
 
     /** Position the modal
      * .position() is relative to parent, .offset() to document. 
@@ -536,15 +487,8 @@ function injectCBB(domElement) {
       // Config: the scrollTop + height of modal + gap > btnOffset.top, 
       let btnOffset = $(this).offset();
       let modalHeight = 360, // eyeball for now
-          modalGap = 10;   // maybe tighten in final work, 
+          modalGap = 10;     // maybe tighten in final work, 
 
-
-      // If modal isn't read, gives an error. @ToDo But doesn't seem to 
-      //  be creating errors for users (so far as I see), but consider
-      //  error handling use cases.
-      // Uncaught TypeError: Cannot read property 'style' of null
-      console.log("Modal is: ");
-      console.log(modal);
       modal.style.height = modalHeight + "px";
 
       // Position the modal vertically.
@@ -558,11 +502,9 @@ function injectCBB(domElement) {
 
 
       //  Toggle the modal ( Why not show() ? )
-      //  Code review and better documentation needed here. @ToDo
       if (modal && modal.style.display != "block") {
         modal.style.display = "block";
       } else {
-        // ToDo: Fix height problem so that modal always appears on
         $(modal).offset({ top: 0, left: 0});
         modal.style.display = "none";
       }
@@ -591,15 +533,8 @@ function injectCBB(domElement) {
 
   // @ToDo ... probably should close if click btn again
   // window is apparently null?
-  console.log(window);
   if ( window == null ) { console.log("Hey, why is window null?????? ID: " + id); }
   window.onclick = function(event) {
-    // click outside the modal, anywhere anytime, and it's done.
-    console.log("event target for click: ");
-    console.log(event);
-    ///console.log(event.target.parentNode);
-    // event.currentTarget
-    // @ToDo: if you click on a div within modal, that's not modal
 
     //modal should be declared within this function so that it is not sometimes null
     var modal = document.getElementById('cbModal');
@@ -609,21 +544,12 @@ function injectCBB(domElement) {
     var contentArray = [].slice.call(content)
 
     //If you click outside of the cbbContent class, it closes the modal
-    if ((!contentArray.includes(event.target)) 
-         && event.target !== btn ) {
-        console.log(event.target)
-        //console.log(event.target.parentNode)
+    if ((!contentArray.includes(event.target)) && event.target !== btn ) {
         $(modal).offset({ top: 0, left: 0});
         modal.style.display = "none";
     }
   }
 } // done injectCBB into document or new mutation
-
-
-
-
-
-
 
 
 
