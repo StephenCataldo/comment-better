@@ -69,7 +69,6 @@ class InjectApp extends Component {
 // Reread: https://stackoverflow.com/questions/588040/window-onload-vs-document-onload. Below is a hack, sometimes document, sometimes window, expected to
 // sometimes run twice (not a disaster). Document loaded should be sufficient
 // for the text-oriented, DOM-oriented injectActions.
-console.log(window.window_name);
 var windw = window.window_name;
 if ( document.readyState == "complete" ||
       document.readyState == "interactive" ) {
@@ -77,6 +76,7 @@ if ( document.readyState == "complete" ||
   injectActions();
 } else {
   console.log("window addEventListener for load ***");
+  injectActions();
   window.addEventListener('load', injectActions());
 }
 

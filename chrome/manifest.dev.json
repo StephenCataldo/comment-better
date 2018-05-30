@@ -13,25 +13,25 @@
     "128": "img/megaphone-blue_purple-outline-128.png"
   },
   "web_accessible_resources": [
-    "inject.html", "img/attachButton.png","*"
+    "inject.html", "img/attachButton.png", "*"
   ],
   "background": {
     "page": "background.html"
   },
-  "permissions": [ "contextMenus", "management", "tabs", "storage", "activeTab","<all_urls>"  ],
+  "permissions": [ "contextMenus", "management", "tabs", "storage", "activeTab", "<all_urls>"  ],
   "content_security_policy": "default-src 'self'; script-src 'self' http://localhost:3000 https://localhost:3000 'unsafe-eval'; connect-src  http://cognitivepolitics.com https://cognitivepolitics.com http://localhost:3000 https://localhost:3000; style-src * 'unsafe-inline' 'self' blob:; img-src  img-src https://cognitivepolitics.org http://cognitivepolitics.org  'self' data:;",
   "content_scripts": [
-  {
-    "matches": [
-      "<all_urls>"
-    ],
-    "css": ["better_comment.css"]
-  },
-  {
-    "matches": [
-      "https://www.facebook.com/*"
-    ],
-    "css": ["cbbModal.css"]
-  }
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": ["better_comment.css"]
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "css": ["cbbModal.css"]
+    }
   ]
 }

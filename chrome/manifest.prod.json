@@ -4,7 +4,7 @@
   "manifest_version": 2,
   "description": "Social media tools for active, civil citizenship: The Comment Better Buttons inserts suggestions from communications experts into comment boxes on your browser (so far, Facebook). The Social Media Guide or 'bullhorn' searches for political keywords and provides suggestions on how respond from a framing/editorial/activist source. Currently configured to Cognitive Politics — you can fork and choose your own source.",
   "browser_action": {
-    "default_title": "React Chrome Web Guide",
+    "default_title": "Comment Better Button & Social Media Toolkit",
     "default_popup": "popup.html"
   },
   "icons": {
@@ -13,11 +13,25 @@
     "128": "img/megaphone-blue_purple-outline-128.png"
   },
   "web_accessible_resources": [
-    "inject.html", "img/*.png"
+    "inject.html", "img/attachButton.png", "*"
   ],
   "background": {
     "page": "background.html"
   },
-  "permissions": [ "contextMenus", "tabs", "storage", "<all_urls>" ],
-  "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;"
+  "permissions": [ "contextMenus", "management", "tabs", "storage", "activeTab", "<all_urls>"  ],
+  "content_security_policy": "default-src 'self'; script-src 'self'; style-src * 'unsafe-inline'; img-src 'self' data:;",
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": ["better_comment.css"]
+    },
+    {
+      "matches": [
+        "https://www.facebook.com/*"
+      ],
+      "css": ["cbbModal.css"]
+    }
+  ]
 }
