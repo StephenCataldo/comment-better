@@ -516,27 +516,60 @@ function injectCBB(domElement) {
      **/ 
     let btn = this;
     let modal =  document.getElementById('cbModal');  /* or global var? */
+
+    /* !!! This is the wrong spot for the clipboard code. 
+     * There is one modal — "ById" — but every $newBtnSections runs this code,
+     * setting up listeners on the same modal.
+     */ 
     if (modal) {
+      //#Clipboard1
+      //** Add listeners within the modal, for a clipboard **//
       Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
+        /* Does this help?*/
         div.onclick = function() {
           document.execCommand("copy")
         }
+        // Getting buckets of these:
+        // Uncaught TypeError: Cannot read property 'setData' of undefined
+        // I believe this is running for every dev within the modal, every time 
+        // "copy" is run, not just the one div that should be copied?
+        console.log("Setting up listerners for copy"); // runs 11 times each time I click the cbButton
         div.addEventListener("copy", function(e) {
+          // reverse-engineering: this fires when we click a bubble.
+          console.log("This is the copy event via addEventListener");
+          console.log(e); // ClipboardEvent 
+          // source, target are: div._1mf._1mj
+          //type: "copy", target: clip, currentTarget: div.tabs__content
+
           e.preventDefault()
           if (e.clipboardData) {
+            // Runs 25 times on a click that should cause a paste
+            console.log("Setting the clipboard data via the event.");
             e.clipboardData.setData('text/plain', e.target.innerText);
+            // #cataldo: this would be where to insert it into the nearby
+            // comment box. Need to get something like
+            // $lastCBBclicked.parents(".UFIAddCommentInput").children("_5rpb
+            // "No translate"
+            // span data-offset-key= true
+            // span data-text=“true”
+            // and insert the text.
+            // Fighting with facebook's weird comment system is not mvp,
+            // leave the comments for later.
           } else if (window.clipboardData) {
+            // Never runs that Stephen has seen. What is this for?
+            console.log("PLEASE REPORT THIS IF SEEN. Setting data for clipboard.");
             window.clipboardData.setData('Text', e.target.innerText);
           }
         })
       })
 
-      let scrollTop = $(window).scrollTop();
-
+      //** Figure out where to 
       // Config: the scrollTop + height of modal + gap > btnOffset.top, 
       let btnOffset = $(this).offset();
       let modalHeight = 360, // eyeball for now
           modalGap = 10;   // maybe tighten in final work, 
+
+      let scrollTop = $(window).scrollTop();
 
 
       // If modal isn't read, gives an error. @ToDo But doesn't seem to 
@@ -597,6 +630,7 @@ function injectCBB(domElement) {
     // click outside the modal, anywhere anytime, and it's done.
     console.log("event target for click: ");
     console.log(event);
+
     ///console.log(event.target.parentNode);
     // event.currentTarget
     // @ToDo: if you click on a div within modal, that's not modal
@@ -607,6 +641,16 @@ function injectCBB(domElement) {
 
     //converts the cbbContent class into an array
     var contentArray = [].slice.call(content)
+
+    // #Clipboard2
+    // We have a listener on the bubble already, copying it to the clipboard.
+    // That bubble is inside the modal: a single object on the page, weakly
+    // related to the current facebook node. But I think the clipboard stops
+    // propagation... an important choice. We don't come here?
+    console.log("Was propagation stopped, if you clicked the clipboard?");
+    // NO, we do get here.
+    //
+    // Now, paste it into comment box here? Or do this in the listener?
 
     //If you click outside of the cbbContent class, it closes the modal
     if ((!contentArray.includes(event.target)) 
