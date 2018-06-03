@@ -536,7 +536,9 @@ function injectCBB(domElement) {
         console.log("Setting up listerners for copy"); // runs 11 times each time I click the cbButton
         div.addEventListener("copy", function(e) {
           // reverse-engineering: this fires when we click a bubble.
+          console.log("This is the copy event via addEventListener");
           console.log(e); // ClipboardEvent 
+          // source, target are: div._1mf._1mj
           //type: "copy", target: clip, currentTarget: div.tabs__content
 
           e.preventDefault()
@@ -544,6 +546,15 @@ function injectCBB(domElement) {
             // Runs 25 times on a click that should cause a paste
             console.log("Setting the clipboard data via the event.");
             e.clipboardData.setData('text/plain', e.target.innerText);
+            // #cataldo: this would be where to insert it into the nearby
+            // comment box. Need to get something like
+            // $lastCBBclicked.parents(".UFIAddCommentInput").children("_5rpb
+            // "No translate"
+            // span data-offset-key= true
+            // span data-text=“true”
+            // and insert the text.
+            // Fighting with facebook's weird comment system is not mvp,
+            // leave the comments for later.
           } else if (window.clipboardData) {
             // Never runs that Stephen has seen. What is this for?
             console.log("PLEASE REPORT THIS IF SEEN. Setting data for clipboard.");
