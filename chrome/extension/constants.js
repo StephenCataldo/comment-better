@@ -1,10 +1,8 @@
-//export const myConstClass = {
-//    firstTfirstM: "Yes. And..."
-//}
+
 import React, { PropTypes, Component } from 'react';
 
 //first tab
-export const tab1_msg1 = <div><clip>"Yes. And...."</clip></div>;// "Yes. And....";
+export const tab1_msg1 = <div><clip>"Yes. And..."</clip></div>;// "Yes. And....";
 export const tab1_msg2 = <div><clip>I think I see where you're coming from.</clip></div>;
 export const tab1_msg3 = <div><clip>I hear what you’re saying. I agree about... I also see...</clip></div>;
 export const tab1_msg4 = <div><clip>Tell me more about ... </clip></div>;
