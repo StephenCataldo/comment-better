@@ -210,8 +210,15 @@ div.smg {
   border: 10px solid #eee;
 
 }
-.active-listening, .tactic  {background-color:#D15e55;} .question {background-color:#F15e25;} .group, .agree {background-color:#Ee9a21;} .advice {background-color:#A0499c;} .gothere {background-color: #29a329; } .personal {background-color:#5c4f9b;} .gladiator { background-color: red; } .observe { background-color: #333; }
-.adv { background-color: orange; /* what's our orange? */ }
+/*.active-listening, .tactic  {background-color:#D15e55;} */
+.black {background-color:#0b0206;}
+.darkpurple{background-color:#280d45;}
+.darkblue {background-color:#1b376c;} 
+.cerulean {background-color: #3b9990; } 
+.green {background-color:#44c971;} 
+/*.gladiator { background-color: red; } */
+/*.observe { background-color: #333; }*/
+/*.adv { background-color: orange; /* what's our orange? }*/
 
 #adv {
   /* not know to work yet,... */

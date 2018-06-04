@@ -228,22 +228,22 @@ export default class CbbModal extends Component {
       <div id="cbModal">
         <Tabs selected={0}>
           <Card
-            label = { <span>Listen<br/> & Ask</span> }
+            label = { <span>Step 1<br/>Ask</span> }
           >
             <Pane>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree">{myConstClass.tab1_msg1}
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg black">{myConstClass.tab1_msg1}
               </div>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree">
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg darkpurple">
                 {myConstClass.tab1_msg2}
               </div>
-              <div className="sg agree">{myConstClass.tab1_msg3}
+              <div className="sg darkblue">{myConstClass.tab1_msg3}
               </div>
-              <div className="sg agree">
+              <div className="sg cerulean">
                 {myConstClass.tab1_msg4}
               </div>
 
-              <div id="cbb-3" className="sg question">{myConstClass.tab1_msg5}</div>
-              <div className="sg personal">{myConstClass.tab1_msg6}
+              <div id="cbb-3" className="sg green">{myConstClass.tab1_msg5}</div>
+              <div className="sg darkpurple">{myConstClass.tab1_msg6}
               </div>
 
 
@@ -256,18 +256,14 @@ export default class CbbModal extends Component {
           </Card>
 
           <Card
-            label = { <span>Open<br/> & Close</span> }
+            label = { <span>Step 2<br/>Listen</span> }
           >
             <Pane>
     
-              <div className="sg observe">{myConstClass.tab2_msg1}</div>
+              <div className="sg black">{myConstClass.tab2_msg1}</div>
 
-              <div className="sg group">{myConstClass.tab2_msg2}
+              <div className="sg darkpurple">{myConstClass.tab2_msg2}
               </div>
-
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree">{myConstClass.tab2_msg3}
-              </div>
-              <div className="sg personal">{myConstClass.tab2_msg4}</div>
 
 
             </Pane>
@@ -280,17 +276,20 @@ export default class CbbModal extends Component {
 
 
           <Card
-            label = { <span>Group<br/> & Frame</span> }
+            label = { <span>Step 3<br/>Reflect</span> }
           >
             <Pane>
     
-              <div className="sg observe ask">{myConstClass.tab3_msg1}</div>
+              <div className="sg black">{myConstClass.tab3_msg1}</div>
 
-              <div className="sg gladiator">{myConstClass.tab3_msg2}              </div>
+              <div className="sg darkpurple">{myConstClass.tab3_msg2}              </div>
 
-              <div className="sg group gladiator">{myConstClass.tab3_msg3}</div>
+              <div className="sg darkblue">{myConstClass.tab3_msg3}</div>
 
-              <div className="sg group">{myConstClass.tab3_msg4}  
+              <div className="sg cerulean">{myConstClass.tab3_msg4}  
+              </div>
+
+              <div className="sg green">{myConstClass.tab3_msg5}  
               </div>
 
             </Pane>
@@ -302,19 +301,19 @@ export default class CbbModal extends Component {
 
 
           <Card
-            label = { <span>Conflict<br/> & Trolls</span> }
+            label = { <span>Step 4<br/>Agree</span> }
           >
             <Pane>
-              <div id="cbb-1" className="sg group gladiator">{myConstClass.tab4_msg1} 
+              <div id="cbb-1" className="sg black">{myConstClass.tab4_msg1} 
               </div>
-							<div id="cbb-1" className="sg group gladiator">
+							<div id="cbb-1" className="sg darkpurple">
 								{myConstClass.tab4_msg2} 
 							</div>
-              <div id="cbb-1" className="sg group gladiator">{myConstClass.tab4_msg3}</div>
-              <div id="cbb-1" className="sg group gladiator">
+              <div id="cbb-1" className="sg darkblue">{myConstClass.tab4_msg3}</div>
+              <div id="cbb-1" className="sg cerulean">
                 {myConstClass.tab4_msg4} 
               </div>
-              <div id="cbb-1" className="sg group gladiator">
+              <div id="cbb-1" className="sg green">
                 {myConstClass.tab4_msg5} 
               </div>
             </Pane>
@@ -328,72 +327,76 @@ export default class CbbModal extends Component {
           </Card>
 
           <Card
-            id="smg"
-            className="image-tab-label"
-            title = "Social Media Guide"
-            label = { <span>Cognitive Politics Social Media Guide</span> }
+            label = { <span>Step 5<br/>Explain</span> }
           >
             <Pane>
-              <div title="Social Media Guide" 
-                 className="sg gothere bottom whitetext">
-                Explore the <a href="http://cognitivepolitics.org/social-media-guide-progressives">Social Media Guide for Progressives</a>
+              <div id="cbb-1" className="sg black">{myConstClass.tab5_msg1} 
+              </div>
+              <div id="cbb-1" className="sg darkpurple">
+                {myConstClass.tab5_msg2} 
+              </div>
+              <div id="cbb-1" className="sg darkblue">{myConstClass.tab5_msg3}</div>
+              <div id="cbb-1" className="sg cerulean">
+                {myConstClass.tab5_msg4} 
+              </div>
+              <div id="cbb-1" className="sg green">
+                {myConstClass.tab5_msg5} 
+              </div>
+              <div id="cbb-1" className="sg darkpurple">
+                {myConstClass.tab5_msg6} 
               </div>
             </Pane>
             <Info>
+                  "I statements" with strong beliefs are powerful in reasonable
+            conversations — share your heart. But when
+            facing hate, make it everyone together
+            against the hate. Don't let trolls represent 50% of the country
+            while you represent the other 50%.
             </Info>   
           </Card>
 
 
-          <Card 
-            id="rcc"
-            className="image-tab-label"
-            title="Radical Civility Cycle"
-            label = { <span>Radical Civility Cycle</span> }
-          >
-            <Pane>
-              <div className="sg gothere bottom whitetext">
-                Join this Radical Civility practice community:<br/><a href="https://www.facebook.com/groups/smartly/">Social Media Approaches for Respect and Tolerance</a>.
-              </div>
-            </Pane>
-            <Info>
-            </Info>   
-          </Card>
-
+        
 
           <Card
-            id="cp"
-            className="image-tab-label"
-            title = "Cognitive Politics Steps"
-            label = { <span>Cognitive Politics Social Media Guide</span> }
+            label = { <span>Step 6<br/>Share</span> }
           >
             <Pane>
-              <div title="" className="sg question">
-                {myConstClass.tab6_msg1} 
-                <info>Going sideways from the main debate is often helpful;
-                seek out details. Use Moral Foundation Theory to 
-                as a place to find interesting questions about values.</info>
-              </div>
-              <div title="steelman" className="sg agree">
-                {myConstClass.tab6_msg2} 
-                <taxonomy>Active Listening: Steelman</taxonomy>
-              </div>
-              <div title="" className="sg observe">
-                {myConstClass.tab6_msg3} 
-                <info> It's good to know
-                your frame, and know your conclusion, but don't state your
-                conclusion: share the observations and values that led you
-                to your conclusion, and stop there.</info>
-              </div>
-              <div title="" className="sg personal">
-               {myConstClass.tab6_msg4} 
+              <div id="cbb-1" className="sg black">Coming soon: share saved articles and links!
               </div>
             </Pane>
             <Info>
+                  "I statements" with strong beliefs are powerful in reasonable
+            conversations — share your heart. But when
+            facing hate, make it everyone together
+            against the hate. Don't let trolls represent 50% of the country
+            while you represent the other 50%.
+            </Info>   
+          </Card>
+
+          <Card
+            label = { <span>...</span> }
+          >
+            <Pane>
+              <div id="cbb-1" className="sg darkpurple">Like this? Join SMART Politics!
+              </div>
+              <div id="cbb-1" className="sg darkblue">Active listening / Steelman
+              </div>
+              <div id="cbb-1" className="sg cerulean">Self-herding kittens: a DIY guide for progressive social media
+              </div>
+            </Pane>
+            <Info>
+                  "I statements" with strong beliefs are powerful in reasonable
+            conversations — share your heart. But when
+            facing hate, make it everyone together
+            against the hate. Don't let trolls represent 50% of the country
+            while you represent the other 50%.
             </Info>   
           </Card>
 
 
 
+{/**
           <Card
             id="adv"
             className="image-tab-label-tiny"
@@ -412,6 +415,7 @@ export default class CbbModal extends Component {
             <Info>
             </Info>
           </Card>
+          **/}
 
 
         </Tabs>
