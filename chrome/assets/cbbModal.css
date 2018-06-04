@@ -23,30 +23,46 @@ ul.tabs__labels {
   padding: 0;
   height: 38px;
   width: 100%;
-  overflow: none;
+  overflow: auto;
+  /*  overflow: none;*/
+  white-space: nowrap;
+  /* remove?*/
 }
 ul.tabs__labels li {
   height: 38px;
 }
 .menuTab {
   text-align: center;
+  font-weight: bold;
+  padding: 0px;
+  background-color: #eeeeee;
   color: #333;
   cursor: pointer;
   float: left; /* or inline-block? */
-  padding: 6px 12px;
   margin: 0 0 0 -1px;
   border: 1px solid #ccc;
   border-right: none;
   border-top: none;
 }
+
+.menuTab > a {
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 0px;
+}
+
+.menuTab > a:hover {
+  text-decoration: none;
+}
+
 .cbbContent {
   padding-top: 4px; /* breathing space at top of sg's */
   height: 305px;
   overflow-y: scroll; /*cbModal height (360) - menuTab.undefined height (51) - padding-top (4) */
 }
 /* from @b, what for? */
-.active { background-color: #ddd; }
-.deselectTab { background-color: #F6F7F9; } /*#F6F7F9*/
+.active { background-color: #ffffff; } /*ddd*/
+.deselectTab { background-color: #eeeeee; } /*#F6F7F9*/
 
 /***### tabs__content ###***/
 .tabs__content {
@@ -86,6 +102,11 @@ div.i-button {
   margin-top: 2px;
   padding: 2px 0;
 }
+
+.image-tab-label > a {
+  display: none;
+}
+
 .image-tab-label-tiny {
   width: 23px;
   height: 48px;
@@ -134,24 +155,24 @@ div.smg {
 
 }
 .menu {
-	background-color: #ccc;
+  background-color: #ccc;
 }
 
 .menuAffirm, .menuAsk, .menuRequest {
-	text-align: center;
-	color: ;
+  text-align: center;
+  color: ;
 }
 
 .menuAffirm {
-	text-align: center;
+  text-align: center;
 }
 
 .menuAsk {
-	text-align: center;
+  text-align: center;
 }
 
 .menuRequest {
-	text-align: center;
+  text-align: center;
 }
 
 .bottom {
@@ -164,13 +185,17 @@ div.smg {
 
 /*.group, .tactic, .question, .agree, .observe, .advice, .personal {*/
 .sg {
-	width: 300px; /* 86% */
-	padding: 10px;
-	margin: 8px auto;
-	border-radius: 10px;
-	color: white;
-	text-align: center;
-	cursor: pointer;
+  width: 300px; /* 86% */
+  padding: 10px;
+  margin: 8px auto;
+  border-radius: 10px;
+  color: #696969;
+  font-style: none;
+  /*text-shadow: 1px 1px #000000;*/
+  text-align: center;
+  cursor: pointer;
+  /*font-style: italic;*/
+  font-weight: bold;
 }
 /* sgsm and sgrt create half-width boxes. Not
  * used in v.15, but available if designers want. */
@@ -187,11 +212,13 @@ div.smg {
 
 
 .sg clip {
-  color: #ffe0cc; /* adjust to our orange @ToDoDesign */
+  color: #696969; /* adjust to our orange @ToDoDesign */
   font-weight: bold;
+  font-style: initial;
+  /*text-shadow: none;*/
 }
 .sg noclip {
-  color: #f0f5f5;
+  color: #d9d9d9;
   text-decoration:line-through;
   text-decoration: #d1e0e0 single line-through;
   /* @ToDoDesign: */
@@ -210,15 +237,15 @@ div.smg {
   border: 10px solid #eee;
 
 }
-/*.active-listening, .tactic  {background-color:#D15e55;} */
-.black {background-color:#0b0206;}
-.darkpurple{background-color:#280d45;}
-.darkblue {background-color:#1b376c;} 
-.cerulean {background-color: #3b9990; } 
-.green {background-color:#44c971;} 
-/*.gladiator { background-color: red; } */
-/*.observe { background-color: #333; }*/
-/*.adv { background-color: orange; /* what's our orange? }*/
+.coral {background-color:#F08080;} 
+.mint {background-color:#9fdf9f;} 
+.lightblue {background-color:#99ccff;} 
+.steelblue {background-color:#B0C4DE;} 
+.tangerine {background-color: #F4A460; } 
+.pink {background-color:#ffb3cc;} 
+.bubblegum { background-color: #DDA0DD; }
+.gray {background-color: #b3b3b3; color: white; font-style: italic;}
+.adv { background-color: orange; }
 
 #adv {
   /* not know to work yet,... */

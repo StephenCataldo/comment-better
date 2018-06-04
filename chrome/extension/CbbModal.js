@@ -231,19 +231,19 @@ export default class CbbModal extends Component {
             label = { <span>Step 1<br/>Ask</span> }
           >
             <Pane>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg black">{myConstClass.tab1_msg1}
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg gray">{myConstClass.tab1_msg1}
               </div>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg darkpurple">
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg coral">
                 {myConstClass.tab1_msg2}
               </div>
-              <div className="sg darkblue">{myConstClass.tab1_msg3}
+              <div className="sg coral">{myConstClass.tab1_msg3}
               </div>
-              <div className="sg cerulean">
+              <div className="sg coral">
                 {myConstClass.tab1_msg4}
               </div>
 
-              <div id="cbb-3" className="sg green">{myConstClass.tab1_msg5}</div>
-              <div className="sg darkpurple">{myConstClass.tab1_msg6}
+              <div id="cbb-3" className="sg coral">{myConstClass.tab1_msg5}</div>
+              <div className="sg coral">{myConstClass.tab1_msg6}
               </div>
 
 
@@ -260,9 +260,9 @@ export default class CbbModal extends Component {
           >
             <Pane>
     
-              <div className="sg black">{myConstClass.tab2_msg1}</div>
+              <div className="sg gray">{myConstClass.tab2_msg1}</div>
 
-              <div className="sg darkpurple">{myConstClass.tab2_msg2}
+              <div className="sg mint">{myConstClass.tab2_msg2}
               </div>
 
 
@@ -280,16 +280,16 @@ export default class CbbModal extends Component {
           >
             <Pane>
     
-              <div className="sg black">{myConstClass.tab3_msg1}</div>
+              <div className="sg gray">{myConstClass.tab3_msg1}</div>
 
-              <div className="sg darkpurple">{myConstClass.tab3_msg2}              </div>
+              <div className="sg tangerine">{myConstClass.tab3_msg2}              </div>
 
-              <div className="sg darkblue">{myConstClass.tab3_msg3}</div>
+              <div className="sg tangerine">{myConstClass.tab3_msg3}</div>
 
-              <div className="sg cerulean">{myConstClass.tab3_msg4}  
+              <div className="sg tangerine">{myConstClass.tab3_msg4}  
               </div>
 
-              <div className="sg green">{myConstClass.tab3_msg5}  
+              <div className="sg tangerine">{myConstClass.tab3_msg5}  
               </div>
 
             </Pane>
@@ -304,16 +304,16 @@ export default class CbbModal extends Component {
             label = { <span>Step 4<br/>Agree</span> }
           >
             <Pane>
-              <div id="cbb-1" className="sg black">{myConstClass.tab4_msg1} 
+              <div id="cbb-1" className="sg gray">{myConstClass.tab4_msg1} 
               </div>
-							<div id="cbb-1" className="sg darkpurple">
+							<div id="cbb-1" className="sg lightblue">
 								{myConstClass.tab4_msg2} 
 							</div>
-              <div id="cbb-1" className="sg darkblue">{myConstClass.tab4_msg3}</div>
-              <div id="cbb-1" className="sg cerulean">
+              <div id="cbb-1" className="sg lightblue">{myConstClass.tab4_msg3}</div>
+              <div id="cbb-1" className="sg lightblue">
                 {myConstClass.tab4_msg4} 
               </div>
-              <div id="cbb-1" className="sg green">
+              <div id="cbb-1" className="sg lightblue">
                 {myConstClass.tab4_msg5} 
               </div>
             </Pane>
@@ -330,19 +330,19 @@ export default class CbbModal extends Component {
             label = { <span>Step 5<br/>Explain</span> }
           >
             <Pane>
-              <div id="cbb-1" className="sg black">{myConstClass.tab5_msg1} 
+              <div id="cbb-1" className="sg gray">{myConstClass.tab5_msg1} 
               </div>
-              <div id="cbb-1" className="sg darkpurple">
+              <div id="cbb-1" className="sg pink">
                 {myConstClass.tab5_msg2} 
               </div>
-              <div id="cbb-1" className="sg darkblue">{myConstClass.tab5_msg3}</div>
-              <div id="cbb-1" className="sg cerulean">
+              <div id="cbb-1" className="sg pink">{myConstClass.tab5_msg3}</div>
+              <div id="cbb-1" className="sg pink">
                 {myConstClass.tab5_msg4} 
               </div>
-              <div id="cbb-1" className="sg green">
+              <div id="cbb-1" className="sg pink">
                 {myConstClass.tab5_msg5} 
               </div>
-              <div id="cbb-1" className="sg darkpurple">
+              <div id="cbb-1" className="sg pink">
                 {myConstClass.tab5_msg6} 
               </div>
             </Pane>
@@ -362,7 +362,7 @@ export default class CbbModal extends Component {
             label = { <span>Step 6<br/>Share</span> }
           >
             <Pane>
-              <div id="cbb-1" className="sg black">Coming soon: share saved articles and links!
+              <div id="cbb-1" className="sg gray">Coming soon: share saved articles and links!
               </div>
             </Pane>
             <Info>
@@ -378,11 +378,11 @@ export default class CbbModal extends Component {
             label = { <span>...</span> }
           >
             <Pane>
-              <div id="cbb-1" className="sg darkpurple">Like this? Join SMART Politics!
+              <div id="cbb-1" className="sg steelblue">Like this? Join SMART Politics!
               </div>
-              <div id="cbb-1" className="sg darkblue">Active listening / Steelman
+              <div id="cbb-1" className="sg steelblue">Active listening / Steelman
               </div>
-              <div id="cbb-1" className="sg cerulean">Self-herding kittens: a DIY guide for progressive social media
+              <div id="cbb-1" className="sg steelblue">Self-herding kittens: a DIY guide for progressive social media
               </div>
             </Pane>
             <Info>
