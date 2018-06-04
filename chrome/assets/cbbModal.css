@@ -23,7 +23,7 @@ ul.tabs__labels {
   padding: 0;
   height: 38px;
   width: 100%;
-  overflow: auto;
+  overflow-x: auto;
   /*  overflow: none;*/
   white-space: nowrap;
   /* remove?*/
