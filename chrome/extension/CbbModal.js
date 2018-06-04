@@ -10,7 +10,10 @@
  */
 
 import React, { PropTypes, Component } from 'react';
-
+//import * as myConstClass from 'chrome/extension/text_constants';
+//import ConstantsList from './text_constants'
+//import {myConstClass} from './constants'
+import * as myConstClass from './constants'
 
 const Tabs = React.createClass({
   displayName: 'Tabs',
@@ -95,8 +98,9 @@ const Tabs = React.createClass({
     );
   }
 });
-// end Tabs
-
+// end Tabs..
+///..
+//..
 const Card = React.createClass({
   displayName: 'Card',
 /*
@@ -224,23 +228,22 @@ export default class CbbModal extends Component {
       <div id="cbModal">
         <Tabs selected={0}>
           <Card
-            label = { <span>Listen<br/> & Ask</span> }
+            label = { <span>Step 1<br/>Ask</span> }
           >
             <Pane>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree"><clip>Yes. And...</clip>
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg black">{myConstClass.tab1_msg1}
               </div>
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree">
-                <clip>I think I see where you're coming from.</clip>
+              <div id="cbb-yesAnd" title="Yes. And..." className="sg darkpurple">
+                {myConstClass.tab1_msg2}
               </div>
-              <div className="sg agree">`
-                <clip>I hear what you’re saying. I agree about... I also see...</clip>
+              <div className="sg darkblue">{myConstClass.tab1_msg3}
               </div>
-              <div className="sg agree">`
-                <clip>Tell me more about ... </clip>
+              <div className="sg cerulean">
+                {myConstClass.tab1_msg4}
               </div>
 
-              <div id="cbb-3" className="sg question"><clip>What made you aware of </clip> this problem?</div>
-              <div className="sg personal">Getting permission helps people relax and connect: <clip>Do you want to talk about this?</clip>
+              <div id="cbb-3" className="sg green">{myConstClass.tab1_msg5}</div>
+              <div className="sg darkpurple">{myConstClass.tab1_msg6}
               </div>
 
 
@@ -253,26 +256,14 @@ export default class CbbModal extends Component {
           </Card>
 
           <Card
-            label = { <span>Open<br/> & Close</span> }
+            label = { <span>Step 2<br/>Listen</span> }
           >
             <Pane>
     
-              <div className="sg observe"><clip>My experience was ..."</clip></div>
+              <div className="sg black">{myConstClass.tab2_msg1}</div>
 
-              <div className="sg group"><clip>I agree with you about ... and 
-              about ... and about .... What do you think of ...</clip> 
-              <br/>(taxonomy/value: tit-for-tat listening/fairness)
+              <div className="sg darkpurple">{myConstClass.tab2_msg2}
               </div>
-
-              <div id="cbb-yesAnd" title="Yes. And..." className="sg agree">Say what is important
-                to you, your values, your heart.
-        For example: <clip>I want to live in a world where </clip> people who
-      work a full time job can raise a family. Agreeing on a policy like
-      minimum wage comes much, much later.
-              </div>
-              <div className="sg personal"><clip>What do you think of this?</clip>
-              invites someone to converse, rather than feel like they are
-              attacking you if they see something else.</div>
 
 
             </Pane>
@@ -285,25 +276,20 @@ export default class CbbModal extends Component {
 
 
           <Card
-            label = { <span>Group<br/> & Frame</span> }
+            label = { <span>Step 3<br/>Reflect</span> }
           >
             <Pane>
     
-              <div className="sg observe ask"><clip>My experience was ... What was yours?"</clip></div>
+              <div className="sg black">{myConstClass.tab3_msg1}</div>
 
-              <div className="sg gladiator"><clip>I don't see this as left vs.
-          right,
-          but as ordinary people vs. those who'd take our democracy away.</clip>              </div>
+              <div className="sg darkpurple">{myConstClass.tab3_msg2}              </div>
 
-              <div className="sg group gladiator"><clip>Yes, I see parts of 
-              this issue differently, but would be happy to work with you
-              and focus on corruption — which I think is widespread in DC 
-              across left and right, and not widespread among ordinary liberals
-              or conservatives</clip></div>
+              <div className="sg darkblue">{myConstClass.tab3_msg3}</div>
 
-              <div className="sg group"><clip>I agree with you about ... and 
-              about ... and about .... What do you think of ...</clip> 
-              <br/>(taxonomy/value: tit-for-tat listening/fairness)
+              <div className="sg cerulean">{myConstClass.tab3_msg4}  
+              </div>
+
+              <div className="sg green">{myConstClass.tab3_msg5}  
               </div>
 
             </Pane>
@@ -315,34 +301,20 @@ export default class CbbModal extends Component {
 
 
           <Card
-            label = { <span>Conflict<br/> & Trolls</span> }
+            label = { <span>Step 4<br/>Agree</span> }
           >
             <Pane>
-              <div id="cbb-1" className="sg group gladiator"><clip>I feel like we here
-                are gladiators,
-                decent people fighting while the emperor laughs in the stands.</clip>
+              <div id="cbb-1" className="sg black">{myConstClass.tab4_msg1} 
               </div>
-							<div id="cbb-1" className="sg group gladiator">
-								<clip>We don't do that here.</clip> Set boundaries while 
-								welcoming people to be on the inside, to be part of "we." 
-								<a href=
-								"http://thagomizer.com/blog/2017/09/29/we-don-t-do-that-here.html"
-								>more</a>
+							<div id="cbb-1" className="sg darkpurple">
+								{myConstClass.tab4_msg2} 
 							</div>
-              <div id="cbb-1" className="sg group gladiator"><clip>I doubt this
-          view represents most ...</clip></div>
-              <div id="cbb-1" className="sg group gladiator">
-                Echo messengers: find people your audience will respect who
-                are saying the right thing, and share their voice.
-                Nothing to cut and paste here: just share, 
-                the less you say the better.
+              <div id="cbb-1" className="sg darkblue">{myConstClass.tab4_msg3}</div>
+              <div id="cbb-1" className="sg cerulean">
+                {myConstClass.tab4_msg4} 
               </div>
-              <div id="cbb-1" className="sg group gladiator">
-                Keep it personal: Avoid saying <noclip>All you <em>Group X</em> are rude.</noclip> 
-                If someone is rude to you, set your boundaries one-to-one:
-      <clip>I'm trying to listen to what you have
-                to say, and I don't see you returning the favor. I'm hoping to connect with you,
-                even if our politics are different, but this feels disrespectfulto me. What are you hoping to get out of this conversation?</clip>
+              <div id="cbb-1" className="sg green">
+                {myConstClass.tab4_msg5} 
               </div>
             </Pane>
             <Info>
@@ -355,82 +327,76 @@ export default class CbbModal extends Component {
           </Card>
 
           <Card
-            id="smg"
-            className="image-tab-label"
-            title = "Social Media Guide"
-            label = { <span>Cognitive Politics Social Media Guide</span> }
+            label = { <span>Step 5<br/>Explain</span> }
           >
             <Pane>
-              <div title="Social Media Guide" 
-                 className="sg gothere bottom whitetext">
-                Explore the <a href="http://cognitivepolitics.org/social-media-guide-progressives">Social Media Guide for Progressives</a>
+              <div id="cbb-1" className="sg black">{myConstClass.tab5_msg1} 
+              </div>
+              <div id="cbb-1" className="sg darkpurple">
+                {myConstClass.tab5_msg2} 
+              </div>
+              <div id="cbb-1" className="sg darkblue">{myConstClass.tab5_msg3}</div>
+              <div id="cbb-1" className="sg cerulean">
+                {myConstClass.tab5_msg4} 
+              </div>
+              <div id="cbb-1" className="sg green">
+                {myConstClass.tab5_msg5} 
+              </div>
+              <div id="cbb-1" className="sg darkpurple">
+                {myConstClass.tab5_msg6} 
               </div>
             </Pane>
             <Info>
+                  "I statements" with strong beliefs are powerful in reasonable
+            conversations — share your heart. But when
+            facing hate, make it everyone together
+            against the hate. Don't let trolls represent 50% of the country
+            while you represent the other 50%.
             </Info>   
           </Card>
 
 
-          <Card 
-            id="rcc"
-            className="image-tab-label"
-            title="Radical Civility Cycle"
-            label = { <span>Radical Civility Cycle</span> }
-          >
-            <Pane>
-              <div className="sg gothere bottom whitetext">
-                Join this Radical Civility practice community:<br/><a href="https://www.facebook.com/groups/smartly/">Social Media Approaches for Respect and Tolerance</a>.
-              </div>
-            </Pane>
-            <Info>
-            </Info>   
-          </Card>
-
+        
 
           <Card
-            id="cp"
-            className="image-tab-label"
-            title = "Cognitive Politics Steps"
-            label = { <span>Cognitive Politics Social Media Guide</span> }
+            label = { <span>Step 6<br/>Share</span> }
           >
             <Pane>
-              <div title="" className="sg question">
-                1. Find a way to get people talking so they feel heard.
-                Ask them questions that are curious rather than loaded.
-                <info>Going sideways from the main debate is often helpful;
-                seek out details. Use Moral Foundation Theory to 
-                as a place to find interesting questions about values.</info>
-              </div>
-              <div title="steelman" className="sg agree">
-                2. A variant of active listening merged with 
-                agreeing on everything
-                you can, and steelman their point of view.
-                <taxonomy>Active Listening: Steelman</taxonomy>
-              </div>
-              <div title="" className="sg observe">
-                3. In your head, backtrack from your conclusion, 
-                and your metaphor: then
-                share the observation and value that inexorably lead to
-                your conclusion. "I statements" are great,
-                and make it easier for people to listen without having to
-                agree right away. <info> It's good to know
-                your frame, and know your conclusion, but don't state your
-                conclusion: share the observations and values that led you
-                to your conclusion, and stop there.</info>
-              </div>
-              <div title="" className="sg personal">
-                4. End with a request. Even if it isn't met, it's a good way
-                to wrap up the conversation: <clip>I hope we can keep
-                talking.</clip> <clip>I'd love to watch this video ...
-                with you</clip>
+              <div id="cbb-1" className="sg black">Coming soon: share saved articles and links!
               </div>
             </Pane>
             <Info>
+                  "I statements" with strong beliefs are powerful in reasonable
+            conversations — share your heart. But when
+            facing hate, make it everyone together
+            against the hate. Don't let trolls represent 50% of the country
+            while you represent the other 50%.
+            </Info>   
+          </Card>
+
+          <Card
+            label = { <span>...</span> }
+          >
+            <Pane>
+              <div id="cbb-1" className="sg darkpurple">Like this? Join SMART Politics!
+              </div>
+              <div id="cbb-1" className="sg darkblue">Active listening / Steelman
+              </div>
+              <div id="cbb-1" className="sg cerulean">Self-herding kittens: a DIY guide for progressive social media
+              </div>
+            </Pane>
+            <Info>
+                  "I statements" with strong beliefs are powerful in reasonable
+            conversations — share your heart. But when
+            facing hate, make it everyone together
+            against the hate. Don't let trolls represent 50% of the country
+            while you represent the other 50%.
             </Info>   
           </Card>
 
 
 
+{/**
           <Card
             id="adv"
             className="image-tab-label-tiny"
@@ -449,6 +415,7 @@ export default class CbbModal extends Component {
             <Info>
             </Info>
           </Card>
+          **/}
 
 
         </Tabs>
