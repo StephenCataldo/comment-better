@@ -42,10 +42,10 @@ const actionsMap = {
     // "Take a Knee" is a topic .. with spaces. This right, and ok?
     /*
     var g = {};
-g[] = someValueArray;
-myArray.push(obj);
-*/
-/** state.guides is an object. Must replace/assign it, not edit it! **/
+    g[] = someValueArray;
+    myArray.push(obj);
+    */
+    /** state.guides is an object. Must replace/assign it, not edit it! **/
     let key = action.webPageByTopic.topic;
     let newGuides = Object.assign({}, state["guides"], {
       [key] : action.webPageByTopic.webPage
@@ -55,10 +55,10 @@ myArray.push(obj);
       guides: newGuides
     });
     let newState = Object.assign({}, state);
-console.log(action.webPageByTopic);
-console.log(newState);
-console.log(action.webPageByTopic.topic);
-//console.log(action.webPageByTopic.webPage);
+    console.log(action.webPageByTopic);
+    console.log(newState);
+    console.log(action.webPageByTopic.topic);
+    //console.log(action.webPageByTopic.webPage);
     //newState.guides[action.webPageByTopic.topic] = action.webPageByTopic.webPage;
     newState.guides.foo = "bar";
     return newState;

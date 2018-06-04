@@ -10,9 +10,9 @@ const hotScript = 'webpack-hot-middleware/client?path=__webpack_hmr&dynamicPubli
 const baseDevConfig = () => ({
   devtool: 'eval-cheap-module-source-map',
   entry: {
-    todoapp: [customPath, hotScript, path.join(__dirname, '../chrome/extension/inject')],
+    inject: [customPath, hotScript, path.join(__dirname, '../chrome/extension/inject')],
     background: [customPath, hotScript, path.join(__dirname, '../chrome/extension/background')],
-    popup: [customPath, hotScript, path.join(__dirname, '../chrome/extension/injectPopup.js')],
+    bullhorn: [customPath, path.join(__dirname, '../chrome/extension/bullhorn')],
   },
   devMiddleware: {
     publicPath: `http://${host}:${port}/js`,

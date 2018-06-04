@@ -16,7 +16,6 @@ console.log("Hello Activists");
  *  loads more text!
  */
 
-
 var windw = window.window_name;
 if ( document.readyState == "complete" || document.readyState == "interactive" ) {
   injectActions();
@@ -35,7 +34,7 @@ function injectActions() {
    **/
   // Don't Inject the extension's own popup
   if ( document.baseURI == "chrome-extension://jgokkghkbpkjknmigodgbiefmnkbplil/popup.html" ) { return; }
-
+  
   const injectDOM = document.createElement('div');
   injectDOM.className = 'inject-react-guide';
   injectDOM.style.textAlign = 'center';
@@ -74,11 +73,11 @@ class InjectApp extends Component {
   };
   */
 
-// Seems like store = createStore is missing. Here also Root and App which work.
-// Note: http://www.thegreatcodeadventure.com/react-redux-tutorial-part-iii-async-redux/
-//  encourages creating the store here... it seems to be just props here, or has
-//  createStore been called ... and then having the store call the functions to load
-//  data. store.dispatch(loadCats());
+  // Seems like store = createStore is missing. Here also Root and App which work.
+  // Note: http://www.thegreatcodeadventure.com/react-redux-tutorial-part-iii-async-redux/
+  //  encourages creating the store here... it seems to be just props here, or has
+  //  createStore been called ... and then having the store call the functions to load
+  //  data. store.dispatch(loadCats());
 
 
   static propTypes = {

@@ -7,7 +7,8 @@ const customPath = path.join(__dirname, './customPublicPath');
 module.exports = {
   entry: {
     background: [customPath, path.join(__dirname, '../chrome/extension/background')],
-    inject: [customPath, path.join(__dirname, '../chrome/extension/inject')]
+    inject: [customPath, path.join(__dirname, '../chrome/extension/inject')],
+    bullhorn: [customPath, path.join(__dirname, '../chrome/extension/bullhorn')],
   },
   output: {
     path: path.join(__dirname, '../build/js'),
