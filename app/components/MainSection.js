@@ -54,17 +54,17 @@ ReactDOM.findDOMNode(<instance-of-outermost-component>).getElementsByClassName('
   }
 
   render() {
-console.log("Main Section renderi just begun");
+    console.log("Main Section renderi just begun");
     const { todos, actions } = this.props;
 
     //The todo examples used filters ... that might be worth
     //looking at in future iteration:
     //const filteredTodos = todos.filter(TODO_FILTERS[filter]);
-console.log("Main Section render begun");
+    console.log("Main Section render begun");
 
     let topic = Object.keys(todos.recentTopics[0])[0]; 
-console.log("topics loaded");
-console.log(topic);
+    console.log("topics loaded");
+    console.log(topic);
     let recentGuide = todos.guides[topic];
     return (
       <div id="start-guide" className="start">

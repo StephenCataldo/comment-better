@@ -16,7 +16,6 @@ console.log("Hello Activists");
  *  loads more text!
  */
 
-
 var windw = window.window_name;
 if ( document.readyState == "complete" || document.readyState == "interactive" ) {
   injectActions();
@@ -35,7 +34,7 @@ function injectActions() {
    **/
   // Don't Inject the extension's own popup
   if ( document.baseURI == "chrome-extension://jgokkghkbpkjknmigodgbiefmnkbplil/popup.html" ) { return; }
-
+  
   const injectDOM = document.createElement('div');
   injectDOM.className = 'inject-react-guide';
   injectDOM.style.textAlign = 'center';
@@ -74,11 +73,11 @@ class InjectApp extends Component {
   };
   */
 
-// Seems like store = createStore is missing. Here also Root and App which work.
-// Note: http://www.thegreatcodeadventure.com/react-redux-tutorial-part-iii-async-redux/
-//  encourages creating the store here... it seems to be just props here, or has
-//  createStore been called ... and then having the store call the functions to load
-//  data. store.dispatch(loadCats());
+  // Seems like store = createStore is missing. Here also Root and App which work.
+  // Note: http://www.thegreatcodeadventure.com/react-redux-tutorial-part-iii-async-redux/
+  //  encourages creating the store here... it seems to be just props here, or has
+  //  createStore been called ... and then having the store call the functions to load
+  //  data. store.dispatch(loadCats());
 
 
   static propTypes = {
@@ -462,9 +461,7 @@ function injectCBB(domElement) {
     e.preventDefault();
     e.stopPropagation();
 
-    /** Position the modal
-     * .position() is relative to parent, .offset() to document. 
-     **/ 
+    // Copy text to clipboard on click
     let btn = this;
     let modal =  document.getElementById('cbModal');  /* or global var? */
     if (modal) {
@@ -496,12 +493,13 @@ function injectCBB(domElement) {
         // Under 
         let commentHeight = 32;
         $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-200});
-      } else { // modal goes over, the normal expected behavior
+      } else { 
+        // modal goes over, the normal expected behavior
         $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-200}); 
       }
 
 
-      //  Toggle the modal ( Why not show() ? )
+      //  Toggle the modal
       if (modal && modal.style.display != "block") {
         modal.style.display = "block";
       } else {
@@ -522,16 +520,12 @@ function injectCBB(domElement) {
   // overflow actually matters for something.
   //$('.UFICommentAttachmentButtons').parents('_3ccb').append(cbModal);
 
-
-  /** Add event handling to the button so it opens the modal **/
   // Review where modal is applied.
   var modal = document.getElementById('cbModal');
-
   
   // The button that opens the modal  @ToDo/look at: byId?
   var btn = document.getElementById("cbButton");
 
-  // @ToDo ... probably should close if click btn again
   // window is apparently null?
   if ( window == null ) { console.log("Hey, why is window null?????? ID: " + id); }
   window.onclick = function(event) {

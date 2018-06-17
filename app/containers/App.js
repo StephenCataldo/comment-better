@@ -27,7 +27,7 @@ export default class App extends Component {
 
   render() {
     const { todos, actions } = this.props;
-console.log(this.props);
+    console.log(this.props);
     // @Hack: css included in hacky way. Intending to rewrite all the styles
     // to use React anyway.
     //
@@ -40,8 +40,8 @@ console.log(this.props);
     // plan to settle on a structure, and have the web resources be provided
     // with more consistent structure, so that react can absorb them as data
     // instead of as html, and produce React style output.
-console.log(todos);
-console.log(actions.addTodo);
+    console.log(todos);
+    console.log(actions.addTodo);
     return (
       <div className={style.normal}>
         <script type="text/javascript" src="../hkpgsm/pop.js" ></script>
