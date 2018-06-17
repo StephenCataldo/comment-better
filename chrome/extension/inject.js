@@ -506,6 +506,8 @@ function injectCBB(domElement) {
         $(modal).offset({ top: 0, left: 0});
         modal.style.display = "none";
       }
+    } else { // modal was not found, something wrong
+      console.log("Error in inject.hs. let modal =  document.getElementById('cbModal') came up null."); 
     }
   });
 
