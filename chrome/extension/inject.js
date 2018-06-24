@@ -4,35 +4,24 @@ import { Provider } from 'react-redux';
 //import { loadResourcesThisPage } from './LoadResourcesThisPage';
 import ResourcesThisPage from './ResourcesThisPage';
 
-console.log("Hello Activists");
-
-
-/** 1. Initiate the process, firing injectActions function, which inject InjectApp
- *  document.readyState can be odd for chrome extensions,
- *  sometimes being done before the addEventListener fires.
- *  Reread: https://stackoverflow.com/questions/588040/window-onload-vs-document-onload.
- *  @ToDo: Refactor, I think this sometimes runs twice, nbd.
- *  @ToDo: this won't work well on Facebook, where the document loads, and then javascript
- *  loads more text!
- */
-
-var windw = window.window_name;
-if ( document.readyState == "complete" || document.readyState == "interactive" ) {
-  injectActions();
-} else {
-  window.addEventListener('load', injectActions());
-}
+/**
+ * This injects two scripts:
+ * 1) one injects a Reader that looks for ResourcesThisPage
+ * 2) injects the CBButton & CbbModal
+ * High level: config these to allow multiple Resource providers or none.
+ */ 
 
 
 
-
-function injectActions() {
+function injectReader() {
+  console.log("2. injectReader firing up.");
   /** When window loads, search it for keyterms, then turn them into
    *  links class="keyterm" and set up the data store
    *  document readyState is complete
    *  window readyState is undefined
    **/
   // Don't Inject the extension's own popup
+  // @ToDo, get the correct id.
   if ( document.baseURI == "chrome-extension://jgokkghkbpkjknmigodgbiefmnkbplil/popup.html" ) { return; }
   
   const injectDOM = document.createElement('div');
@@ -49,9 +38,8 @@ function injectActions() {
   chrome.storage.local.get('state', (obj) => {
     const { state } = obj;
     const initialState = JSON.parse(state || '{}');
-
     const createStore = require('../../app/store/configureStore');
-     /***/
+ 
     render(<InjectApp store={createStore(initialState)} />, injectDOM);
   });
 }
@@ -96,7 +84,22 @@ class InjectApp extends Component {
   }
 }
 
+/** 1. Whether the page has already loaded, or when it loads,
+ *  run injectReader to inject our script
+ *
+ *  document.readyState can be odd for chrome extensions,
+ *  sometimes being done before the addEventListener fires.
+ *  Reread: https://stackoverflow.com/questions/588040/window-onload-vs-document-onload.
+ */ 
+console.log("1. Hello Activists. ");
 
+if ( document.readyState == "complete" || document.readyState == "interactive" ) {
+  //console.log("please note: 1A fired"); // Seen this.
+  injectReader();
+} else {
+  console.log("please note: 1B fired. This wasn't seen before - please note!");
+  window.addEventListener('load', injectReader());
+}
 
 /*--------- CBB Below Here, whenever possible ----------*/
 import CbbModal from './CbbModal';
@@ -163,7 +166,7 @@ function initialInjectCBBs() {
   /*** B1. Run injectCBB() when document loads - or now, if it already has. ***/
   // Reread: https://stackoverflow.com/questions/588040/window-onload-vs-document-onload. Below is a hack, sometimes document, sometimes window, expected to
   // sometimes run twice (not a disaster). Document loaded should be sufficient
-  // for the text-oriented, DOM-oriented injectActions.
+  // for the text-oriented, DOM-oriented injectReader.
   console.log("B1. run injectCBB on the whole document, injecting the button on every comment box that has already loaded");
 
   if ( document.readyState == "complete" ||
@@ -544,6 +547,8 @@ function injectCBB(domElement) {
     }
   }
 } // done injectCBB into document or new mutation
+
+
 
 
 
