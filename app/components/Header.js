@@ -1,7 +1,14 @@
+/** The navbar for the bullhorn **/
+
 import React, { PropTypes, Component } from 'react';
 import style from './Header.css';
 
-//import TodoTextInput from './TodoTextInput';
+/**
+ *  render sends the todos.recentTopics to function TopicMenu(props) 
+ *  which creates a listItems of links encapsulated in empty <a> anchors
+ *
+ */  
+
 
 
   function TopicMenu(props) {
@@ -74,9 +81,6 @@ export default class Header extends Component {
     );
     //topics[0] = Object.keys(todos.recentTopics[0])[0]; 
 
-        // are these gauranteed to be in order, or not?
-// <TopicMenu topics={todos.recentTopics} />,
-
     return (
       <header>
         <TopicMenu topics={todos.recentTopics} />
@@ -84,11 +88,3 @@ export default class Header extends Component {
     );
   }
 }
-/*
-        <h1>todos</h1>
-        <TodoTextInput
-          newTodo
-          onSave={this.handleSave}
-          placeholder="What needs to be done?"
-        />
-*/
