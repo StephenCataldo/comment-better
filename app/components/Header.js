@@ -5,7 +5,10 @@ import style from './Header.css';
 
 /**
  *  render sends the todos.recentTopics to function TopicMenu(props) 
- *  which creates a listItems of links encapsulated in empty <a> anchors
+ *  which creates a listItems of links encapsulated in empty <a> anchors.
+ *  The todos.recentTopics might be repetive.
+ *
+ *  Currently, clicks don't seem to be handled? <a>nothing</a>?
  *
  */  
 

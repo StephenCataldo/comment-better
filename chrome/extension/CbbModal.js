@@ -26,6 +26,7 @@ const Tabs = React.createClass({
   },
   handleClick(index, event) {
     console.log("Label clicked in React:CbbModal:Tabs, index: " + index);
+    /* Wait, this looks like clipboard stuff? Who what? */
     event.stopPropagation();
     event.preventDefault();
     Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
