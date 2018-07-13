@@ -183,19 +183,30 @@ message each time it needs to.
 
 It should be working!
 
-### OMG So much code.
+### Developers: Code and Function overview
 
-Before starting, note that /dev and /build are output directories, created
-by npm commandsr; don't use them as source files.
+/dev and 
+/build 
+are the output directories, 
+created by npm commands; don't use them as source files.
 
-/chrome creates the injected script: the comment better button is nothing else
-  so far.  chrome/README_key-files.txt has the key files, start there!
 
-/chrome also contains code to create a version of this that can operate on
-  a website, right now Drupal sites, injecting the button into your own blog.
+Injection scripts go in
+/chrome 
+The comment better button is all there, as well as the part of the bullhorn
+that reads your browser searching for keywords to provide advice on topics.  
+The CBB (all of it) and the Bullhorn's injection script start at 
+chrome/extension/inject.js
+chrome/README_key-files.txt has the key files for the CBB, start there!
+
 /app creates the app, which lives on its own - not injected into the web pages.
   Much of the bullhorn project lives there: when you click the bullhorn,
-  it opens this app. An injected script (so, in /chrome) prepares the script.
+  it opens this app.
+
+Some websites might provide the CBB to their users, rather than having
+it injected via a chrome extension. That code is also in
+/chrome also contains code to create a version of this that can operate on
+  a website, right now Drupal sites, injecting the button into your own blog.
 
 
 
