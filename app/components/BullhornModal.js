@@ -12,6 +12,17 @@ import style from './Header.css';
  *
  */  
 
+const AllTabs = ({guides}) => (
+  <div>
+    {guides.map(guide => (
+      <Pane label={guide.topic}>
+        {guide.guide}       
+      </Pane>
+    ))}
+  </div>
+); 
+
+
 /** Tabs I'm copying from CbbModal... if no changes, then refactor DRY **/
 const Tabs = React.createClass({
   displayName: 'Tabs',
@@ -26,22 +37,10 @@ const Tabs = React.createClass({
     };
   },
   handleClick(index, event) {
-    console.log("Label clicked in React:CbbModal:Tabs, index: " + index);
+    console.log("Label clicked in React:BullhornModal:Tabs, index: " + index);
     event.stopPropagation();
     event.preventDefault();
-    Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
-      div.onclick = function() {
-        document.execCommand("copy")
-      }
-      div.addEventListener("copy", function(e) {
-        e.preventDefault()
-        if (e.clipboardData) {
-          e.clipboardData.setData('text/plain', e.target.innerText);
-        } else if (window.clipboardData) {
-          window.clipboardData.setData('Text', e.target.innerText);
-        }
-      })
-    })
+    
     this.setState({
       selected: index
     });
@@ -90,10 +89,20 @@ const Tabs = React.createClass({
 });
 // end Tabs
 
+const Pane = React.createClass({
+  displayName: 'Card',
+  render() {
+    return (
+      <div className={this.props.id}>
+        {this.props.children}
+      </div>
+    );
+  }
+});
 
 
 /** class TopicCard imitates the Card from CBB **/
-class TopicCard extends React.Component {
+class TopicCardX extends React.Component {
   render() {
     const topic = this.props.topic;
     const content = this.props.content;
@@ -179,10 +188,14 @@ export default class BullhornModal extends Component {
     const { todos } = this.props;
     //let topic = Object.keys(todos.recentTopics[0])[0];
     //let topicGuide = todos.guides[topic];
-    const topics = todos.recentTopics.slice(0, 4).map(
+    var topics = todos.recentTopics.slice(0, 4).map(
       (t) =>
       t.keys
     );
+
+    
+
+
     //topics[0] = Object.keys(todos.recentTopics[0])[0]; 
 
     /** Generate the html here. 
@@ -207,19 +220,57 @@ export default class BullhornModal extends Component {
     );
     */
 
+    /* PLAN
+const listItems = numbers.map((number) =>
+  <li>{number}</li>
+);
+
+So, map the keys to returning a Pane including it's label
+*/
+
+
+    //let topic = topics[0];
+    //let topicGuide = todos.guides['DACA']; // prints the html when I do this.
+    //topics[0] = Object.keys(todos.recentTopics[0])[0];
+    /*
+    topics = todos.recentTopics[0].keys; // should be one key in an array
+    var guides = [
+      {topic: 'DACA',panel:'Say something about DACA'},
+      {topic: 'Kneed',panel:'Say something about Knee'}
+    ]
+    */
+    // recentTopics is an array of {key:url} from which we want the key only
+    /*** This works if we don't have duplicates!!! 
+    guides = todos.recentTopics.map(function(element) {
+      let topic = Object.keys(element)[0];
+      return {topic: topic,panel: todos.guides[topic] }
+    });
+    /***/
+    var duplicate = {};
+    var guides = [];
+    for (let k in todos.recentTopics) {
+      let element = todos.recentTopics[k];
+      let topic = Object.keys(element)[0];
+
+      if (duplicate[topic] === true) {
+      } else {
+        duplicate[topic] = true;
+        guides.push( {topic: topic,panel: todos.guides[topic] } );
+      }
+    }
+
     return (
       <Tabs selected={0}>
-        <TopicCard
-          label = "TopicA"
-        > 
-          Something plain here.
-          <div>Somethigns goes here
-          </div>
-        </TopicCard>
+        {guides.map(guide => (
+          <Pane label={guide.topic}>
+            {guide.panel}
+          </Pane>
+        ))}
       </Tabs>
     );
 
 
   }
+
 
 }
