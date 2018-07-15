@@ -1,7 +1,16 @@
 /** The navbar for the bullhorn **/
 
+// @ToDo: probably switch the menu design from original nav-list
+// to something more like the cbbModal uses, 
+// and componentDidMount, and everything like .see3, all build a better
+// API
+  
+
+
 import React, { PropTypes, Component } from 'react';
 import style from './Header.css';
+  // @ToDo: restyle. Lots of old style to be cut out of those files
+  // which were built to other design and specs
 
 /**
  *  render sends the todos.recentTopics to function TopicMenu(props) 
@@ -24,6 +33,7 @@ const AllTabs = ({guides}) => (
 
 
 /** Tabs I'm copying from CbbModal... if no changes, then refactor DRY **/
+/* This is basically a cut and paste. @ToDo */
 const Tabs = React.createClass({
   displayName: 'Tabs',
   getDefaultProps() {
@@ -37,7 +47,6 @@ const Tabs = React.createClass({
     };
   },
   handleClick(index, event) {
-    console.log("Label clicked in React:BullhornModal:Tabs, index: " + index);
     event.stopPropagation();
     event.preventDefault();
     
@@ -66,10 +75,21 @@ const Tabs = React.createClass({
       );
     }
     return (
+      <nav>
+        <ul className="tabs__labels nav-list">
+          {this.props.children.map(labels.bind(this))}
+        </ul>
+      </nav>
+    );
+    /* non-meddled version:
+    return (
       <ul className="tabs__labels">
         {this.props.children.map(labels.bind(this))}
       </ul>
     );
+    */
+
+
   },
   _renderContent() {
     return (
@@ -101,67 +121,6 @@ const Pane = React.createClass({
 });
 
 
-/** class TopicCard imitates the Card from CBB **/
-class TopicCardX extends React.Component {
-  render() {
-    const topic = this.props.topic;
-    const content = this.props.content;
-    return (
-      <Card label = { topic } >
-        <div className="Pane">
-          {content}
-        </div>
-      </Card>
-    );
-  }
-}
-
-
-
-
-/*
-
-
-  function TopicMenu(props) {
-    const topicActive = Object.keys(props.topics[0]);
-    // Major problems here: sometimes bad keys seem to sneak into the
-    // store, usually at higher-numbered parts of the array.
-    const topicsInactive = props.topics.slice(1,5); // ignore old???
-
-    const activeItem = 
-      <li className="active" style={{color: 'red'}}>
-        <a>{topicActive}</a>
-      </li>;
-
-    //Don't use map, because want only unique topics?
-    const listItems = [];
-//                  =
-//     topicsInactive.map((t) =>
-//      <li>
-//        {Object.keys(t)}
-//      </li>
-//    );
-//
-    let alreadyT = { [topicActive]: true};
-    for(var i = 0; listItems.length < 5 && i < topicsInactive.length; i++) {
-      let key = Object.keys(topicsInactive[i])[0];
-      if ( !alreadyT[key] ) {
-        alreadyT[key] = true;
-        listItems.push(
-          <li><a>{key}</a></li>
-        );
-      }
-    }
-
-
-    return (
-      <nav>
-        <div className="home"><a href="http://cognitivepolitics.org/social-media-guide-progressives/">Home</a></div>
-        <ul className="nav-list">{activeItem}{listItems}</ul>
-      </nav>  
-    );
-  }
-*/
 
 
 export default class BullhornModal extends Component {
@@ -174,6 +133,34 @@ export default class BullhornModal extends Component {
     todos: PropTypes.object.isRequired, // Object, object, array???
   };
 
+
+  /* @ToDo: the .see3 and similar classes set at the host source
+   * are not coming through! */
+  componentDidMount() {
+    $(".see3").css("display", "none");
+    //$(".see3x").css("display", "block");
+
+    // Temporary crap-import of existing jQuery code already written
+    $(".see1").on( "click", function() {
+      $(".see3").css("display", "none");
+      $(".see3x").css("display", "block");
+      $(this).get(0).scrollIntoView();
+      $(this).find("div.see3:last").get(0).scrollIntoView();
+      //$(this).scrollTop(0);
+      $( this ).children(".see3x").css("display", "none");
+      $( this ).children("h2").css("display", "block");
+      $( this ).find("div.see3").css("display", "block");
+    });
+    $(".see1XX").bind( "click", function() {
+      console.log( $( this ).children("see3").html );
+      $( this ).children("see3").dialog();
+      // modal = set to true?
+    });
+
+
+  }
+
+
   /*
   handleSave = (text) => {
     if (text.length !== 0) {
@@ -184,18 +171,7 @@ export default class BullhornModal extends Component {
 
   render() {
 
-    /* note: pulling same values from store as MainSection */
     const { todos } = this.props;
-    //let topic = Object.keys(todos.recentTopics[0])[0];
-    //let topicGuide = todos.guides[topic];
-    var topics = todos.recentTopics.slice(0, 4).map(
-      (t) =>
-      t.keys
-    );
-
-    
-
-
     //topics[0] = Object.keys(todos.recentTopics[0])[0]; 
 
     /** Generate the html here. 
@@ -208,28 +184,6 @@ export default class BullhornModal extends Component {
     // Try this example of iterating over array:
     // https://thinkster.io/tutorials/iterating-and-rendering-loops-in-react
 /*
-    return (
-      <header>
-        {this.props.todos.map((topic, i) => {
-          console.log("Render this topic: " + topic);
-          return (<Answer key={i} answer={answer} />)
-        })}
-    ) 
-        <TopicMenu topics={todos.recentTopics} />
-      </header>
-    );
-    */
-
-    /* PLAN
-const listItems = numbers.map((number) =>
-  <li>{number}</li>
-);
-
-So, map the keys to returning a Pane including it's label
-*/
-
-
-    //let topic = topics[0];
     //let topicGuide = todos.guides['DACA']; // prints the html when I do this.
     //topics[0] = Object.keys(todos.recentTopics[0])[0];
     /*
@@ -259,11 +213,20 @@ So, map the keys to returning a Pane including it's label
       }
     }
 
+
+
+
+    /** @ToDo The source materials are produced as html. This is not safe,
+     * and should be *redesigned* in some standard way, then downloaded
+     * as data rather than html. All source libraries will need to follow
+     * that not-yet-existant API **/
+
+    /** @ToDo: style.main was what?   id="start-guide" className="start" **/
     return (
-      <Tabs selected={0}>
+      <Tabs selected={0}  id="start-guide" className="start">
         {guides.map(guide => (
-          <Pane label={guide.topic}>
-            {guide.panel}
+          <Pane label={guide.topic} className={style.main}>
+            <div dangerouslySetInnerHTML={{__html: guide.panel}} />
           </Pane>
         ))}
       </Tabs>

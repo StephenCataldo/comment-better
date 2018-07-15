@@ -53,7 +53,6 @@ export default class App extends Component {
       <div className={style.normal}>
         <script type="text/javascript" src="../hkpgsm/pop.js" ></script>
         <link rel="stylesheet" type="text/css" href="http://cognitivepolitics.org/hkpgsm/examples/examples-pop2.css"/>
-        Bullhorn Modal will go here.
         <BullhornModal todos={todos}/>
 
         <Header todos={todos} addTodo={actions.addTodo} />

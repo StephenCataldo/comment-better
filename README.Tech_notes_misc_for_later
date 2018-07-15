@@ -1,2 +1,9 @@
 
 jQuery: $().once   might be useful for page load.
+
+
+Learning about Developing Tech Extensions:
+
+View the source of the popup (is that the right word?)a
+Chrome extension source viewer
+https://chrome.google.com/webstore/detail/chrome-extension-source-v/jifpbeccnghkjeaalbbjmodiffmgedin

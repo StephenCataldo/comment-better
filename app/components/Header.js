@@ -1,7 +1,7 @@
 /** The navbar for the bullhorn **/
 
 import React, { PropTypes, Component } from 'react';
-import style from './Header.css';
+//import style from './Header.css';
 
 /**
  *  render sends the todos.recentTopics to function TopicMenu(props) 
@@ -64,11 +64,6 @@ export default class Header extends Component {
     addTodo: PropTypes.func.isRequired
   };
 
-  handleSave = (text) => {
-    if (text.length !== 0) {
-      this.props.addTodo(text);
-    }
-  };
   render() {
 
     /* note: pulling same values from store as MainSection */
