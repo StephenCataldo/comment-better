@@ -14,7 +14,7 @@ import ResourcesThisPage from './ResourcesThisPage';
 
 
 function injectReader() {
-  console.log("2. injectReader firing up.");
+  console.log("2. bullhorn's injectReader firing up.");
   /** When window loads, search it for keyterms, then turn them into
    *  links class="keyterm" and set up the data store
    *  document readyState is complete
@@ -53,13 +53,6 @@ class InjectApp extends Component {
     super(props);
     this.state = { isVisible: false };
   }
-
-  /*
-  buttonOnClick = () => {
-    this.setState({ isVisible: !this.state.isVisible });
-    console.log("toggling the window"); // have not seen this
-  };
-  */
 
   // Seems like store = createStore is missing. Here also Root and App which work.
   // Note: http://www.thegreatcodeadventure.com/react-redux-tutorial-part-iii-async-redux/
@@ -175,9 +168,9 @@ function initialInjectCBBs() {
     // @ToDo = how overdone is this effort - with mutationobserver running,
     // do we need to wait at all?
     (async () => {
-      console.log('a');
+      //console.log('load: injectCBB');
       injectCBB();
-      console.log('b');
+      //console.log('inject CBB has run');
     })()
 
   } else {
@@ -361,10 +354,10 @@ function injectCBB(domElement) {
   if (domElement != null) {
     target = domElement;
     color =  "#dff";
-    console.log("injectCBB: add buttons to what the MutationObserver found");
+    //console.log("injectCBB: add buttons to what the MutationObserver found");
 
   } else {
-    console.log("injectCBB: add buttons to initial html");
+    //console.log("injectCBB: add buttons to initial html");
   }
 
   /*** B3. Listen for reply buttons being clicked in the facebook nodes ***/
@@ -392,23 +385,24 @@ function injectCBB(domElement) {
     //
     // This isn't perfect. Ultimately need one button each box for
     // the main comment box, and also replying to threads.
-    // Also, after adding this code, for the first time I see
-    // "NOW IT HAS THIS CLASS, ABORT" below.
   let id = $(target).find('.UFIAddComment').prop('id');
-  console.log("The id of the .UFIAddComment section is:" + id);
+  //This works, uncomment if working on this system:
+  // console.log("The id of the .UFIAddComment section is:" + id);
   if (!id) {
-    console.log("++++++++++ UFIAddComment has no id. Was a reply button clicked? The target from which we were seeking the UFIAddComment was:");
+    // This has been seen in the first load, rather than mutationobserver
+    // loads.
+    console.log("IF EVER SEEN, TAKE A NOTE ++++++++++ UFIAddComment has no id. Was a reply button clicked? The target from which we were seeking the UFIAddComment was:");
     console.log($(target));
 
   } else if (idsComplete.indexOf(id) > -1) {
-    console.log("This post has already been processed, id: " + id);
+    console.log("IF EVER SEEN, TAKE A NOTE. This post has already been processed, id: " + id);
     return;
   } else {
     idsComplete.push(id);
-    console.log("This id was not in idsComplete. So push id to idsComplete, which is now:");
-    console.log(idsComplete);
+    // This happens often, so no more comments:
+    //console.log("This id was not in idsComplete. So push id to idsComplete, which is now:");
+    //console.log(idsComplete);
   }
-  console.log("New id added to list, so add the button for that id.");
 
 
   $(target).find('.UFICommentAttachmentButtons').css({

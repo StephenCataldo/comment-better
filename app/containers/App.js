@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import BullhornModal from  '../components/BullhornModal';
 import Header from '../components/Header';
 import MainSection from '../components/MainSection';
+
 import * as TodoActions from '../actions/todos';
 import style from './App.css';
 // npm install jquery bootstrap --save
@@ -42,10 +44,17 @@ export default class App extends Component {
     // instead of as html, and produce React style output.
     console.log(todos);
     console.log(actions.addTodo);
+
+    /** Header is the Tabs, MainSection seems to have all the MainSections.
+     * Tabbing doesn't actually work ... not sure if it did before other
+     * work was done on code? */
+
     return (
       <div className={style.normal}>
         <script type="text/javascript" src="../hkpgsm/pop.js" ></script>
         <link rel="stylesheet" type="text/css" href="http://cognitivepolitics.org/hkpgsm/examples/examples-pop2.css"/>
+        <BullhornModal todos={todos}/>
+
         <Header todos={todos} addTodo={actions.addTodo} />
         <MainSection todos={todos} actions={actions} />
       </div>

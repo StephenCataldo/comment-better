@@ -1,7 +1,17 @@
-import React, { PropTypes, Component } from 'react';
-import style from './Header.css';
+/** The navbar for the bullhorn **/
 
-//import TodoTextInput from './TodoTextInput';
+import React, { PropTypes, Component } from 'react';
+//import style from './Header.css';
+
+/**
+ *  render sends the todos.recentTopics to function TopicMenu(props) 
+ *  which creates a listItems of links encapsulated in empty <a> anchors.
+ *  The todos.recentTopics might be repetive.
+ *
+ *  Currently, clicks don't seem to be handled? <a>nothing</a>?
+ *
+ */  
+
 
 
   function TopicMenu(props) {
@@ -54,11 +64,6 @@ export default class Header extends Component {
     addTodo: PropTypes.func.isRequired
   };
 
-  handleSave = (text) => {
-    if (text.length !== 0) {
-      this.props.addTodo(text);
-    }
-  };
   render() {
 
     /* note: pulling same values from store as MainSection */
@@ -74,9 +79,6 @@ export default class Header extends Component {
     );
     //topics[0] = Object.keys(todos.recentTopics[0])[0]; 
 
-        // are these gauranteed to be in order, or not?
-// <TopicMenu topics={todos.recentTopics} />,
-
     return (
       <header>
         <TopicMenu topics={todos.recentTopics} />
@@ -84,11 +86,3 @@ export default class Header extends Component {
     );
   }
 }
-/*
-        <h1>todos</h1>
-        <TodoTextInput
-          newTodo
-          onSave={this.handleSave}
-          placeholder="What needs to be done?"
-        />
-*/

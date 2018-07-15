@@ -1,12 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import style from './MainSection.css';
-// I import css in the App that maybe go here instead? !!!
 
 export default class MainSection extends Component {
 
   static propTypes = {
     todos: PropTypes.object.isRequired, // todos.guides, todos.recentTopics
-    actions: PropTypes.object.isRequired
+    actions: PropTypes.object.isRequired // is actions a relic, unused?
   };
 
   constructor(props, context) {
