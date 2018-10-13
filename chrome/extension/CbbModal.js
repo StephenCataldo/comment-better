@@ -24,11 +24,16 @@ const Tabs = React.createClass({
       selected: this.props.selected
     };
   },
+  // stephen: I don't trust this code. Give serious review.
   handleClick(index, event) {
     console.log("Label clicked in React:CbbModal:Tabs, index: " + index);
     /* Wait, this looks like clipboard stuff? Who what? */
     event.stopPropagation();
     event.preventDefault();
+    // Indicate that copying has happened:
+
+
+    // Copying happens here:
     Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
       div.onclick = function() {
         document.execCommand("copy")
@@ -36,8 +41,10 @@ const Tabs = React.createClass({
       div.addEventListener("copy", function(e) {
         e.preventDefault()
         if (e.clipboardData) {
+          console.log("A-setData clicked"); // not seeing this
           e.clipboardData.setData('text/plain', e.target.innerText);
         } else if (window.clipboardData) {
+          console.log("B-setData clicked"); // not seeing this
           window.clipboardData.setData('Text', e.target.innerText);
         }
       })
