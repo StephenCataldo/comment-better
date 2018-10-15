@@ -124,9 +124,11 @@ var idsComplete = [];
 
 console.log("CommentBetterButton Initiate!!!");
 console.log(window.location.hostname);
-loadModal(); // A
-initialInjectCBBs(); // B1
-ObserverNewCommentBoxes(); // B2
+if (window.location.hostname == 'www.facebook.com') {
+  loadModal(); // A
+  initialInjectCBBs(); // B1
+  ObserverNewCommentBoxes(); // B2
+}
 // function injectCBB(domElement) { // C, called by the B's,
 // inserts the little orange CB-button
 
@@ -487,14 +489,17 @@ function injectCBB(domElement) {
             console.log(this);  // tab structure, react, includes
                 // div.cbbContent>*><clip>
             console.log(this.getElementsByClassName("clipped"));
-           
-            if (this.getElementsByClassName("clipped").length > 0) {
-          //    this.getElementsByClassName("clipped")[0].classList.remove("clipped");
-this.getElementsByClassName("clipped").forEach(function(clip) {
-        //console.log(elem);
-          clip.classList.remove("clipped");
-    });
+          
+            let clipped = this.getElementsByClassName("clipped");
+            for (var clip of clipped) {
+              clip.classList.remove("clipped");
+              console.log("clip");
+              console.log(clip);
             }
+
+            // Weird error: when clicking upwwards, the last one
+            // isn't unclipped. mvp+1 cleanup...
+
             // @ToDo, low priority, remove this when?
             e.target.classList.add("clipped");
             e.clipboardData.setData('text/plain', e.target.innerText);
