@@ -123,6 +123,7 @@ var idsComplete = [];
 
 
 console.log("CommentBetterButton Initiate!!!");
+console.log(window.location.hostname);
 loadModal(); // A
 initialInjectCBBs(); // B1
 ObserverNewCommentBoxes(); // B2
@@ -466,9 +467,11 @@ function injectCBB(domElement) {
     // This code should not be here, but in the cbModal when it is created,
     // not added every time you click one! There aren't that many clicks,
     // so, @ToDo later.
-    let btn = this;
+    let btn = this; // is this used?
     let modal =  document.getElementById('cbModal');  /* or global var? */
     if (modal) {
+
+      /** Set up response to copy "clips" on click  */
       Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
         div.onclick = function() {
           document.execCommand("copy")
@@ -477,10 +480,26 @@ function injectCBB(domElement) {
           e.preventDefault()
           if (e.clipboardData) {
             // This fires dozens of times when an sg is clicked.
-            //console.log("setData for e");
+            console.log("setData for e in inject.js");
+            // console.log(this); // way too high up the heirarchy,
+            // this is div class="tabs"
+            console.log(e.target); // this is the clip.
+            console.log(this);  // tab structure, react, includes
+                // div.cbbContent>*><clip>
+            console.log(this.getElementsByClassName("clipped"));
+           
+            if (this.getElementsByClassName("clipped").length > 0) {
+          //    this.getElementsByClassName("clipped")[0].classList.remove("clipped");
+this.getElementsByClassName("clipped").forEach(function(clip) {
+        //console.log(elem);
+          clip.classList.remove("clipped");
+    });
+            }
+            // @ToDo, low priority, remove this when?
+            e.target.classList.add("clipped");
             e.clipboardData.setData('text/plain', e.target.innerText);
           } else if (window.clipboardData) {
-            //console.log("setData for window");
+            console.log("setData for window in inject.js");
             window.clipboardData.setData('Text', e.target.innerText);
           }
           //modals are closing when clicked. why?
@@ -512,12 +531,14 @@ function injectCBB(domElement) {
       }
 
 
-      //  Toggle the modal
-      //  Does this sometimes display=none when it shouldn't? @ToDo/@ToReview
-      console.log("Toggle the modal in inject.js is firing");
+      //  Toggle the modal when clicking CBB button
+      //  ReverseEngineer: This should fire when you click the CBB itself
+      //  (not the modal)
       if (modal && modal.style.display != "block") {
+        console.log("Toggle the modal in inject.js is firing ON");
         modal.style.display = "block";
       } else {
+        console.log("Toggle the modal in inject.js is firing OFF");
         $(modal).offset({ top: 0, left: 0});
         modal.style.display = "none";
       }
@@ -553,8 +574,15 @@ function injectCBB(domElement) {
     var contentArray = [].slice.call(content)
 
     //If you click outside of the cbbContent class, it closes the modal
-    if ((!contentArray.includes(event.target)) && event.target !== btn ) {
+    //if ((!contentArray.includes(event.target)) && event.target !== btn ) {
+      // sometimes clips not included in the contentArray? After clipboard?
+      // currently, if you double-click an sg(suggestion), it toggles the 
+      // clipped class and closes the modal. I say, "feature"
+    if ((!modal.contains(event.target)) && event.target !== btn ) {  
         $(modal).offset({ top: 0, left: 0});
+        console.log("You clicked outside the cbbContent class, close modal");
+        console.log(event.target);
+        console.log(contentArray);
         modal.style.display = "none";
     }
   }

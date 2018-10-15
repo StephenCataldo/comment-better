@@ -192,6 +192,7 @@ div.smg {
   font-weight: bold;
 }
 
+/* Visualize a clipboard for copying clip's */
 .sg clip::after {
   display: block;
   position: absolute;
@@ -201,12 +202,19 @@ div.smg {
   height: 22px;
   padding: 7px 4px 4px 4px;
   content: url('chrome-extension://__MSG_@@extension_id__/img/Clipboard-Icon-20-gr.png');
-
-  /*content: url('chrome-extension://__MSG_@@extension_id__/img/Clipboard-Icon-20-pur.png');
-  background-color: yellow;*/
   border-radius: 50%;
+  background-color: rgba(190,190,190,0.7); 
+  opacity: 0.8;
 }
-
+.sg clip:hover::after {
+  background-color: yellow;
+  opacity: 1.0;
+}
+.sg clip.clipped::after {
+  content: url('chrome-extension://__MSG_@@extension_id__/img/Clipboard-Icon-20-pur.png');
+  background-color: yellow;
+  opacity: 1.0;
+}
 .sg noclip {
   color: #f0f5f5;
   text-decoration:line-through;
