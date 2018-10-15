@@ -71,8 +71,8 @@ div.i-button {
   width: 380px;
   width: 405px; /* I think go back to 380, when top menu can scroll! @ToDo */
                 /* 405 worked before the little heart was added */
-  width: 423px;
-  height: 400px; /* too much! but easier to work with */
+  width: 473px;
+  height: 420px; /* too much! but easier to work with */
 }
 
 
@@ -171,6 +171,7 @@ div.smg {
 	color: white;
 	text-align: center;
 	cursor: pointer;
+  position: relative; /* base for clip. */
 }
 /* sgsm and sgrt create half-width boxes. Not
  * used in v.15, but available if designers want. */
@@ -189,6 +190,30 @@ div.smg {
 .sg clip {
   color: #ffe0cc; /* adjust to our orange @ToDoDesign */
   font-weight: bold;
+}
+
+/* Visualize a clipboard for copying clip's */
+.sg clip::after {
+  display: block;
+  position: absolute;
+  right: -15px;
+  top: 2px;
+  width: 22px;
+  height: 22px;
+  padding: 7px 4px 4px 4px;
+  content: url('chrome-extension://__MSG_@@extension_id__/img/Clipboard-Icon-20-gr.png');
+  border-radius: 50%;
+  background-color: rgba(190,190,190,0.7); 
+  opacity: 0.8;
+}
+.sg clip:hover::after {
+  background-color: yellow;
+  opacity: 1.0;
+}
+.sg clip.clipped::after {
+  content: url('chrome-extension://__MSG_@@extension_id__/img/Clipboard-Icon-20-pur.png');
+  background-color: yellow;
+  opacity: 1.0;
 }
 .sg noclip {
   color: #f0f5f5;
@@ -235,3 +260,6 @@ div.smg {
   padding: 8px;
   background: white;
 }
+
+
+

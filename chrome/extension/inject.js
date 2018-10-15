@@ -123,9 +123,12 @@ var idsComplete = [];
 
 
 console.log("CommentBetterButton Initiate!!!");
-loadModal(); // A
-initialInjectCBBs(); // B1
-ObserverNewCommentBoxes(); // B2
+console.log(window.location.hostname);
+if (window.location.hostname == 'www.facebook.com') {
+  loadModal(); // A
+  initialInjectCBBs(); // B1
+  ObserverNewCommentBoxes(); // B2
+}
 // function injectCBB(domElement) { // C, called by the B's,
 // inserts the little orange CB-button
 
@@ -349,7 +352,8 @@ function injectCBB(domElement) {
 
 
   /*** C. injectCBB injects a button into the domElement ***/
-  let color =  "#fcf";
+  let color =  "#fcf"; // color was for marking which is which during dev,
+                       // except I like how it looks. 
   let target = 'body';
   if (domElement != null) {
     target = domElement;
@@ -361,6 +365,8 @@ function injectCBB(domElement) {
   }
 
   /*** B3. Listen for reply buttons being clicked in the facebook nodes ***/
+
+  // @ToDo !!! rewrite this:
   // Is it possible to add listeners to classes, when the html hasn't
   // been loaded yet? If so, this isn't neccessary
   // Also, does the UI really require this, or this already a CBB nearby?
@@ -368,8 +374,6 @@ function injectCBB(domElement) {
   // to prevent nodes from being re-searched, which stops us from noticing
   // this.
   // Might be better to undo that?
-
-  // !!! @ToDo   hey write this
   $(target).find('.UFIReplyLink').click(function() {
     console.log("Trying to add event handler");
     injectCBB(this);
@@ -378,13 +382,13 @@ function injectCBB(domElement) {
 
   /** early effort to use an ID system
    * to prevent MutationObserver from processing
-   * the same code over and over. This needs work!)
+   * the same code over and over. @ToDo This needs work!)
    */
-    // Grab the ID. (adding a class not work!)
-    // ex: id="addComment_10214535777885405"
-    //
-    // This isn't perfect. Ultimately need one button each box for
-    // the main comment box, and also replying to threads.
+  // Grab the ID. (adding a class not work!)
+  // ex: id="addComment_10214535777885405"
+  //
+  // This isn't perfect. Ultimately need one button each box for
+  // the main comment box, and also replying to threads.
   let id = $(target).find('.UFIAddComment').prop('id');
   //This works, uncomment if working on this system:
   // console.log("The id of the .UFIAddComment section is:" + id);
@@ -420,6 +424,7 @@ function injectCBB(domElement) {
 
   // images in chrome extensions are trick, this generates an odd URL for it
   var imgURL = chrome.extension.getURL("img/commentbetter-logo-filled-right.png");
+  // copy: is imgClipboard ever used? Should it be?
   var imgClipboard = chrome.extension.getURL("img/Clipboard-Icon-20.png");
   imgClipboard = '&nbsp;<img src="' + imgClipboard + '"/>';
 
@@ -449,19 +454,26 @@ function injectCBB(domElement) {
   $newBtnSections.prepend(htmlTemplate);
 
   if ($newBtnSections.length == 0) {
-    console.log("newBtnSections was not defined. Appears to happen ... um, at Victory Point cafe, and nowhere else, so far.");
+    console.log("newBtnSections was not defined. Associated with the initial facebook posts not having a CBB, before mutationobserver runs (correctly). Also noticed log message 'UFIAddComment has no id' Seen running dev.");
     return;
   }
 
+  // When you click on a specific CBB (in $newBtnSections
   $($newBtnSections[0].children[0]).on("click", function(e) {
+    console.log(this);
     $(this.href).show();
     e.preventDefault();
     e.stopPropagation();
 
     // Copy text to clipboard on click
-    let btn = this;
+    // This code should not be here, but in the cbModal when it is created,
+    // not added every time you click one! There aren't that many clicks,
+    // so, @ToDo later.
+    let btn = this; // is this used?
     let modal =  document.getElementById('cbModal');  /* or global var? */
     if (modal) {
+
+      /** Set up response to copy "clips" on click  */
       Array.from(document.getElementById("cbModal").getElementsByTagName("div")).forEach(div => {
         div.onclick = function() {
           document.execCommand("copy")
@@ -469,12 +481,40 @@ function injectCBB(domElement) {
         div.addEventListener("copy", function(e) {
           e.preventDefault()
           if (e.clipboardData) {
+            // This fires dozens of times when an sg is clicked.
+            console.log("setData for e in inject.js");
+            // console.log(this); // way too high up the heirarchy,
+            // this is div class="tabs"
+            console.log(e.target); // this is the clip.
+            console.log(this);  // tab structure, react, includes
+                // div.cbbContent>*><clip>
+            console.log(this.getElementsByClassName("clipped"));
+          
+            let clipped = this.getElementsByClassName("clipped");
+            for (var clip of clipped) {
+              clip.classList.remove("clipped");
+              console.log("clip");
+              console.log(clip);
+            }
+
+            // Weird error: when clicking upwwards, the last one
+            // isn't unclipped. mvp+1 cleanup...
+
+            // @ToDo, low priority, remove this when?
+            e.target.classList.add("clipped");
             e.clipboardData.setData('text/plain', e.target.innerText);
           } else if (window.clipboardData) {
+            console.log("setData for window in inject.js");
             window.clipboardData.setData('Text', e.target.innerText);
           }
+          //modals are closing when clicked. why?
+          //e.target.style.background = 'background-color: yellow';
+
         })
       })
+
+
+      /**  Pop the modal high or low... **/
 
       let scrollTop = $(window).scrollTop();
 
@@ -487,24 +527,28 @@ function injectCBB(domElement) {
 
       // Position the modal vertically.
       if ( scrollTop + modalHeight + modalGap > btnOffset.top ) {
-        // Under 
+        // Modal fits underneath 
         let commentHeight = 32;
         $(modal).offset({ top: btnOffset.top+modalGap+commentHeight, left: btnOffset.left-200});
       } else { 
-        // modal goes over, the normal expected behavior
+        // modal goes above, the normal expected behavior
         $(modal).offset({ top: btnOffset.top-modalHeight-modalGap, left: btnOffset.left-200}); 
       }
 
 
-      //  Toggle the modal
+      //  Toggle the modal when clicking CBB button
+      //  ReverseEngineer: This should fire when you click the CBB itself
+      //  (not the modal)
       if (modal && modal.style.display != "block") {
+        console.log("Toggle the modal in inject.js is firing ON");
         modal.style.display = "block";
       } else {
+        console.log("Toggle the modal in inject.js is firing OFF");
         $(modal).offset({ top: 0, left: 0});
         modal.style.display = "none";
       }
     } else { // modal was not found, something wrong
-      console.log("Error in inject.hs. let modal =  document.getElementById('cbModal') came up null."); 
+      console.log("Error in inject.js. let modal =  document.getElementById('cbModal') came up null."); 
     }
   });
 
@@ -535,8 +579,15 @@ function injectCBB(domElement) {
     var contentArray = [].slice.call(content)
 
     //If you click outside of the cbbContent class, it closes the modal
-    if ((!contentArray.includes(event.target)) && event.target !== btn ) {
+    //if ((!contentArray.includes(event.target)) && event.target !== btn ) {
+      // sometimes clips not included in the contentArray? After clipboard?
+      // currently, if you double-click an sg(suggestion), it toggles the 
+      // clipped class and closes the modal. I say, "feature"
+    if ((!modal.contains(event.target)) && event.target !== btn ) {  
         $(modal).offset({ top: 0, left: 0});
+        console.log("You clicked outside the cbbContent class, close modal");
+        console.log(event.target);
+        console.log(contentArray);
         modal.style.display = "none";
     }
   }
