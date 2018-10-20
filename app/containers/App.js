@@ -12,6 +12,8 @@ import jQuery from "../../chrome/extension/library/jquery";
 window.$ = window.jQuery = jQuery;
 
 
+console.log("---Open App.js ---"); // not seen
+
 @connect(
   state => ({
     todos: state.todos
@@ -29,6 +31,7 @@ export default class App extends Component {
 
   render() {
     const { todos, actions } = this.props;
+    console.log("--- App.js ---");
     console.log(this.props);
     // @Hack: css included in hacky way. Intending to rewrite all the styles
     // to use React anyway.

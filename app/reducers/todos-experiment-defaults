@@ -1,0 +1,109 @@
+import * as ActionTypes from '../constants/ActionTypes';
+
+const initialState = [{
+  keytopics: ['Intro'],     //   {keys:[], topic: topicText, url:} 
+  guides: {},        //   .topic = webPage
+  recentTopics: [{'Intro': 'bullhorn-introduction'}],  // [{topic: url-slice}]
+      //!!! The first one seems to be null. Why is that?
+  /* delete beneath here */
+  text: 'Use Redux',
+  completed: false,
+  id: 0
+}];
+
+const actionsMap = {
+
+  [ActionTypes.ADD_TOPIC](state, action) {
+    //let recentTopics = Object.assign([], action.topic, state.recentTopics);
+    //If use this approach, first check if this action.topic is the first key,
+    //return unchanged. If not, search all other recentTopics for it and
+    //remove them.  @ToDo. Also @ToDecide if want to structure data this way,
+    //many similar choices.
+    let recentTopics = [];
+    console.log("actionsMap");
+    console.log(state.recentTopics);
+    if (state.recentTopics) {   // don't shove nulls into recentTopics
+      recentTopics = [action.topic].concat(state.recentTopics);
+    }
+    return Object.assign({}, state, {
+      recentTopics: recentTopics
+    });
+  },
+  [ActionTypes.ADD_GUIDE](state, action) {
+    // put the whole webpage into data.
+    //state.guides[action.guide.topic] = action.guide.webPage;
+    //@ToDoLater = how should caching work? Should there be a timestamp
+    //on this data? I think I might want a weird cache system:
+    //4 hours or so for normal, but if you see a keyword repeatedly, that
+    //means it's trending, which increases the odds that we updated the site,
+    //so check more often? efficiency later...
+    // guides: {[action.webPageByTopic.topic] : action.webPageByTopic.webPage}
+    // replaces the whole guides object, not ex: guides.DACA
+    // "Take a Knee" is a topic .. with spaces. This right, and ok?
+    /*
+    var g = {};
+    g[] = someValueArray;
+    myArray.push(obj);
+    */
+    /** state.guides is an object. Must replace/assign it, not edit it! **/
+    let key = action.webPageByTopic.topic;
+    let newGuides = Object.assign({}, state["guides"], {
+      [key] : action.webPageByTopic.webPage
+    });
+
+    return Object.assign({}, state, {
+      guides: newGuides
+    });
+    let newState = Object.assign({}, state);
+    console.log(action.webPageByTopic);
+    console.log(newState);
+    console.log(action.webPageByTopic.topic);
+    //console.log(action.webPageByTopic.webPage);
+    //newState.guides[action.webPageByTopic.topic] = action.webPageByTopic.webPage;
+    newState.guides.foo = "bar";
+    return newState;
+  },
+
+
+  [ActionTypes.ADD_TODO](state, action) {
+    return [{
+      id: state.reduce((maxId, todo) => Math.max(todo.id, maxId), -1) + 1,
+      completed: false,
+      text: action.text
+    }, ...state];
+  },
+  [ActionTypes.DELETE_TODO](state, action) {
+    return state.filter(todo =>
+      todo.id !== action.id
+    );
+  },
+  [ActionTypes.EDIT_TODO](state, action) {
+    return state.map(todo =>
+      (todo.id === action.id ?
+        Object.assign({}, todo, { text: action.text }) :
+        todo)
+    );
+  },
+  [ActionTypes.COMPLETE_TODO](state, action) {
+    return state.map(todo =>
+      (todo.id === action.id ?
+        Object.assign({}, todo, { completed: !todo.completed }) :
+        todo)
+    );
+  },
+  [ActionTypes.COMPLETE_ALL](state/*, action*/) {
+    const areAllCompleted = state.every(todo => todo.completed);
+    return state.map(todo => Object.assign({}, todo, {
+      completed: !areAllCompleted
+    }));
+  },
+  [ActionTypes.CLEAR_COMPLETED](state/*, action*/) {
+    return state.filter(todo => todo.completed === false);
+  }
+};
+
+export default function todos(state = initialState, action) {
+  const reduceFn = actionsMap[action.type];
+  if (!reduceFn) return state;
+  return reduceFn(state, action);
+}

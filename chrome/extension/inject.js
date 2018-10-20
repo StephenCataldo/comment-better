@@ -482,19 +482,19 @@ function injectCBB(domElement) {
           e.preventDefault()
           if (e.clipboardData) {
             // This fires dozens of times when an sg is clicked.
-            console.log("setData for e in inject.js");
+            //console.log("setData for e in inject.js");
             // console.log(this); // way too high up the heirarchy,
             // this is div class="tabs"
-            console.log(e.target); // this is the clip.
-            console.log(this);  // tab structure, react, includes
+            //console.log(e.target); // this is the clip.
+            //console.log(this);  // tab structure, react, includes
                 // div.cbbContent>*><clip>
-            console.log(this.getElementsByClassName("clipped"));
+            //console.log(this.getElementsByClassName("clipped"));
           
             let clipped = this.getElementsByClassName("clipped");
             for (var clip of clipped) {
               clip.classList.remove("clipped");
-              console.log("clip");
-              console.log(clip);
+            //  console.log("clip");
+            //  console.log(clip);
             }
 
             // Weird error: when clicking upwwards, the last one
