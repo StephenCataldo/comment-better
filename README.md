@@ -71,20 +71,16 @@ See: "Basic Setup for new developers" below the description of the project.
 
 ## Purpose & Plan
 
-###There are three intertwined variants here:
-All help you leave more civil, more effective, better framed comments
-when you are online, providing cut-and-paste templates from which you can
-leave replies faster.
+There are two intertwined tools here: both help you leave more civil, more effective, better framed online comments, providing cut-and-paste templates from which you can leave replies faster.
 
-####1) A "Comment Better Button" that you install as an extension for your browser, 
-providing general advice on improved (and civil) communications techniques,
-starting with facebook comments (intending to expand where it shows up,
-one day).
-####2) A "Comment Better Button" that you install on websites you host, such
-as a Drupal blog, for your readers to use.
-####3) The project CBB was based on, guide-comment-insert--react:
-When you read an article online, this chrome extension checks a list of keywords of "issues" connected to URLs from a guide, and makes them accessible. 
-The beta-test guide is at CognitivePolitics.org, but that can be switched.
+### Phase 1
+
+1) A "Comment Better Button" shows up in your browser, in the comments section. Click it to be reminded of dozens of general approaches to radically civil conversation techniques, re-humanizing and more effective. Version 1 works for facebook. 
+
+2) A "bullhorn" button — When you read an article online, this chrome extension checks a list of keywords of issues from a guide, and provides specific resources, framing, techniques and perhaps a hash tag that your guide hopes will go viral. The beta-test guide is at CognitivePolitics.org, but that can be switched by the user.
+
+There are two places to install it: regular users install as an extension for your browser, for yourself.  If you host a blog, you can install it the Comment Better Button. Help spread tools that bring Gandhi-inspired techniques to reframe online conversations!
+
 
 
 #### Phase 2: DIY
